@@ -1,7 +1,9 @@
+<%@include file='WEB-INF/modules/beans_common.jspf'%>
+
 <!doctype html>
 <html lang="en">
 <head>
-    <%@include file='WEB-INF/modules/head_common.html'%>
+    <%@include file='WEB-INF/modules/head_common.jspf'%>
     <title>Watch Movie</title>
 </head>
 <body>
