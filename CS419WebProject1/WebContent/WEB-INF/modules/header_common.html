@@ -1,0 +1,25 @@
+<!--Fixed header-->	
+<div class="header">
+    <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
+		<div class="pure-g">
+			<div class="pure-u-2-5">
+				<a class="pure-menu-heading" href="">getFlix</a>
+			</div>
+			<div class="pure-u-3-5">
+				<ul class="pure-menu-list">
+					<li id="home-link" class="pure-menu-item"><a href="index.jsp" class="pure-menu-link">Home</a></li>
+					<li id="browse-link" class="pure-menu-item"><a href="browse.jsp" class="pure-menu-link">Browse</a></li>
+					<!--If you're not logged in:-->
+					<li id="signup-link" class="pure-menu-item"><a href="sign_up.jsp" class="pure-menu-link">Sign Up</a></li>
+					<li id="login-link" class="pure-menu-item"><a href="login.jsp" class="pure-menu-link">Log In</a></li>
+					<!--End no logged in-->
+					
+					<!--if you ARE logged in-->
+					<li id="account-link" class="pure-menu-item"><a href="account_settings.jsp" class="pure-menu-link">Account</a></li>
+					<li id="logout-link" class="pure-menu-item"><a href="#" class="pure-menu-link" onclick="alert('you have logged out');">Log Out</a></li>
+					<!--end logged in-->
+				</ul>
+			</div>
+		</div>
+    </div>
+</div>
