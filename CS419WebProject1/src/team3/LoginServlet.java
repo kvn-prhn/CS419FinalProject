@@ -52,6 +52,7 @@ public class LoginServlet extends HttpServlet {
 				//con.close();
 			} catch (Exception ex) {
 				ex.printStackTrace();
+				response.getWriter().println("Error logging in: " + ex);
 			}
 	        
 	    } else {
