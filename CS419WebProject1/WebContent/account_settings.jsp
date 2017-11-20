@@ -20,7 +20,6 @@
 				<p>
 					Wow look at all of these account settings.
 				</p>
-				
             </div>
             
         </div>

@@ -35,7 +35,7 @@
         <div class="pure-g">
             <div class="l-box pure-u-1">
 
-                <form class="pure-form pure-form-stacked">
+                <form action="Login" method="POST" class="pure-form pure-form-stacked">
                     <fieldset>
 						<div class="pure-g">
 							<div class="l-box pure-u-1">
@@ -48,12 +48,14 @@
 							</div>
 							
 							<div class="l-box pure-u-1">
-								<button type="submit" class="pure-button">Sign Up</button>
+								<button type="submit" class="pure-button">Log in</button>
 							</div>
 						</div>
                     </fieldset>
                 </form>
-				
+				<p>
+					No Account? <a href="sign_up.jsp" class="pure-link">Sign up now!</a>
+				</p>
             </div>
             
         </div>

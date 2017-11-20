@@ -1,3 +1,4 @@
+package team3;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -17,17 +18,27 @@ public class LogoutServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// get the current session
-		HttpSession session = request.getSession(false);
+		HttpSession session = request.getSession(true);
 		if (session != null) {
 			// try to get the bean from the session
+		    			
 			User userBean = (User) session.getAttribute("userBean");
+			System.out.println(userBean);
+			
 			// if the bean exists -- the user is logged in
 			if (userBean != null) {
 				// remove the bean from the session
-				session.removeAttribute("userBean");
+				System.out.println("Logging out user with id: " + userBean.getAccountId());
+				userBean.setId(-1);
+				userBean.setLoggedIn(false);
+				//session.removeAttribute("userBean");
+				
+				// move back to the home page
+				response.sendRedirect("index.jsp");
+				
 			}
+			response.getWriter().println("ERROR WITH LOGGING OUT");
 		}
-
 	}
 
 }

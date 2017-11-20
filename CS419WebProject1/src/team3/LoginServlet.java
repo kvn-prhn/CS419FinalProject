@@ -1,3 +1,4 @@
+package team3;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,8 +25,9 @@ public class LoginServlet extends HttpServlet {
 	    HttpSession session = request.getSession(true);
 	    // try to get the bean from the session
 	    User userBean = (User)session.getAttribute("userBean");
-	    // if the bean does not exist...
-	    if (userBean == null)
+
+	    // if the bean is not logged in.
+	    if (!userBean.isLoggedIn()) 
 	    {
 	    	// search for user that matches login info in database
 			try {
@@ -36,17 +38,25 @@ public class LoginServlet extends HttpServlet {
 				ps.setString(2, (String)request.getAttribute("password"));
 
 				ResultSet rs = ps.executeQuery();
-
+				
 				// if a user is found, set the user bean to that user
 				if (rs.next()) {
-					userBean = UserDao.getUserById(rs.getInt(1));
+					// TEMP: fake log in
+					userBean.setAccountId(22);
+					//userBean = UserDao.getUserById(rs.getInt(1));
+					
+					userBean.setLoggedIn(true);   // let them know the user is logged in
+					response.sendRedirect("browse.jsp");  // browse after successful login.
 				}
 
-				con.close();
+				//con.close();
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
 	        
+	    } else {
+	    	// if you're not logged in already, go to home page.
+	    	response.sendRedirect("index.jsp");
 	    }
 	    // update the session with the new user bean
 	    session.setAttribute("userBean", userBean);

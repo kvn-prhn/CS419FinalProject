@@ -21,7 +21,7 @@
 					We are browsing all of the movies on this page.
 				</p>
 				<p>
-					<a href="watch_movie.html">Watch a movie</a>
+					<a href="watch_movie.jsp">Watch a movie</a>
 				</p>
             </div>
             
@@ -41,37 +41,6 @@
             </p>
         </div>
     </div>
-	
-	<!--
-    <div class="content">
-        <h2 class="content-head is-center">Dolore magna aliqua. Uis aute irure.</h2>
-
-        <div class="pure-g">
-            <div class="l-box-lrg pure-u-1 pure-u-md-2-5">
-                
-            </div>
-
-            <div class="l-box-lrg pure-u-1 pure-u-md-3-5">
-                <h4>Contact Us</h4>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat.
-                </p>
-
-                <h4>More Information</h4>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua.
-                </p>
-            </div>
-        </div>
-
-    </div>
-	-->
-
-
 </div>
 <script src="js/jquery.min.js"></script>
 <script>

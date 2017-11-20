@@ -12,7 +12,7 @@
 
 <div class="content-wrapper-watch-movie">
     <div class="top-bar-movie-watching l-box is-center">
-		We are watching a movie on this page. <a href="browse.html">Back to browse</a>
+		We are watching a movie on this page. <a href="browse.jsp">Back to browse</a>
 	</div>
 	
 	<video class="fullscreen-watch-movie" src="img/fishvideo.webm" autoplay loop muted></video>
