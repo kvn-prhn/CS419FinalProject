@@ -52,9 +52,10 @@
 					<% for (Movie movie : browseListBean.getMovies()) { %>
 						<div class="pure-u-1-3">
 							<div class="movie-display-block-<%= movieOn %>">
-								<label for="modal-trigger-center" class="modal-open">
+								<label for="modal-trigger-center" class="modal-open movie-title">
 									<% out.println(movie.getTitle()); %>
 								</label>
+								<img class="movie-image" alt="loading..." src="" width="300" height="200"></img>
 							</div>
 						</div>
 					<% movieOn++; // track which block we're iterating on. 
@@ -86,21 +87,31 @@
 <script src="js/jquery.min.js"></script>
 <script>
 	$(function() {
-		
-		function modalDisplayForMovie(cName) {
-			$("#modal-label-movie-title").html(cName);
-		}
-		
-		
 		var current_page_id = "browse-link";
 		$("#" + current_page_id).addClass("pure-menu-selected");
 		
-		for (var i = 0; i <= <%= movieOn %>; i++) {
+		for (var i = 0; i < <%= movieOn %>; i++) {
 			var currentMovieId = ".movie-display-block-" + i;
-			$(currentMovieId).click(function(e) {
-				console.log(e.target['className']); 
-				modalDisplayForMovie(e.target['className']);
+			var currentMovieTitle = $(currentMovieId).find(".movie-title").text().trim();
+			console.log(currentMovieTitle );
+			$(currentMovieId).click({movieTitle: currentMovieTitle}, function(e) {
+				console.log(e.data);
+				$("#modal-label-movie-title").html(e.data.movieTitle);
 			});
+			
+			(function(movieId, movieTitle) {
+				var API_KEY = '7130256-0e83e707d7f0f3407d56ce8aa';
+				var URL = "https://pixabay.com/api/?key="+API_KEY+"&q="+encodeURIComponent("snake");
+				$.getJSON(URL).done(function(data){
+					if (data.totalHits > 0) {
+						// set the source of the image to wherever this is. 
+						$(movieId).find("img").attr("src", data.hits[0].webformatURL);
+					} else {
+						$(movieId).find("img").attr("alt", "No image found.");
+					}
+				});
+			})(currentMovieId, currentMovieTitle);
+			
 		}
 	});
 	
