@@ -214,7 +214,7 @@ a.pure-button-primary {
 
 /* We want to give the content area some more padding */
 .content {
-    padding: 1em 1em 3em;
+    padding-top: 3em;
 }
 
 /* This is the class used for the main content headers (<h2>) */
@@ -598,22 +598,25 @@ video.fullscreen-watch-movie {
 /* The block around a movie on the browser page */
 div[class*="movie-display-block"]
 {
-	border: 1px solid #ff00ff;
-	diplay: block;
-	padding: 0.5em;
-	height: 15em;
+	border: 1px solid #999999;
 	background-color: #ffffff;
 }
 
 div[class*="movie-display-block"]:hover
 {
 	background-color: #ececec;
-	padding: 0.7em;
 }
 
 /*Add more styling so that it can behave how we want.*/
 div[class*="movie-display-block"]  > label
 {
 	display: block;
-
+	padding: 0.5em;
 }
+
+
+div[class*="movie-display-block"]  >  .movie-display-img
+{
+	box-shadow: 10px 10px 5px #888888;
+}
+

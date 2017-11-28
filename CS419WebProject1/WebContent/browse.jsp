@@ -35,7 +35,7 @@
         <h2 class="content-head is-center">Browse</h2>
 
         <div class="pure-g">
-            <div class="l-box pure-u-1">
+            <div class="pure-u-1">
 				<p>
 					We are browsing all of the movies on this page.
 				</p>
@@ -46,22 +46,38 @@
 					<label for="modal-trigger-center" class="open-modal">OPEN THAT MODAL</label>
 				</p>
             </div>
-            <div class="l-box pure-u-1">
-            	<div class="pure-g">
-            		<% int movieOn = 0; %>
-					<% for (Movie movie : browseListBean.getMovies()) { %>
-						<div class="pure-u-1-3">
-							<div class="movie-display-block-<%= movieOn %>">
-								<label for="modal-trigger-center" class="modal-open movie-title">
-									<% out.println(movie.getTitle()); %>
-								</label>
-								<img class="movie-image" alt="loading..." src="" width="300" height="200"></img>
-							</div>
+         	<% int movieOn = 0; %>
+			<% for (Movie movie : browseListBean.getMovies()) { %>
+				<div class="pure-u-sm-1-2 pure-u-md-1-3 pure-u-lg-1-4">
+					<div class="movie-display-block-<%= movieOn %>">
+						<div class="pure-u-1">
+							<h3 for="modal-trigger-center" class="modal-open movie-title">
+								<% out.println(movie.getTitle()); %>
+							</h3>
 						</div>
-					<% movieOn++; // track which block we're iterating on. 
-					} %>
+						<div class="pure-u-11-24">
+							<img class="pure-img movie-display-img" alt="loading..." src=""></img>
+						</div>
+						<div class="pure-u-1-2">			
+							<p>
+								Description for "<%= movie.getTitle() %>": <%= movie.getDescription() %>
+							</p>
+							<p>
+								Ratings are fun
+								<div class="pure-u-1">
+									<% int randomRating = (int)(Math.random() * 5.0);
+										for (int i = 0; i < randomRating; i++) { %>
+											<div class="pure-u-1-5">
+												<img src="img/star.png" class="pure-img">
+											</div>	
+									<% 	}  %>
+								</div>
+							</p>
+						</div>
+					</div>
 				</div>
-            </div>
+			<% movieOn++; // track which block we're iterating on. 
+			} %>
         </div>
     </div>
 
@@ -105,9 +121,20 @@
 				$.getJSON(URL).done(function(data){
 					if (data.totalHits > 0) {
 						// set the source of the image to wherever this is. 
-						$(movieId).find("img").attr("src", data.hits[0].webformatURL);
+						
+						// find the first image that is a good size...
+						var bestImg = 0;
+						var bestRatio = data.hits[0].imageWidth / data.hits[0].imageHeight; 
+						for (var i = 1; i < data.hits.length; i++) {
+							var testRatio = data.hits[i].imageWidth / data.hits[i].imageHeight;
+							if (Math.abs(testRatio - 1) < Math.abs(bestRatio - 1)) {
+								bestImg = i;
+								bestRatio = testRatio;
+							}
+						}
+						$(movieId).find(".movie-display-img").attr("src", data.hits[bestImg].webformatURL);
 					} else {
-						$(movieId).find("img").attr("alt", "No image found.");
+						$(movieId).find(".movie-display-img").attr("alt", "No image found.");
 					}
 				});
 			})(currentMovieId, currentMovieTitle);
