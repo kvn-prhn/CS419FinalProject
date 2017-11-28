@@ -54,15 +54,19 @@
 								<label for="email">Your Email</label>
 								<input id="email" type="email" placeholder="Your Email">
 							</div>
-							<div class="l-box pure-u-1-3">
+							<div class="l-box pure-u-2-5">
 								<label for="streetAddress">Street Address</label>
 								<input id="streetAddress" type="text" placeholder="Street Address">
 							</div>
-							<div class="l-box pure-u-1-3">
+							<div class="l-box pure-u-1-5">
 								<label for="city">City</label>
 								<input id="city" type="text" placeholder="City">
 							</div>
-							<div class="l-box pure-u-1-3">
+							<div class="l-box pure-u-1-8">
+								<label for="state">State</label>
+								<input id="state" type="text" placeholder="">
+							</div>
+							<div class="l-box pure-u-1-5">
 								<label for="zipCode">ZIP Code</label>
 								<input id="zipCode" type="text" placeholder="ZIP Code">
 							</div>

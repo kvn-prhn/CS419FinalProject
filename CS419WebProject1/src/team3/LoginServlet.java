@@ -27,10 +27,15 @@ public class LoginServlet extends HttpServlet {
 	    User userBean = (User)session.getAttribute("userBean");
 
 	    // if the bean is not logged in.
-	    if (!userBean.isLoggedIn()) 
-	    {
+	    if (userBean == null || !userBean.isLoggedIn()) 
+	    { 
 	    	// search for user that matches login info in database
 			try {
+				if (userBean == null) {
+		    		userBean = new User();
+		    		session.setAttribute("userBean", userBean);
+		    	}
+				
 				Connection con = DBLink.getConnection();
 				PreparedStatement ps = con
 						.prepareStatement("select id from user where email=? and password=?");
@@ -47,9 +52,11 @@ public class LoginServlet extends HttpServlet {
 					
 					userBean.setLoggedIn(true);   // let them know the user is logged in
 					response.sendRedirect("browse.jsp");  // browse after successful login.
+				} else {
+					response.getWriter().println("No user found.");
 				}
 
-				//con.close();
+				con.close();
 			} catch (Exception ex) {
 				ex.printStackTrace();
 				response.getWriter().println("Error logging in: " + ex);

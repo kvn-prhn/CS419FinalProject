@@ -604,7 +604,10 @@ div[class*="movie-display-block"]
 
 div[class*="movie-display-block"]:hover
 {
-	background-color: #ececec;
+	z-index: 1000; /* Goes on top (hopefully)*/
+	/*box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.5);*/
+	border: 6px solid black;
+	padding: 3px;
 }
 
 /*Add more styling so that it can behave how we want.*/

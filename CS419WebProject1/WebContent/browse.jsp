@@ -43,7 +43,7 @@
 					<a href="watch_movie.jsp">Watch a movie</a>
 				</p>
 				<p>
-					<label for="modal-trigger-center" class="open-modal">OPEN THAT MODAL</label>
+					<label  class="open-modal">OPEN THAT MODAL</label>
 				</p>
             </div>
          	<% int movieOn = 0; %>
@@ -72,6 +72,11 @@
 											</div>	
 									<% 	}  %>
 								</div>
+							</p>
+							<p>
+							<label for="modal-trigger-center" class="pure-button pure-button-active open-modal">
+								MORE INFO
+							</label>
 							</p>
 						</div>
 					</div>
@@ -116,27 +121,41 @@
 			});
 			
 			(function(movieId, movieTitle) {
-				var API_KEY = '7130256-0e83e707d7f0f3407d56ce8aa';
-				var URL = "https://pixabay.com/api/?key="+API_KEY+"&q="+encodeURIComponent("snake");
-				$.getJSON(URL).done(function(data){
-					if (data.totalHits > 0) {
-						// set the source of the image to wherever this is. 
-						
-						// find the first image that is a good size...
-						var bestImg = 0;
-						var bestRatio = data.hits[0].imageWidth / data.hits[0].imageHeight; 
-						for (var i = 1; i < data.hits.length; i++) {
-							var testRatio = data.hits[i].imageWidth / data.hits[i].imageHeight;
-							if (Math.abs(testRatio - 1) < Math.abs(bestRatio - 1)) {
-								bestImg = i;
-								bestRatio = testRatio;
+				
+				function getMovieImageFor(id, searchQuery) {
+					var API_KEY = '7130256-0e83e707d7f0f3407d56ce8aa';
+					var URL = "https://pixabay.com/api/?key="+API_KEY+"&q="+encodeURIComponent(searchQuery)+"&callback=?";
+					$.getJSON(URL).done(function(data){
+						if (data.totalHits > 0) {
+							// set the source of the image to wherever this is. 
+							
+							// find the first image that is a good size...
+							var bestImg = 0;
+							var bestRatio = data.hits[0].imageWidth / data.hits[0].imageHeight; 
+							for (var i = 1; i < data.hits.length; i++) {
+								var testRatio = data.hits[i].imageWidth / data.hits[i].imageHeight;
+								if (Math.abs(testRatio - 1) < Math.abs(bestRatio - 1)) {
+									bestImg = i;
+									bestRatio = testRatio;
+								}
+							}
+							$(id).find(".movie-display-img").attr("src", data.hits[bestImg].webformatURL);
+						} else {
+							$(id).find(".movie-display-img").attr("alt", "No image found.");
+							// do another search, chopping off the last word in the search query
+							var searchTerms = searchQuery.split(" ");
+							searchTerms.splice( searchTerms.length - 1, 1);
+							var newSearchQuery = searchTerms.join(" ");
+							console.log("Shorter term: " + newSearchQuery);
+							if (newSearchQuery !== "") {
+								getMovieImageFor(id, newSearchQuery);
 							}
 						}
-						$(movieId).find(".movie-display-img").attr("src", data.hits[bestImg].webformatURL);
-					} else {
-						$(movieId).find(".movie-display-img").attr("alt", "No image found.");
-					}
-				});
+					});
+				}
+				// update the movie image.
+				getMovieImageFor(movieId, movieTitle);
+				
 			})(currentMovieId, currentMovieTitle);
 			
 		}
