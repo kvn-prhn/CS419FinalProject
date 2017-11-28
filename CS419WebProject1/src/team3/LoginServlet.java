@@ -37,8 +37,7 @@ public class LoginServlet extends HttpServlet {
 		    	}
 				
 				Connection con = DBLink.getConnection();
-				PreparedStatement ps = con
-						.prepareStatement("select id from user where email=? and password=?");
+				PreparedStatement ps = con.prepareStatement("select id from user where email=? and password=?");
 				ps.setString(1, (String)request.getAttribute("email"));
 				ps.setString(2, (String)request.getAttribute("password"));
 

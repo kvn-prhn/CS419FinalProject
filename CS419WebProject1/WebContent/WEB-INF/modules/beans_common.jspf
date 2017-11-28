@@ -1,6 +1,4 @@
-<jsp:useBean id="userBean" scope="session" class="team3.User">
-  </jsp:useBean>
-  
+
   <% //userBean.setLoggedIn(true); 
   	 //userBean.setAccountId(22);
   %>	
