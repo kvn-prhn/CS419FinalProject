@@ -46,6 +46,23 @@
 					<label  class="open-modal">OPEN THAT MODAL</label>
 				</p>
             </div>
+            <div class="pure-u-1">
+            	<form class="pure-form" method="post" action="">
+	            	<div class="pure-u-1-4">
+	            		<label for="search_bar">Search:</label>
+	            		<input id="search_bar" name="search" input="text" placehold="Search">
+	            	</div>
+	            	<div class="pure-u-1-4">
+	            		<label for="sort_by">Sort by:</label>
+	            		<select id="sort_by" name="sort_by">
+	            			<option value="nothing">Select an option</option>
+	            		</select>
+	            	</div>
+	            	<div class="pure-u-3-24">
+	            		<input type="submit" class="pure-button">Update</input>
+	            	</div>
+            	</form>
+            </div>
          	<% int movieOn = 0; %>
 			<% for (Movie movie : browseListBean.getMovies()) { %>
 				<div class="pure-u-sm-1-2 pure-u-md-1-3 pure-u-lg-1-4">

@@ -21,6 +21,7 @@ public class LoginServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
+		
 		// get the current session
 	    HttpSession session = request.getSession(true);
 	    // try to get the bean from the session
@@ -38,9 +39,12 @@ public class LoginServlet extends HttpServlet {
 				
 				Connection con = DBLink.getConnection();
 				PreparedStatement ps = con.prepareStatement("select id from user where email=? and password=?");
-				ps.setString(1, (String)request.getAttribute("email"));
-				ps.setString(2, (String)request.getAttribute("password"));
+				ps.setString(1, (String)request.getParameter("email"));
+				ps.setString(2, (String)request.getParameter("password"));
 
+				System.out.println("email: " + request.getParameter("email"));
+				System.out.println("password: " + request.getParameter("password"));
+				
 				ResultSet rs = ps.executeQuery();
 				
 				// if a user is found, set the user bean to that user
