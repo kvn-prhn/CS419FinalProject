@@ -54,7 +54,7 @@
 				</p>
             </div>
             <div class="pure-u-1">
-            	<form class="pure-form" method="post" action="">
+            	<form class="pure-form" method="get" action="Search">
 	            	<div class="pure-u-1-4">
 	            		<label for="search_bar">Search:</label>
 	            		<input id="search_bar" name="search" input="text" placehold="Search">
