@@ -40,11 +40,11 @@
 						<div class="pure-g">
 							<div class="l-box pure-u-1">
 								<label for="email">Your Email</label>
-								<input id="email" type="email" placeholder="Your Email">
+								<input id="email" type="email" name="email" placeholder="Your Email">
 							</div>
 							<div class="l-box pure-u-1">
 								<label for="password">Your Password</label>
-								<input id="password" type="password" placeholder="Your Password">
+								<input id="password" type="password" name="password" placeholder="Your Password">
 							</div>
 							
 							<div class="l-box pure-u-1">

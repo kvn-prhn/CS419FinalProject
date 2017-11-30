@@ -1,5 +1,6 @@
 package team3;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import java.sql.Date;
 
 @WebServlet("/Signup")
 public class SignupServlet extends HttpServlet {
@@ -24,7 +27,7 @@ public class SignupServlet extends HttpServlet {
 		// search for user that matches login info in database
 		try {
 			Connection con = DBLink.getConnection();
-			PreparedStatement ps = con.prepareStatement("select * from account where email=?");
+			PreparedStatement ps = con.prepareStatement("select * from accountteam3 where email=?");
 			ps.setString(1, (String) request.getAttribute("email"));
 
 			ResultSet rs = ps.executeQuery();
@@ -32,15 +35,37 @@ public class SignupServlet extends HttpServlet {
 			// if a user is found, set the user bean to that user
 			if (rs.next()) {
 				// ERROR: There is already an account with this email address
+				System.err.println("ERROR MAKING THE ACCOUNT");
 			} else { // Create new account
 				Account a = new Account();
-				a.setFirstName((String)request.getAttribute("firstName"));
-				a.setLastName((String)request.getAttribute("lastName"));
-				a.setEmail((String)request.getAttribute("email"));
-				a.setAddress((String)request.getAttribute("streetAddress") + " " + (String)request.getAttribute("city") + " " + (String)request.getAttribute("zipcode"));
-				a.setSubscriptionTier((int)request.getAttribute("subscriptionTier"));
+				a.setFirstName((String)request.getParameter("firstName"));
+				a.setLastName((String)request.getParameter("lastName"));
+				a.setPassword((String)request.getParameter("password"));
+				a.setEmail((String)request.getParameter("email"));
+				a.setAddress((String)request.getParameter("streetAddress") + ", " + (String)request.getAttribute("city") + 
+						", " + (String)request.getAttribute("state") + " " + (String)request.getAttribute("zipcode"));
+				a.setSubscriptionTier(Integer.parseInt(request.getParameter("subscriptionTier")));
+				
+				// TODO: Centralize all of this information somewhere.
+				switch(a.getSubscriptionTier()) {
+				case 1: a.setHoursRemaining(10); break; // bronze
+				case 2: a.setHoursRemaining(30); break; // bronze
+				case 3: a.setHoursRemaining(50); break; // bronze
+				case 4: a.setHoursRemaining(100); break; // bronze
+				}
+				
+				// TODO: Set the first date.
 				
 				AccountDao.create(a);
+				
+				PrintWriter pw = response.getWriter();
+				pw.println("<p>" + a.getFirstName() + "</p>");
+				pw.println("<p>" + a.getLastName() + "</p>");
+				pw.println("<p>" + a.getPassword() + "</p>");
+				pw.println("<p>" + a.getEmail() + "</p>");
+				pw.println("<p>" + a.getSubscriptionTier() + "</p>");
+				pw.println("<p>" + a.getHoursRemaining() + "</p>");
+				pw.println("<p>" + a.getHoursResetDate()+ "</p>");
 				
 				rs = ps.executeQuery();
 				

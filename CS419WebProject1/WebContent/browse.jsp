@@ -20,11 +20,18 @@
    <div class="modal-overlay">
      <label for="modal-trigger-center" class="o-close"></label>
      <div class="modal-wrap a-center">
-       <label for="modal-trigger-small" class="close">&#10006;</label>
-       <h2 id="modal-label-movie-title">Movie Title</h2>
-       <p id="modal-label-movie-description">
-         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique cum sequi maxime officia provident voluptatibus aut! Non autem asperiores repellat architecto laboriosam officiis ab libero enim illo animi, error alias.
-       </p>
+       <label for="modal-trigger-center" class="close">&#10006;</label>
+       <div class="pure-g">
+	       <div class="pure-u-1">
+				<h2 id="modal-label-movie-title">Movie Title</h2>
+	       </div>
+	       <div class="pure-u-1-5">
+	       	<img class="pure-img" id="modal-movie-image" alt="movie image" src=""></img>
+	       </div>
+	       <div class="pure-u-4-5" id="modal-label-movie-description">
+		       Description.
+	       </div>
+       </div>
      </div>
    </div>
  </div>
@@ -71,13 +78,15 @@
 							<h3 for="modal-trigger-center" class="modal-open movie-title">
 								<% out.println(movie.getTitle()); %>
 							</h3>
+							<%-- Meta-data for the movie for the modal --%>
+							<div style="display: none;" class="movie-full-description"> <%= movie.getDescription() %> </div>
 						</div>
-						<div class="pure-u-11-24">
-							<img class="pure-img movie-display-img" alt="loading..." src=""></img>
+						<div class="pure-u-1">
+							<img class="pure-img" id="movie-display-img" alt="loading..." src=""></img>
 						</div>
-						<div class="pure-u-1-2">			
+						<div class="pure-u-1">			
 							<p>
-								Description for "<%= movie.getTitle() %>": <%= movie.getDescription() %>
+								Description for "<%= movie.getTitle() %>": <%= movie.getTruncatedDescription() %>
 							</p>
 							<p>
 								Ratings are fun
@@ -132,9 +141,17 @@
 			var currentMovieId = ".movie-display-block-" + i;
 			var currentMovieTitle = $(currentMovieId).find(".movie-title").text().trim();
 			console.log(currentMovieTitle );
-			$(currentMovieId).click({movieTitle: currentMovieTitle}, function(e) {
-				console.log(e.data);
-				$("#modal-label-movie-title").html(e.data.movieTitle);
+			$(currentMovieId).click(
+				{
+					movieTitle: currentMovieTitle,
+					movieDescription: $(currentMovieId).find(".movie-full-description").text(),
+					movieImgSrc : $(currentMovieId).find("#movie-display-img").attr("src")
+				}, 
+				function(e) {
+					console.log(e.data);
+					$("#modal-label-movie-title").html(e.data.movieTitle);
+					$("#modal-label-movie-description").html(e.data.movieDescription);
+					$("#modal-movie-image").attr("src", e.data.movieImgSrc);
 			});
 			
 			(function(movieId, movieTitle) {

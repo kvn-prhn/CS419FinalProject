@@ -29,6 +29,23 @@ public class Movie {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	/**
+	 * Get a shorter version of the description for displaying on the browse page.
+	 * @return A shorter description.
+	 */
+	public String getTruncatedDescription() {
+		if (description == null)
+			return "";
+		
+		String lessDescription = "";
+		String[] words = description.split(" ");
+		int i = 0;
+		while (i < words.length && lessDescription.length() < 30) {  // keep adding until its longer than 30
+			lessDescription += words[i] + " ";
+			i++;
+		}
+		return lessDescription;
+	}
 	public int getReleaseYear() {
 		return releaseYear;
 	}

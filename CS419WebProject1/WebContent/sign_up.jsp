@@ -35,59 +35,66 @@
         <div class="pure-g">
             <div class="l-box pure-u-1">
 
-                <form class="pure-form pure-form-stacked">
+                <form class="pure-form pure-form-stacked" method="POST" action="Signup">
                     <fieldset>
 						<div class="pure-g">
 							<div class="l-box pure-u-1-2">
 								<label for="firstName">First Name</label>
-								<input id="firstName" type="text" placeholder="Your First Name">
+								<input id="firstName" type="text" name="firstName" 
+									value="<%= request.getParameter("firstName") != null ? request.getParameter("firstName") : "" %>" placeholder="Your First Name">
 							</div>
 							<div class="l-box pure-u-1-2">
-								<label for="firstName">Last Name</label>
-								<input id="firstName" type="text" placeholder="Your Last Name">
+								<label for="lastName">Last Name</label>
+								<input id="lastName" type="text" name="lastName" 
+									value="<%= request.getParameter("lastName") != null ? request.getParameter("lastName") : "" %>"placeholder="Your Last Name">
 							</div>
 							<div class="l-box pure-u-1">
 								<label for="password">Your Password</label>
-								<input id="password" type="password" placeholder="Your Password">
+								<input id="password" type="password" name="password" placeholder="Your Password">
 							</div>
 							<div class="l-box pure-u-1">
 								<label for="email">Your Email</label>
-								<input id="email" type="email" placeholder="Your Email">
+								<input id="email" type="email" name="email" 
+									value="<%= request.getParameter("email") != null ? request.getParameter("email") : "" %>" placeholder="Your Email">
 							</div>
 							<div class="l-box pure-u-2-5">
 								<label for="streetAddress">Street Address</label>
-								<input id="streetAddress" type="text" placeholder="Street Address">
+								<input id="streetAddress" type="text" name="streetAddress"
+									value="<%= request.getParameter("streetAddress") != null ? request.getParameter("streetAddress") : "" %>" placeholder="Street Address">
 							</div>
 							<div class="l-box pure-u-1-5">
 								<label for="city">City</label>
-								<input id="city" type="text" placeholder="City">
+								<input id="city" type="text" name="city" 
+									value="<%= request.getParameter("city") != null ? request.getParameter("city") : "" %>" placeholder="City">
 							</div>
 							<div class="l-box pure-u-1-8">
 								<label for="state">State</label>
-								<input id="state" type="text" placeholder="">
+								<input id="state" type="text" name="state"
+									value="<%= request.getParameter("state") != null ? request.getParameter("state") : "" %>" placeholder="">
 							</div>
 							<div class="l-box pure-u-1-5">
 								<label for="zipCode">ZIP Code</label>
-								<input id="zipCode" type="text" placeholder="ZIP Code">
+								<input id="zipCode" type="text" name="zipcode"
+									value="<%= request.getParameter("zipcode") != null ? request.getParameter("zipcode") : "" %>" placeholder="ZIP Code">
 							</div>
 							<!--Radio buttons for choosing a plan-->
 							<div class="l-box pure-u-1-4">
 								<label for="subChoice1">Bronze</label>
-								<input type="radio" id="subChoice1" name="subPlan" value="bronze">
+								<input type="radio" id="subChoice1" name="subscriptionTier" value="1">
 							</div>
 							<div class="l-box pure-u-1-4">
 								<label for="subChoice2">Silver</label>
-								<input type="radio" id="subChoice2" name="subPlan" value="silver">
+								<input type="radio" id="subChoice2" name="subscriptionTier" value="2">
 								
 							</div>
 							<div class="l-box pure-u-1-4">
 								<label for="subChoice3">Gold</label>
-								<input type="radio" id="subChoice3" name="subPlan" value="gold">
+								<input type="radio" id="subChoice3" name="subscriptionTier" value="3">
 								
 							</div>
 							<div class="l-box pure-u-1-4">
 								<label for="subChoice4">Platinum</label>
-								<input type="radio" id="subChoice4" name="subPlan" value="platinum">
+								<input type="radio" id="subChoice4" name="subscriptionTier" value="4">
 								
 							</div>
 							

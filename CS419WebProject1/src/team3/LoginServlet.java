@@ -15,44 +15,33 @@ import javax.servlet.http.HttpSession;
 public class LoginServlet extends HttpServlet {
 
 	/**
-	 * 
+	 * The serial version.
 	 */
 	private static final long serialVersionUID = 1L;
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		
 		// get the current session
 	    HttpSession session = request.getSession(true);
 	    // try to get the bean from the session
 	    User userBean = (User)session.getAttribute("userBean");
 
 	    // if the bean is not logged in.
-	    if (userBean == null || !userBean.isLoggedIn()) 
+	    if (!userBean.isLoggedIn()) 
 	    { 
 	    	// search for user that matches login info in database
 			try {
-				if (userBean == null) {
-		    		userBean = new User();
-		    		session.setAttribute("userBean", userBean);
-		    	}
-				
 				Connection con = DBLink.getConnection();
-				PreparedStatement ps = con.prepareStatement("select id from user where email=? and password=?");
+				PreparedStatement ps = con.prepareStatement("select id from accountteam3 where email=? and password=?");
 				ps.setString(1, (String)request.getParameter("email"));
 				ps.setString(2, (String)request.getParameter("password"));
-
-				System.out.println("email: " + request.getParameter("email"));
-				System.out.println("password: " + request.getParameter("password"));
 				
 				ResultSet rs = ps.executeQuery();
-				
 				// if a user is found, set the user bean to that user
 				if (rs.next()) {
 					// TEMP: fake log in
-					userBean.setAccountId(22);
-					//userBean = UserDao.getUserById(rs.getInt(1));
-					
+					int indexOfId = rs.findColumn("id");
+					userBean.setAccountId(rs.getInt(indexOfId));
 					userBean.setLoggedIn(true);   // let them know the user is logged in
 					response.sendRedirect("browse.jsp");  // browse after successful login.
 				} else {
