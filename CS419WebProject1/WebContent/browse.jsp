@@ -2,6 +2,7 @@
 <%-- Bean for getting data from the server for the browse page. --%>
 <jsp:useBean id="browseListBean" scope="session" class="team3.BrowseListBean"></jsp:useBean>
 <%@ page import = "team3.Movie" %>
+<%@ page import = "team3.MovieRatingDao" %>
 
 <!doctype html>
 <html lang="en">
@@ -32,8 +33,8 @@
 		       Description.
 	       </div>
 	       <div class="pure-u-1">
-	       	<div class="pure-u-2-5"><a href="#" class="pure-button pure-button-active">Add to Favorites</a></div>
-	       	<div class="pure-u-2-5"><a href="#" class="pure-button pure-button-active">Add to Queue</a></div>
+	       	<div class="pure-u-2-5"><a id="addToFavorites" class="pure-button pure-button-active">Add to Favorites</a></div>
+	       	<div class="pure-u-2-5"><a id="addToQueue" class="pure-button pure-button-active">Add to Queue</a></div>
 	       </div>
        </div>
      </div>
@@ -74,6 +75,7 @@
 							</h2>
 							<%-- Meta-data for the movie for the modal --%>
 							<div style="display: none;" class="movie-full-description"> <%= movie.getDescription() %> </div>
+							<div style="display: none;" class="movie-id-num"><%= movie.getId() %></div>
 						</div>
 						<div class="pure-u-1-24"></div><!-- spacing -->
 						<div class="pure-u-5-24">
@@ -87,12 +89,16 @@
 							<p>
 								Ratings are fun
 								<div class="pure-u-1">
+									<!-- 
 									<% int randomRating = (int)(Math.random() * 5.0);
 										for (int i = 0; i < randomRating; i++) { %>
 											<div class="pure-u-1-5">
 												<img src="img/star.png" class="pure-img ratings-img">
 											</div>	
 									<% 	}  %>
+									 -->
+									 
+									 <%= MovieRatingDao.getMovieRatingByUserId(movie.getId(), userBean.getId()) %>
 								</div>
 							</p>
 							<p>
@@ -139,17 +145,28 @@
 			console.log(currentMovieTitle );
 			$(currentMovieId).click(
 				{	// these are the parameters given when the modal is opened
+					movieId: $(currentMovieId).find(".movie-id-num").text(),	// a string
 					movieTitle: currentMovieTitle,
 					movieDescription: $(currentMovieId).find(".movie-full-description").text(),
 					movieImgSrc : $(currentMovieId).find("#movie-display-img").attr("src")
 				}, 
 				function(e) {	// what happens when the modal opens up...
 					console.log(e.data);
+					$("#movie-id-current").html(e.data.movieId);
 					$("#modal-label-movie-title").html(e.data.movieTitle);
 					$("#modal-label-movie-description").html(e.data.movieDescription);
 					$("#modal-movie-image").attr("src", e.data.movieImgSrc);
-					
+					var paramsToAjax = {ajaxParams : "userId=" + (<%= userBean.getId() %>) + "&movieId=" + (e.data.movieId) };
+					console.log(paramsToAjax);
 					// TODO: Event listeners for the modal.
+					$("#addToFavorites").click(paramsToAjax, function(e) {
+						alert("add to favorites with " + e.data.ajaxParams);
+					});
+					$("#addToQueue").click(paramsToAjax, function(e) {
+						alert("add to queue with " + e.data.ajaxParams);
+						var addToQueueURL = ""; // the url for updating with json
+						// $.getJSON()
+					});
 			});
 			
 			(function(movieId, movieTitle) {
@@ -184,9 +201,10 @@
 							}
 						}
 					});
+					
 				}
 				// update the movie image.
-				getMovieImageFor(movieId, movieTitle);
+				//getMovieImageFor(movieId, movieTitle);
 				
 				
 				// TODO: Make all the event handlers for adding to favorites and stuff.
