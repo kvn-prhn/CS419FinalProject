@@ -31,6 +31,10 @@
 	       <div class="pure-u-4-5" id="modal-label-movie-description">
 		       Description.
 	       </div>
+	       <div class="pure-u-1">
+	       	<div class="pure-u-2-5"><a href="#" class="pure-button pure-button-active">Add to Favorites</a></div>
+	       	<div class="pure-u-2-5"><a href="#" class="pure-button pure-button-active">Add to Queue</a></div>
+	       </div>
        </div>
      </div>
    </div>
@@ -42,17 +46,7 @@
         <h2 class="content-head is-center">Browse</h2>
 
         <div class="pure-g">
-            <div class="pure-u-1">
-				<p>
-					We are browsing all of the movies on this page.
-				</p>
-				<p>
-					<a href="watch_movie.jsp">Watch a movie</a>
-				</p>
-				<p>
-					<label  class="open-modal">OPEN THAT MODAL</label>
-				</p>
-            </div>
+					<!-- <a href="watch_movie.jsp">Watch a movie</a> -->
             <div class="pure-u-1">
             	<form class="pure-form" method="get" action="Search">
 	            	<div class="pure-u-1-4">
@@ -177,7 +171,7 @@
 									bestRatio = testRatio;
 								}
 							}
-							//$(id).find(".movie-display-img").attr("src", data.hits[bestImg].webformatURL);
+							$(id).find(".movie-display-img").attr("src", data.hits[bestImg].webformatURL);
 						} else {
 							$(id).find(".movie-display-img").attr("alt", "No image found.");
 							// do another search, chopping off the last word in the search query
