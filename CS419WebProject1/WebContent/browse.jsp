@@ -1,6 +1,6 @@
 <%@include file='WEB-INF/modules/beans_common.jspf'%>
 <%-- Bean for getting data from the server for the browse page. --%>
-<jsp:useBean id="browseListBean" scope="request" class="team3.BrowseListBean"></jsp:useBean>
+<jsp:useBean id="browseListBean" scope="session" class="team3.BrowseListBean"></jsp:useBean>
 <%@ page import = "team3.Movie" %>
 
 <!doctype html>
@@ -54,7 +54,7 @@
 				</p>
             </div>
             <div class="pure-u-1">
-            	<form class="pure-form" method="post" action="">
+            	<form class="pure-form" method="get" action="Search">
 	            	<div class="pure-u-1-4">
 	            		<label for="search_bar">Search:</label>
 	            		<input id="search_bar" name="search" input="text" placehold="Search">
