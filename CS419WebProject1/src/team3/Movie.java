@@ -4,10 +4,13 @@ public class Movie {
 	
 	private int id;
 	private String title;
+	private String genre;
 	private String description;
 	private int releaseYear;
-	private String language;
-	private int length;
+	private String imageURL;
+	private String trailerURL;
+	private String language; 	// UNUSED
+	private int length;			// UNUSED
 	private int rating;
 	private int userRating;
 	
@@ -75,6 +78,24 @@ public class Movie {
 	}
 	public void setUserRating(int userRating) {
 		this.userRating = userRating;
+	}
+	public String getGenre() {
+		return genre;
+	}
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+	public String getImageURL() {
+		return imageURL;
+	}
+	public void setImageURL(String imageURL) {
+		this.imageURL = imageURL;
+	}
+	public String getTrailerURL() {
+		return trailerURL;
+	}
+	public void setTrailerURL(String trailerURL) {
+		this.trailerURL = trailerURL;
 	}
 	
 	

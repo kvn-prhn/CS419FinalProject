@@ -15,7 +15,7 @@ public class MovieDao {
 		
         try{  
             Connection con = DBLink.getConnection();
-            PreparedStatement ps=con.prepareStatement("select * from film where title like ? or description like ? " + filter.filterClause());  
+            PreparedStatement ps=con.prepareStatement("select * from movie where movieTitle like ? or movieDescription like ? " + filter.filterClause());  
             
             for (int i = 1; i <= ps.getParameterMetaData().getParameterCount(); i++) {
             	ps.setString(i, "%".concat(searchString.concat("%")));
@@ -28,9 +28,11 @@ public class MovieDao {
                 Movie m = new Movie(); 
                 
                 m.setId(rs.getInt(1));
-                m.setTitle(rs.getString(2));
-                m.setDescription(rs.getString(3));
-                m.setReleaseYear(rs.getInt(4));
+                m.setGenre(rs.getString(2));
+                m.setTitle(rs.getString(3));
+                m.setDescription(rs.getString(4));
+                //m.setReleaseYear(rs.getInt(5));
+                m.setImageURL(rs.getString(6));
                 //m.setLanguage(rs.getString(5));
                 //m.setLength(rs.getInt(6));
                 //m.setRating(rs.getInt(7));
@@ -51,9 +53,11 @@ public class MovieDao {
 	                Movie m = new Movie(); 
 	                
 	                m.setId(rs.getInt(1));
-	                m.setTitle(rs.getString(2));
-	                m.setDescription(rs.getString(3));
-	                //m.setReleaseYear(rs.getInt(4));
+	                m.setGenre(rs.getString(2));
+	                m.setTitle(rs.getString(3));
+	                m.setDescription(rs.getString(4));
+	                //m.setReleaseYear(rs.getInt(5));
+	                m.setImageURL(rs.getString(6));
 	                //m.setLanguage(rs.getString(5));
 	                //m.setLength(rs.getInt(6));
 	                //m.setRating(rs.getInt(7));
@@ -76,19 +80,21 @@ public class MovieDao {
           
         try{  
             Connection con = DBLink.getConnection();  
-            PreparedStatement ps=con.prepareStatement("select * from film");
+            PreparedStatement ps=con.prepareStatement("select * from movie");
             ResultSet rs=ps.executeQuery();
             while(rs.next()){  
                 Movie m = new Movie(); 
                 
                 m.setId(rs.getInt(1));
-                m.setTitle(rs.getString(2));
-                m.setDescription(rs.getString(3));
-                m.setReleaseYear(rs.getInt(4));
-                m.setLanguage(rs.getString(5));
-                m.setLength(rs.getInt(6));
-                m.setRating(rs.getInt(7));
-                m.setUserRating(rs.getInt(8));
+                m.setGenre(rs.getString(2));
+                m.setTitle(rs.getString(3));
+                m.setDescription(rs.getString(4));
+                //m.setReleaseYear(rs.getInt(5));
+                m.setImageURL(rs.getString(6));
+                //m.setLanguage(rs.getString(5));
+                //m.setLength(rs.getInt(6));
+                //m.setRating(rs.getInt(7));
+                //m.setUserRating(rs.getInt(8));
                 
                 list.add(m);  
             }  

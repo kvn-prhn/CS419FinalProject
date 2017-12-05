@@ -69,7 +69,7 @@ public class MovieRatingDao {
             
             con.close();  
         }catch(Exception ex){ex.printStackTrace();}  
-          
+         
         return status;  
 	}
 	

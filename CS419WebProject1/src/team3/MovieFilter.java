@@ -32,7 +32,7 @@ public class MovieFilter {
 			if (rating)
 				filter.append(" rating,");
 			if (title)
-				filter.append(" title,");
+				filter.append(" movieTitle,");
 			if (userRating)
 				filter.append(" userRating,");
 		}
