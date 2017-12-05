@@ -72,19 +72,21 @@
             </div>
          	<% int movieOn = 0; %>
 			<% for (Movie movie : browseListBean.getMovies()) { %>
-				<div class="pure-u-sm-1-2 pure-u-md-1-3 pure-u-lg-1-4">
+				<div class="pure-u-sm-1 pure-u-lg-1-2">
 					<div class="movie-display-block-<%= movieOn %>">
 						<div class="pure-u-1">
-							<h3 for="modal-trigger-center" class="modal-open movie-title">
+							<h2 for="modal-trigger-center" class="modal-open movie-title">
 								<% out.println(movie.getTitle()); %>
-							</h3>
+							</h2>
 							<%-- Meta-data for the movie for the modal --%>
 							<div style="display: none;" class="movie-full-description"> <%= movie.getDescription() %> </div>
 						</div>
-						<div class="pure-u-1">
-							<img class="pure-img" id="movie-display-img" alt="loading..." src=""></img>
+						<div class="pure-u-1-24"></div><!-- spacing -->
+						<div class="pure-u-5-24">
+							<img class="pure-img" id="movie-display-img" alt="loading..." src="img/apple.jpg" ></img>
 						</div>
-						<div class="pure-u-1">			
+						<div class="pure-u-2-24"></div><!-- spacing -->
+						<div class="pure-u-2-5">			
 							<p>
 								Description for "<%= movie.getTitle() %>": <%= movie.getTruncatedDescription() %>
 							</p>
@@ -94,7 +96,7 @@
 									<% int randomRating = (int)(Math.random() * 5.0);
 										for (int i = 0; i < randomRating; i++) { %>
 											<div class="pure-u-1-5">
-												<img src="img/star.png" class="pure-img">
+												<img src="img/star.png" class="pure-img ratings-img">
 											</div>	
 									<% 	}  %>
 								</div>
@@ -142,16 +144,18 @@
 			var currentMovieTitle = $(currentMovieId).find(".movie-title").text().trim();
 			console.log(currentMovieTitle );
 			$(currentMovieId).click(
-				{
+				{	// these are the parameters given when the modal is opened
 					movieTitle: currentMovieTitle,
 					movieDescription: $(currentMovieId).find(".movie-full-description").text(),
 					movieImgSrc : $(currentMovieId).find("#movie-display-img").attr("src")
 				}, 
-				function(e) {
+				function(e) {	// what happens when the modal opens up...
 					console.log(e.data);
 					$("#modal-label-movie-title").html(e.data.movieTitle);
 					$("#modal-label-movie-description").html(e.data.movieDescription);
 					$("#modal-movie-image").attr("src", e.data.movieImgSrc);
+					
+					// TODO: Event listeners for the modal.
 			});
 			
 			(function(movieId, movieTitle) {
@@ -173,7 +177,7 @@
 									bestRatio = testRatio;
 								}
 							}
-							$(id).find(".movie-display-img").attr("src", data.hits[bestImg].webformatURL);
+							//$(id).find(".movie-display-img").attr("src", data.hits[bestImg].webformatURL);
 						} else {
 							$(id).find(".movie-display-img").attr("alt", "No image found.");
 							// do another search, chopping off the last word in the search query
@@ -190,6 +194,8 @@
 				// update the movie image.
 				getMovieImageFor(movieId, movieTitle);
 				
+				
+				// TODO: Make all the event handlers for adding to favorites and stuff.
 			})(currentMovieId, currentMovieTitle);
 			
 		}

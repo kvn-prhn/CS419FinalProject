@@ -506,13 +506,21 @@ div[class*="movie-display-block"]:hover {
   -moz-box-shadow: inset 0 0 10px #000000;
   -webkit-box-shadow: inset 0 0 10px #000000;
   box-shadow: inset 0 0 10px #000000;
-  padding: 8px;
 }
 /*Add more styling so that it can behave how we want.*/
 div[class*="movie-display-block"] > label {
   display: block;
   padding: 0.5em;
 }
-div[class*="movie-display-block"] > .movie-display-img {
-  box-shadow: 10px 10px 5px #888888;
+/*Add more styling so that it can behave how we want.*/
+h2 {
+  text-align: center;
+}
+#movie-display-img {
+  margin: 15px;
+}
+.ratings-img {
+  min-height: 3em;
+  height: 3em;
+  max-height: 3em;
 }

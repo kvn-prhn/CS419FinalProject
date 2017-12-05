@@ -1,4 +1,6 @@
 <%-- JSP FRAGMENT: Common header of each page. --%>
+<%@page import="team3.Account"%>
+<%@page import="team3.AccountDao"%>
 <jsp:useBean id="userBean" scope="session" class="team3.User">
   </jsp:useBean>
   
@@ -14,7 +16,17 @@
 					<% } %>
 				</strong>
 			</div>
-			<div class="pure-u-3-5">
+			<div class="pure-u-1-5">
+				<% if (userBean != null && userBean.isLoggedIn()) { %>
+					<% Account userAcc = AccountDao.getAccountById(userBean.getAccountId()); 
+					   if (userAcc != null) {  %>
+	   					<ul class="pure-menu-list">
+							<li class="pure-menu-item"><a href="account_settings.jsp" class="pure-menu-link">Plan: <%= userAcc.getSubscriptionTier() %></a></li>
+							<li class="pure-menu-item"><a href="account_settings.jsp" class="pure-menu-link">Hours left: <%= userAcc.getHoursRemaining() %></a></li>
+						</ul>
+				<% } } %>
+			</div>
+			<div class="pure-u-2-5">
 				<ul class="pure-menu-list">
 					<li id="home-link" class="pure-menu-item"><a href="index.jsp" class="pure-menu-link">Home</a></li>
 					<li id="browse-link" class="pure-menu-item"><a href="browse.jsp" class="pure-menu-link">Browse</a></li>
@@ -26,10 +38,8 @@
 					<% } else { %>
 						<!--if you ARE logged in-->
 						<li id="account-link" class="pure-menu-item"><a href="account_settings.jsp" class="pure-menu-link">Account</a></li>
-						<form id="logout_header_form" method="POST" action="Logout">
-							<li id="logout-link" class="pure-menu-item"><a href="#" class="pure-menu-link"
-								onclick="$('#logout_header_form').submit();">Log Out</a></li>
-						</form>
+						<li id="logout-link" class="pure-menu-item"><a href="#" class="pure-menu-link" onclick="$('#logout_header_form').submit();">Log Out</a></li>
+						<form id="logout_header_form" method="POST" action="Logout" style="display:none"></form>
 					<% } %>
 				</ul>
 			</div>
