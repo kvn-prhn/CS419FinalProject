@@ -7,6 +7,7 @@ public class User {
 	private int accountId;
 	private String username;
 	private List<Integer> favoritesList;
+	private List<Integer> queue;
 	private boolean isLoggedIn;
 	
 	public User() {
@@ -66,6 +67,28 @@ public class User {
 		fl.setUserId(id);
 		fl.setMovieIdList(favoritesList);
 		return FavoritesListDao.update(fl);
+	}
+	
+	public int addToQueue(int movieId) {
+		if (!queue.contains(movieId))
+			queue.add(movieId);
+		else
+			return 1;
+		Queue q = new Queue();
+		q.setUserId(id);
+		q.setMovieIdList(queue);
+		return QueueDao.update(q);
+	}
+	
+	public int removeFromQueue(int movieId) {
+		if (!queue.contains(movieId))
+			queue.remove(movieId);
+		else
+			return 1;
+		Queue q = new Queue();
+		q.setUserId(id);
+		q.setMovieIdList(queue);
+		return QueueDao.update(q);
 	}
 	
 	

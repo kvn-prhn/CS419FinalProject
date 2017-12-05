@@ -7,7 +7,8 @@ public class DBLink {
 		Connection con = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost/sakila?useSSL=false", "root", "sesame");
+			//con = DriverManager.getConnection("jdbc:mysql://localhost/sakila?useSSL=false", "root", "sesame");
+			con = DriverManager.getConnection("jdbc:mysql://localhost/moviestoredb?useSSL=false", "root", "sesame");
 		} catch (Exception e) {
 			System.out.println(e);
 		}
