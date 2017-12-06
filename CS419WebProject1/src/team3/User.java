@@ -90,6 +90,14 @@ public class User {
 		q.setMovieIdList(queue);
 		return QueueDao.update(q);
 	}
+
+	public List<Integer> getQueue() {
+		return queue;
+	}
+
+	public void setQueue(List<Integer> queue) {
+		this.queue = queue;
+	}
 	
 	
 }

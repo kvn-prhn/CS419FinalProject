@@ -86,9 +86,10 @@ public class AccountDao {
                 a.setPassword(rs.getString(4));  
                 a.setEmail(rs.getString(5));  
                 a.setAddress(rs.getString(6));  
-                a.setSubscriptionTier(rs.getInt(7));
-                a.setHoursResetDate(rs.getDate(8));
-                a.setHoursRemaining(rs.getFloat(9));
+                a.setHoursResetDate(rs.getDate(7));
+                a.setHoursRemaining(rs.getFloat(8));
+                a.setSubscriptionTier(rs.getInt(9));
+                
             }  
             con.close();  
         }

@@ -39,9 +39,10 @@ public class LoginServlet extends HttpServlet {
 				ResultSet rs = ps.executeQuery();
 				// if a user is found, set the user bean to that user
 				if (rs.next()) {
+					userBean = (User) UserDao.getUsersForAccount(rs.getInt(1)).get(0);	// get default user for account
 					// TEMP: fake log in
-					int indexOfId = rs.findColumn("id");
-					userBean.setAccountId(rs.getInt(indexOfId));
+					//int indexOfId = rs.findColumn("id");
+					//userBean.setAccountId(rs.getInt(indexOfId));
 					userBean.setLoggedIn(true);   // let them know the user is logged in
 					response.sendRedirect("browse.jsp");  // browse after successful login.
 				} else {
