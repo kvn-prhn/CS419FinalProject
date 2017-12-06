@@ -28,7 +28,7 @@ public class SignupServlet extends HttpServlet {
 		try {
 			Connection con = DBLink.getConnection();
 			PreparedStatement ps = con.prepareStatement("select * from accountteam3 where email=?");
-			ps.setString(1, (String) request.getAttribute("email"));
+			ps.setString(1, (String) request.getParameter("email"));
 
 			ResultSet rs = ps.executeQuery();
 
@@ -42,16 +42,16 @@ public class SignupServlet extends HttpServlet {
 				a.setLastName((String)request.getParameter("lastName"));
 				a.setPassword((String)request.getParameter("password"));
 				a.setEmail((String)request.getParameter("email"));
-				a.setAddress((String)request.getParameter("streetAddress") + ", " + (String)request.getAttribute("city") + 
-						", " + (String)request.getAttribute("state") + " " + (String)request.getAttribute("zipcode"));
+				a.setAddress((String)request.getParameter("streetAddress") + ", " + (String)request.getParameter("city") + 
+						", " + (String)request.getParameter("state") + " " + (String)request.getParameter("zipcode"));
 				a.setSubscriptionTier(Integer.parseInt(request.getParameter("subscriptionTier")));
 				
 				// TODO: Centralize all of this information somewhere.
 				switch(a.getSubscriptionTier()) {
-				case 1: a.setHoursRemaining(10); break; // bronze
-				case 2: a.setHoursRemaining(30); break; // bronze
-				case 3: a.setHoursRemaining(50); break; // bronze
-				case 4: a.setHoursRemaining(100); break; // bronze
+					case 1: a.setHoursRemaining(10); break; // bronze
+					case 2: a.setHoursRemaining(30); break; // silver
+					case 3: a.setHoursRemaining(50); break; // gold
+					case 4: a.setHoursRemaining(100); break; // plat
 				}
 				
 				// TODO: Set the first date.
