@@ -26,7 +26,7 @@ public class QueueDao {
 		try {
 			Connection con = DBLink.getConnection();
 			PreparedStatement ps = con
-					.prepareStatement("insert into queue(movieId, userId, position) values (?,?,?)");
+					.prepareStatement("insert into queue(movieID, userID, position) values (?,?,?)");
 			List<Integer> Queue = q.getMovieIdList();
 			for (int position = 0; position < Queue.size(); position++) {
 				ps.setInt(1, Queue.get(position));
@@ -48,7 +48,7 @@ public class QueueDao {
 		int status = 0;
 		try {
 			Connection con = DBLink.getConnection();
-			PreparedStatement ps = con.prepareStatement("update queue set movieId=? where userId=? and position=?");
+			PreparedStatement ps = con.prepareStatement("update queue set movieID=? where userID=? and position=?");
 			List<Integer> Queue = q.getMovieIdList();
 			for (int position = 0; position < Queue.size(); position++) {
 				ps.setInt(1, Queue.get(position));
@@ -57,7 +57,7 @@ public class QueueDao {
 				status = (ps.executeUpdate() == 1 || status == 1) ? 1 : 0;
 			}
 
-			PreparedStatement psCleanUp = con.prepareStatement("delete from queue where userId=? and position > ?");
+			PreparedStatement psCleanUp = con.prepareStatement("delete from queue where userID=? and position > ?");
 			psCleanUp.setInt(q.getUserId(), Queue.size() - 1);
 
 			con.close();
@@ -73,7 +73,7 @@ public class QueueDao {
 
 		try {
 			Connection con = DBLink.getConnection();
-			PreparedStatement ps = con.prepareStatement("delete from queue where userId=?");
+			PreparedStatement ps = con.prepareStatement("delete from queue where userID=?");
 			ps.setInt(1, q.getUserId());
 
 			status = ps.executeUpdate();
@@ -93,7 +93,7 @@ public class QueueDao {
 
 		try {
 			Connection con = DBLink.getConnection();
-			PreparedStatement ps = con.prepareStatement("select * from queue where userId=? order by position asc");
+			PreparedStatement ps = con.prepareStatement("select * from queue where userID=? order by position asc");
 			ps.setInt(1, id);
 
 			ResultSet rs = ps.executeQuery();

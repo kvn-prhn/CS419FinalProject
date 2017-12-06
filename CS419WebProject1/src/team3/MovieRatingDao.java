@@ -43,7 +43,7 @@ public class MovieRatingDao {
         try{  
             Connection con = DBLink.getConnection();  
             PreparedStatement ps = con.prepareStatement(  
-                         "update movieRating set rating=? where movieId=? and userId=?");  
+                         "update movieRating set rating=? where movieID=? and userID=?");  
             ps.setInt(1, mr.getRating());
             ps.setInt(2, mr.getMovieId());
             ps.setInt(3, mr.getUserId());
@@ -61,7 +61,7 @@ public class MovieRatingDao {
         try{  
             Connection con = DBLink.getConnection();  
             PreparedStatement ps = con.prepareStatement(  
-                         "delete from movieRating where movieId=? and userId=?");  
+                         "delete from movieRating where movieID=? and userID=?");  
             ps.setInt(1, mr.getMovieId());
             ps.setInt(2, mr.getUserId());
               
@@ -78,7 +78,7 @@ public class MovieRatingDao {
         
         try{  
             Connection con = DBLink.getConnection();  
-            PreparedStatement ps = con.prepareStatement("select * from account where movieId=? and userId=?");  
+            PreparedStatement ps = con.prepareStatement("select * from account where movieID=? and userID=?");  
             ps.setInt(1, movieId);  
             ps.setInt(2, userId);
             

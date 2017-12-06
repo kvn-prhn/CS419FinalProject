@@ -57,16 +57,6 @@ public class SignupServlet extends HttpServlet {
 				// TODO: Set the first date.
 				
 				AccountDao.create(a);
-				
-				PrintWriter pw = response.getWriter();
-				pw.println("<p>" + a.getFirstName() + "</p>");
-				pw.println("<p>" + a.getLastName() + "</p>");
-				pw.println("<p>" + a.getPassword() + "</p>");
-				pw.println("<p>" + a.getEmail() + "</p>");
-				pw.println("<p>" + a.getSubscriptionTier() + "</p>");
-				pw.println("<p>" + a.getHoursRemaining() + "</p>");
-				pw.println("<p>" + a.getHoursResetDate()+ "</p>");
-				
 				rs = ps.executeQuery();
 				
 				if (rs.next()) { // Create a new default user for account
@@ -78,6 +68,7 @@ public class SignupServlet extends HttpServlet {
 					UserDao.create(u);
 				}
 				
+				response.sendRedirect("login.jsp");  // send to the login page after making an account.
 			}
 
 			con.close();

@@ -33,8 +33,8 @@
 		       Description.
 	       </div>
 	       <div class="pure-u-1">
-	       	<div class="pure-u-2-5"><a id="addToFavorites" class="pure-button pure-button-active">Add to Favorites</a></div>
-	       	<div class="pure-u-2-5"><a id="addToQueue" class="pure-button pure-button-active">Add to Queue</a></div>
+	       	<div class="pure-u-2-5"><a id="favoritesButton" class="pure-button pure-button-active">Add to Favorites</a></div>
+	       	<div class="pure-u-2-5"><a id="queueButton" class="pure-button pure-button-active">Add to Queue</a></div>
 	       </div>
        </div>
      </div>
@@ -79,25 +79,16 @@
 						</div>
 						<div class="pure-u-1-24"></div><!-- spacing -->
 						<div class="pure-u-5-24">
-							<img class="pure-img" id="movie-display-img" alt="loading..." src="img/apple.jpg" ></img>
+							<img class="pure-img" id="movie-display-img" alt="loading..." src="<%= movie.getImageURL() %>" ></img>
 						</div>
 						<div class="pure-u-2-24"></div><!-- spacing -->
-						<div class="pure-u-2-5">			
+						<div class="pure-u-2-5">  
 							<p>
-								Description for "<%= movie.getTitle() %>": <%= movie.getTruncatedDescription() %>
+								<%= movie.getTruncatedDescription() %>
 							</p>
 							<p>
 								Ratings are fun
-								<div class="pure-u-1">
-									<!-- 
-									<% int randomRating = (int)(Math.random() * 5.0);
-										for (int i = 0; i < randomRating; i++) { %>
-											<div class="pure-u-1-5">
-												<img src="img/star.png" class="pure-img ratings-img">
-											</div>	
-									<% 	}  %>
-									 -->
-									 
+								<div class="pure-u-1">							 
 									 <%= MovieRatingDao.getMovieRatingByUserId(movie.getId(), userBean.getId()) %>
 								</div>
 							</p>
@@ -127,9 +118,6 @@
             </p>
         </div>
     </div>
-    
-    
-    
 </div>
 
 
@@ -142,7 +130,6 @@
 		for (var i = 0; i < <%= movieOn %>; i++) {
 			var currentMovieId = ".movie-display-block-" + i;
 			var currentMovieTitle = $(currentMovieId).find(".movie-title").text().trim();
-			console.log(currentMovieTitle );
 			$(currentMovieId).click(
 				{	// these are the parameters given when the modal is opened
 					movieId: $(currentMovieId).find(".movie-id-num").text(),	// a string
@@ -151,22 +138,70 @@
 					movieImgSrc : $(currentMovieId).find("#movie-display-img").attr("src")
 				}, 
 				function(e) {	// what happens when the modal opens up...
-					console.log(e.data);
+					//console.log(e.data);
 					$("#movie-id-current").html(e.data.movieId);
 					$("#modal-label-movie-title").html(e.data.movieTitle);
 					$("#modal-label-movie-description").html(e.data.movieDescription);
 					$("#modal-movie-image").attr("src", e.data.movieImgSrc);
-					var paramsToAjax = {ajaxParams : "userId=" + (<%= userBean.getId() %>) + "&movieId=" + (e.data.movieId) };
-					console.log(paramsToAjax);
-					// TODO: Event listeners for the modal.
-					$("#addToFavorites").click(paramsToAjax, function(e) {
-						alert("add to favorites with " + e.data.ajaxParams);
-					});
-					$("#addToQueue").click(paramsToAjax, function(e) {
-						alert("add to queue with " + e.data.ajaxParams);
-						var addToQueueURL = ""; // the url for updating with json
-						// $.getJSON()
-					});
+					
+					// If you are logged into the user, show the buttons
+					if (<%= userBean.isLoggedIn() ? "true" : "false" %>) {
+						//$("#favoritesButton").show();
+						//$("#queueButton").show();
+						var paramsToAjax = {ajaxParams : "accountID=" + (<%= userBean.getAccountId() %>) + "&movieID=" + (e.data.movieId) };
+						// TODO: Event listeners for the modal.
+						$("#favoritesButton").off("click");  // remove the old event handler.
+						$("#favoritesButton").click(paramsToAjax, function(e) {
+							console.log("favorites button");
+							var isInFavorites = false;
+							var actionToDo = "";
+							if (isInFavorites) {
+								// remove from the queue
+								actionToDo = "remove_favorite";
+							} else {
+								// add to the queue
+								actionToDo = "add_favorite";
+							}
+							var URL = "AjaxInterface?action=" + actionToDo + "&" + e.data.ajaxParams;
+							console.log(URL);
+							$.getJSON(URL).done(function(data) {
+								console.log(data);
+								if (data.success) {
+									console.log("updated favorites");
+									// TODO: change styling for queue
+								} else {
+									console.error("Error with updating favorites");
+								}
+							});
+						});
+						$("#queueButton").off("click");  // remove the old event handler.
+						$("#queueButton").click(paramsToAjax, function(e) {
+							console.log("queue button");
+							// if the movie is NOT in the queue...
+							var isInQueue = false;
+							var actionToDo = "";
+							if (isInQueue) {
+								// remove from the queue
+								actionToDo = "remove_queue";
+							} else {
+								// add to the queue
+								actionToDo = "add_queue";
+							}
+							$.getJSON("AjaxInterface?action=" + actionToDo + "&" + e.data.ajaxParams).done(function(data) {
+								console.log(data);
+								if (data.success) {
+									console.log("updated the queue");
+									// TODO: change styling for queue
+								} else {
+									console.error("Error with updating queue");
+								}
+							});
+						});
+					} else {
+						// The favorites and queue buttons should hide when the user is not logged in.
+						$("#favoritesButton").attr("disabled", "");
+						$("#queueButton").attr("disabled", "");
+					}
 			});
 			
 			(function(movieId, movieTitle) {

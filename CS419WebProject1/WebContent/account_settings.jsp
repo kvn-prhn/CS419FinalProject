@@ -17,9 +17,79 @@
 
         <div class="pure-g">
             <div class="l-box pure-u-1">
-				<p>
-					Wow look at all of these account settings.
-				</p>
+            <% Account account = null;
+            	if (userBean.isLoggedIn()) {
+            		account = AccountDao.getAccountById(userBean.getAccountId()); 
+           		}
+            	if (account != null) { %>
+				<form class="pure-form">
+				 	<fieldset>
+				 		<div class="pure-u-1">
+				 			<legend>Account Information</legend>
+				 			
+				 			<p>
+				 				Name: <%= account.getLastName()  %>, <%= account.getFirstName()  %>
+				 			</p>
+				 			<p>
+				 				Email: <%= account.getEmail() %>
+				 			</p>
+				 			<p>
+				 				Reset date: <%= account.getHoursResetDate() %>
+				 			</p>
+				 			<p>
+				 				Hours Left: <%= account.getHoursRemaining() %>
+				 			</p>
+				 			<p>
+				 				Subscription Tier: <%= account.getSubscriptionTier() %>
+				 			</p>
+				 		</div>
+				 		<div class="pure-control-group pure-u-1">
+				            <div class="pure-u-1">
+				            	<legend>Update password</legend>
+				            	<input id="password" type="password" placeholder="New password">
+				            </div>
+				        </div>
+				        <div class="pure-control-group pure-u-1">
+				            <div class="pure-u-1">
+				            	<legend>Update Address</legend>
+				            	<label for="streetAddress">Street Address</label>
+								<input id="streetAddress" type="text" name="streetAddress" value="" placeholder="Street Address">
+								<label for="city">City</label>
+								<input id="city" type="text" name="city" value="" placeholder="City">
+								<label for="state">State</label>
+								<input id="state" type="text" name="state" value="" placeholder="State">
+								<label for="zipCode">ZIP Code</label>
+								<input id="zipCode" type="text" name="zipcode" value="" placeholder="ZIP Code">
+							</div>
+				        </div>
+				        <div class="pure-control-group">
+			            	<legend>Update Subscription change</legend>
+			            	<div class="pure-u-1-5">
+								<label for="subChoice1">Bronze</label>
+								<input type="radio" id="subChoice1" name="subscriptionTier" value="1">
+							</div>
+							<div class="pure-u-1-5">
+								<label for="subChoice2">Silver</label>
+								<input type="radio" id="subChoice2" name="subscriptionTier" value="2">
+								
+							</div>
+							<div class="pure-u-1-5">
+								<label for="subChoice3">Gold</label>
+								<input type="radio" id="subChoice3" name="subscriptionTier" value="3">
+								
+							</div>
+							<div class="pure-u-1-5">
+								<label for="subChoice4">Platinum</label>
+								<input type="radio" id="subChoice4" name="subscriptionTier" value="4">
+							</div>
+				        </div>
+				 	</fieldset>
+				</form>
+				
+			<% } else { // end the form
+ 				out.println("No account logged in");
+ 			}
+ 			%>
             </div>
             
         </div>
@@ -39,35 +109,6 @@
         </div>
     </div>
 	
-	<!--
-    <div class="content">
-        <h2 class="content-head is-center">Dolore magna aliqua. Uis aute irure.</h2>
-
-        <div class="pure-g">
-            <div class="l-box-lrg pure-u-1 pure-u-md-2-5">
-                
-            </div>
-
-            <div class="l-box-lrg pure-u-1 pure-u-md-3-5">
-                <h4>Contact Us</h4>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat.
-                </p>
-
-                <h4>More Information</h4>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua.
-                </p>
-            </div>
-        </div>
-
-    </div>
-	-->
-
     <div class="footer l-box is-center">
         This is the footer.
     </div>

@@ -37,19 +37,16 @@
 
                 <form action="Login" method="POST" class="pure-form pure-form-stacked">
                     <fieldset>
-						<div class="pure-g">
-							<div class="l-box pure-u-1">
-								<label for="email">Your Email</label>
-								<input id="email" type="email" name="email" placeholder="Your Email">
-							</div>
-							<div class="l-box pure-u-1">
-								<label for="password">Your Password</label>
-								<input id="password" type="password" name="password" placeholder="Your Password">
-							</div>
-							
-							<div class="l-box pure-u-1">
-								<button type="submit" class="pure-button">Log in</button>
-							</div>
+						<div class="pure-control-group">
+							<label for="email">Your Email</label>
+							<input id="email" type="email" name="email" placeholder="Your Email">
+						</div>
+						<div class="pure-control-group">
+							<label for="password">Your Password</label>
+							<input id="password" type="password" name="password" placeholder="Your Password">
+						</div>
+						<div class="pure-controls">
+							<button type="submit" class="pure-button">Log in</button>
 						</div>
                     </fieldset>
                 </form>
