@@ -35,7 +35,7 @@ public class AjaxInterface extends HttpServlet {
 				} else {
 					// TODO: Add actions for changing the account properties.
 					if (actionToDo.equals("update_address")) {		// update some account's address...
-						
+						// TODO: Street address, city, state, ZIP code.
 					} else {
 						// begin actions that use a movieId
 						// make sure that movie ID that was given is valid

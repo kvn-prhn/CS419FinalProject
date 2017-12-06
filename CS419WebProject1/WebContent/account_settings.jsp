@@ -26,22 +26,26 @@
 				 	<fieldset>
 				 		<div class="pure-u-1">
 				 			<legend>Account Information</legend>
-				 			
-				 			<p>
-				 				Name: <%= account.getLastName()  %>, <%= account.getFirstName()  %>
-				 			</p>
-				 			<p>
-				 				Email: <%= account.getEmail() %>
-				 			</p>
-				 			<p>
-				 				Reset date: <%= account.getHoursResetDate() %>
-				 			</p>
-				 			<p>
-				 				Hours Left: <%= account.getHoursRemaining() %>
-				 			</p>
-				 			<p>
-				 				Subscription Tier: <%= account.getSubscriptionTier() %>
-				 			</p>
+				 			<div class="pure-u-1">
+				 				<div class="pure-u-1-4"> Name:</div>
+				 				<div class="pure-u-2-3"><%= account.getLastName()  %>, <%= account.getFirstName()  %></div>
+				 			</div>
+				 			<div class="pure-u-1">
+				 				<div class="pure-u-1-4">Email:</div>
+				 				<div class="pure-u-2-3"><%= account.getEmail() %></div>
+				 			</div> 
+				 			<div class="pure-u-1">
+				 				<div class="pure-u-1-4">Reset date:</div>
+				 				<div class="pure-u-2-3"><%= account.getHoursResetDate() %></div>
+				 			</div> 
+				 			<div class="pure-u-1">
+				 				<div class="pure-u-1-4">Hours Left:</div>
+				 				<div class="pure-u-2-3"><%= account.getHoursRemaining() %></div>
+				 			</div>
+				 			<div class="pure-u-1">
+				 				<div class="pure-u-1-4">Subscription Tier:</div>
+				 				<div class="pure-u-2-3"><%= account.getSubscriptionTier() %></div>
+				 			</div> 
 				 		</div>
 				 		<div class="pure-control-group pure-u-1">
 				            <div class="pure-u-1">

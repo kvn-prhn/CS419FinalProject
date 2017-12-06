@@ -8,6 +8,39 @@ import java.util.List;
 
 public class MovieDao {
 
+	public static Movie getMovieById(int id) {
+		Movie movie = null;
+		try{  
+            Connection con = DBLink.getConnection();
+            PreparedStatement ps=con.prepareStatement("select " +
+            		"movieID, movieGenre, movieTitle, movieDescription, movieYearReleased," +
+            		"movieImage, movieTrailer, movieMPAARating, movieLength  "
+            		+ "from movie where movieID = " + id);  
+            
+            System.out.println(ps.toString());      
+            
+            ResultSet rs = ps.executeQuery(); 
+            
+            if (rs.next()) {
+            	movie = new Movie();
+            	movie.setId(rs.getInt(1));
+            	movie.setGenre(rs.getString(2));
+            	movie.setTitle(rs.getString(3));
+            	movie.setDescription(rs.getString(4));
+            	movie.setReleaseYear(rs.getInt(5));
+            	movie.setImageURL(rs.getString(6));
+            	movie.setTrailerURL(rs.getString(7));
+            	movie.setRating(rs.getInt(8));
+            	movie.setLength(rs.getInt(9));
+            }
+            con.close();  
+        }catch(Exception e){
+        	e.printStackTrace(); 
+    	} 
+		
+		return movie;
+	}
+	
 	public static List<Movie> searchMovies(String searchString, MovieFilter filter){
 		List<Movie> list = new ArrayList<Movie>();  
 		

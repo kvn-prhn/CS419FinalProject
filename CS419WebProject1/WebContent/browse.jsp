@@ -35,6 +35,8 @@
 	       <div class="pure-u-1">
 	       	<div class="pure-u-2-5"><a id="favoritesButton" class="pure-button pure-button-active">Add to Favorites</a></div>
 	       	<div class="pure-u-2-5"><a id="queueButton" class="pure-button pure-button-active">Add to Queue</a></div>
+	        <div class="pure-u-2-5"><a id="watchButton" class="pure-button pure-button-active">Watch</a></div>
+	         
 	       </div>
        </div>
      </div>
@@ -52,7 +54,7 @@
             	<form class="pure-form" method="get" action="Search">
 	            	<div class="pure-u-1-4">
 	            		<label for="search_bar">Search:</label>
-	            		<input id="search_bar" name="search" input="text" placehold="Search">
+	            		<input id="search_bar" name="search" input="text" value="<%= browseListBean.getSearchString() %>" placehold="Search">
 	            	</div>
 	            	<div class="pure-u-1-4">
 	            		<label for="sort_by">Sort by:</label>
@@ -197,10 +199,13 @@
 								}
 							});
 						});
+						
+						$("#watchButton").attr("href", "watch_movie.jsp?movieID=" +  (e.data.movieId));
 					} else {
 						// The favorites and queue buttons should hide when the user is not logged in.
 						$("#favoritesButton").attr("disabled", "");
 						$("#queueButton").attr("disabled", "");
+						$("#watchButton").attr("disabled", "");
 					}
 			});
 			
