@@ -19,7 +19,7 @@
 
     <div class="splash">
 		<!-- fullscreen video background-->
-		<video class="fullscreen" src="img/trafficbg.webm" autoplay loop muted></video>
+		<video class="fullscreen" src="img/cambg.webm" autoplay loop muted></video>
 
         <h1 class="splash-head">Movies for you</h1>
         <p class="splash-subhead">

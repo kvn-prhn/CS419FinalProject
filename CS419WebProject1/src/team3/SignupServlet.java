@@ -35,8 +35,27 @@ public class SignupServlet extends HttpServlet {
 			// if a user is found, set the user bean to that user
 			if (rs.next()) {
 				// ERROR: There is already an account with this email address
-				System.err.println("ERROR MAKING THE ACCOUNT");
+				System.err.println("An account with this email already exists");
+				request.getRequestDispatcher("sign_up.jsp").forward(request, response);
+				con.close();
+				return;
 			} else { // Create new account
+				if (request.getParameter("firstName") == null ||
+						request.getParameter("lastName") == null ||
+						request.getParameter("password") == null ||
+						request.getParameter("email") == null ||
+						request.getParameter("streetAddress") == null ||
+						request.getParameter("state") == null ||
+						request.getParameter("city") == null ||
+						request.getParameter("zipcode") == null ||
+						request.getParameter("subscriptionTier") == null) {
+				
+					// return to the sign up page if  everythign is not in there yet.
+					request.getRequestDispatcher("sign_up.jsp").forward(request, response);
+					con.close();
+					return;
+				}
+				
 				Account a = new Account();
 				a.setFirstName((String)request.getParameter("firstName"));
 				a.setLastName((String)request.getParameter("lastName"));
@@ -57,6 +76,9 @@ public class SignupServlet extends HttpServlet {
 				// TODO: Set the first date.
 				
 				AccountDao.create(a);
+				
+				ps = DBLink.getConnection().prepareStatement("select id, firstName from accountteam3 where email=?");
+				ps.setString(1, request.getParameter("email"));
 				rs = ps.executeQuery();
 				
 				if (rs.next()) { // Create a new default user for account
@@ -68,12 +90,14 @@ public class SignupServlet extends HttpServlet {
 					UserDao.create(u);
 				}
 				
+				//request.getRequestDispatcher("sign_up.jsp").forward(request, response);
 				response.sendRedirect("login.jsp");  // send to the login page after making an account.
 			}
 
 			con.close();
 		} catch (Exception ex) {
 			ex.printStackTrace();
+			response.getWriter().println("THERE WAS AN ERROR");
 		}
 
 	}
