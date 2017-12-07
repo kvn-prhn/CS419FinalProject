@@ -3,8 +3,8 @@
 <%@page import="team3.AccountDao"%>
 <jsp:useBean id="userBean" scope="session" class="team3.User">
   </jsp:useBean>
-  
-  
+
+
 <div class="header">
     <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
 		<div class="pure-g">

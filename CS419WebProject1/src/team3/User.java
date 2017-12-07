@@ -49,7 +49,7 @@ public class User {
 	}
 	
 	public int addToFavorites(int movieId) {
-		if (!favoritesList.contains(movieId))
+		if (favoritesList != null && !favoritesList.contains(movieId))
 			favoritesList.add(movieId);
 		else
 			return 1;
