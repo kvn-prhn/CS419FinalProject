@@ -48,18 +48,42 @@ public class FavoritesListDao {
 		int status = 0;
 		try {
 			Connection con = DBLink.getConnection();
-			PreparedStatement ps = con.prepareStatement("update favoriteteam3 set movieId=? where userId=? and position=?");
+			
+			PreparedStatement ifExists = con.prepareStatement("select * from favoriteteam3 where movieId = ? and userId = ?");
+			PreparedStatement update = con.prepareStatement("update favoriteteam3 set movieId=? where userId=? and position=?");
+			PreparedStatement insert = con.prepareStatement("insert into favoriteteam3(movieId, userId, position) values (?,?,?)");
+			
+			ResultSet rs;
+			
 			List<Integer> favoritesList = fl.getMovieIdList();
-			for (int position = 0; position < favoritesList.size(); position++) {
-				ps.setInt(1, favoritesList.get(position));
-				ps.setInt(2, fl.getUserId());
-				ps.setInt(3, position);
-				status = (ps.executeUpdate() == 1 || status == 1) ? 1 : 0;
+			
+			for (int i = 0; i < favoritesList.size(); i++) {
+				ifExists.setInt(1, favoritesList.get(i));
+				ifExists.setInt(2, fl.getUserId());
+				rs = ifExists.executeQuery();
+				if (rs.next()) {
+					//System.out.println("UPDATING FL");
+					update.setInt(1, favoritesList.get(i));
+					update.setInt(2, fl.getUserId());
+					update.setInt(3, i);
+					status = (update.executeUpdate() == 1 || status == 1) ? 1 : 0;
+				}
+				else {
+					//System.out.println("INSERTING INTO FL");
+					insert.setInt(1, favoritesList.get(i));
+					insert.setInt(2, fl.getUserId());
+					insert.setInt(3, i);
+					insert.executeUpdate();
+				}
 			}
 
 			PreparedStatement psCleanUp = con.prepareStatement("delete from favoriteteam3 where userId=? and position > ?");
-			psCleanUp.setInt(fl.getUserId(), favoritesList.size() - 1);
-
+			if (favoritesList.size() > 0) {
+				psCleanUp.setInt(1, fl.getUserId());
+				psCleanUp.setInt(2, favoritesList.size()-1);
+				psCleanUp.executeUpdate();
+			}
+			
 			con.close();
 		} catch (Exception ex) {
 			ex.printStackTrace();
