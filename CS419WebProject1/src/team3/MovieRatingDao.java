@@ -78,9 +78,15 @@ public class MovieRatingDao {
         
         try{  
             Connection con = DBLink.getConnection();  
-            PreparedStatement ps = con.prepareStatement("select * from account where movieID=? and userID=?");  
+            PreparedStatement ps = con.prepareStatement("SELECT movieratingteam3.* "
+            										  + "FROM movieratingteam3 " 
+            										  + "INNER JOIN userteam3 on movieratingteam3.userId = userteam3.id "
+            										  + "INNER JOIN movie on movie.movieID = movieratingteam3.movieId "
+            										  + "WHERE movieratingteam3.movieId = ? AND movieratingteam3.userId = ? ");  
             ps.setInt(1, movieId);  
             ps.setInt(2, userId);
+            
+            System.out.println(ps.toString());
             
             ResultSet rs = ps.executeQuery();  
             

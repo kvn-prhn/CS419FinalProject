@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/AjaxInterface")
 public class AjaxInterface extends HttpServlet {
@@ -37,6 +38,9 @@ public class AjaxInterface extends HttpServlet {
 					if (actionToDo.equals("update_address")) {		// update some account's address...
 						// TODO: Street address, city, state, ZIP code.
 					} else {
+						HttpSession session = req.getSession(true);
+					    User user = (User)session.getAttribute("userBean");
+						
 						// begin actions that use a movieId
 						// make sure that movie ID that was given is valid
 						String movieIdStr = req.getParameter("movieID");
@@ -49,6 +53,7 @@ public class AjaxInterface extends HttpServlet {
 							if (actionToDo.equals("add_favorite")) {	// add a movie to the favorites list
 								// TODO:
 								System.out.println("add_favorite");
+								user.addToFavorites(movieId);
 								
 								pw.write("{\"success\":false,\"msg\":\"Not yet implemented\"}");
 								

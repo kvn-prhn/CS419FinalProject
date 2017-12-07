@@ -14,7 +14,7 @@
 String movieId = request.getParameter("movieID");
 Movie movie = null;
 if (movieId != null) {
-	movie = MovieDao.getMovieById(Integer.parseInt(movieId));
+	movie =  MovieDao.getMovieById(Integer.parseInt(movieId));
 }
 %>
 

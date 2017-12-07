@@ -26,7 +26,7 @@ public class FavoritesListDao {
 		try {
 			Connection con = DBLink.getConnection();
 			PreparedStatement ps = con
-					.prepareStatement("insert into FavoritesList(movieId, userId, position) values (?,?,?)");
+					.prepareStatement("insert into favoriteteam3(movieId, userId, position) values (?,?,?)");
 			List<Integer> favoritesList = fl.getMovieIdList();
 			for (int position = 0; position < favoritesList.size(); position++) {
 				ps.setInt(1, favoritesList.get(position));
@@ -48,7 +48,7 @@ public class FavoritesListDao {
 		int status = 0;
 		try {
 			Connection con = DBLink.getConnection();
-			PreparedStatement ps = con.prepareStatement("update favorites set movieId=? where userId=? and position=?");
+			PreparedStatement ps = con.prepareStatement("update favoriteteam3 set movieId=? where userId=? and position=?");
 			List<Integer> favoritesList = fl.getMovieIdList();
 			for (int position = 0; position < favoritesList.size(); position++) {
 				ps.setInt(1, favoritesList.get(position));
@@ -57,7 +57,7 @@ public class FavoritesListDao {
 				status = (ps.executeUpdate() == 1 || status == 1) ? 1 : 0;
 			}
 
-			PreparedStatement psCleanUp = con.prepareStatement("delete from favorites where userId=? and position > ?");
+			PreparedStatement psCleanUp = con.prepareStatement("delete from favoriteteam3 where userId=? and position > ?");
 			psCleanUp.setInt(fl.getUserId(), favoritesList.size() - 1);
 
 			con.close();
@@ -73,7 +73,7 @@ public class FavoritesListDao {
 
 		try {
 			Connection con = DBLink.getConnection();
-			PreparedStatement ps = con.prepareStatement("delete from favorites where userId=?");
+			PreparedStatement ps = con.prepareStatement("delete from favoriteteam3 where userId=?");
 			ps.setInt(1, fl.getUserId());
 
 			status = ps.executeUpdate();
@@ -93,16 +93,16 @@ public class FavoritesListDao {
 
 		try {
 			Connection con = DBLink.getConnection();
-			PreparedStatement ps = con.prepareStatement("select * from favorites where userId=? order by position asc");
+			PreparedStatement ps = con.prepareStatement("select movieId from favoriteteam3 where userId=? order by position asc");
 			ps.setInt(1, id);
 
 			ResultSet rs = ps.executeQuery();
 
-			if (rs.next()) {
+			while (rs.next()) {
 				favoritesList.add(rs.getInt(1));
 			}
 			fl.setMovieIdList(favoritesList);
-			con.close();
+			//con.close();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

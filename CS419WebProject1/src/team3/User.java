@@ -1,4 +1,5 @@
 package team3;
+import java.util.ArrayList;
 import java.util.List;
 
 public class User {
@@ -6,8 +7,8 @@ public class User {
 	private int id;
 	private int accountId;
 	private String username;
-	private List<Integer> favoritesList;
-	private List<Integer> queue;
+	private List<Integer> favoritesList = new ArrayList<Integer>();
+	private List<Integer> queue = new ArrayList<Integer>();
 	private boolean isLoggedIn;
 	
 	public User() {

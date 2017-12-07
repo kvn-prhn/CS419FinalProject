@@ -91,7 +91,7 @@
 							<p>
 								Ratings are fun
 								<div class="pure-u-1">							 
-									 <%= MovieRatingDao.getMovieRatingByUserId(movie.getId(), userBean.getId()) %>
+									 <%= MovieRatingDao.getMovieRatingByUserId(movie.getId(), userBean.getId()).getRating() %>
 								</div>
 							</p>
 							<p>
