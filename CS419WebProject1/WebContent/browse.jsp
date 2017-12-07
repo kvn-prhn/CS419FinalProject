@@ -52,16 +52,34 @@
 					<!-- <a href="watch_movie.jsp">Watch a movie</a> -->
             <div class="pure-u-1">
             	<form class="pure-form" method="get" action="Search">
+	            	
+	            	<div class="pure-u-1-4">
+	            		<label for="sort_by">Sort by:</label>
+	            		<select id="sort_by" name="sort_by">
+	            			<option value="keyword">Keyword</option>
+	            			<option value="genre">Genre</option>
+	            			<option value="rating">Rating</option>
+	            			<option value="releaseYear">Release Year</option>
+	            		</select>
+	            	</div>
+	            	
+	            	<%-- Genre Filter Dropdown --%>
+	            	<div class="pure-u-1-4">
+	            		<label for="filter_by">Filter by:</label>
+	            		<select id="filter_by" name="sort_by">
+	            			<option value="drama">Drama</option>
+	            			<option value="action">Action</option>
+	            			<option value="comedy">Comedy</option>
+	            			<option value="horror">Horror</option>
+	            			<option value="sciFi">Sci-Fi</option>
+	            		</select>
+	            	</div>
+	            	
 	            	<div class="pure-u-1-4">
 	            		<label for="search_bar">Search:</label>
 	            		<input id="search_bar" name="search" input="text" value="<%= browseListBean.getSearchString() %>" placehold="Search">
 	            	</div>
-	            	<div class="pure-u-1-4">
-	            		<label for="sort_by">Sort by:</label>
-	            		<select id="sort_by" name="sort_by">
-	            			<option value="nothing">Select an option</option>
-	            		</select>
-	            	</div>
+	            	
 	            	<div class="pure-u-3-24">
 	            		<input type="submit" class="pure-button">Update</input>
 	            	</div>
