@@ -50,7 +50,7 @@ public class FavoritesListDao {
 			Connection con = DBLink.getConnection();
 			
 			PreparedStatement ifExists = con.prepareStatement("select * from favoriteteam3 where movieId = ? and userId = ?");
-			PreparedStatement update = con.prepareStatement("update favoriteteam3 set movieId=? where userId=? and position=?");
+			PreparedStatement update = con.prepareStatement("update favoriteteam3 set position=? where movieId=? and userId=?");
 			PreparedStatement insert = con.prepareStatement("insert into favoriteteam3(movieId, userId, position) values (?,?,?)");
 			
 			ResultSet rs;
@@ -63,9 +63,9 @@ public class FavoritesListDao {
 				rs = ifExists.executeQuery();
 				if (rs.next()) {
 					//System.out.println("UPDATING FL");
-					update.setInt(1, favoritesList.get(i));
-					update.setInt(2, fl.getUserId());
-					update.setInt(3, i);
+					update.setInt(1, i);
+					update.setInt(2, favoritesList.get(i));
+					update.setInt(3, fl.getUserId());
 					status = (update.executeUpdate() == 1 || status == 1) ? 1 : 0;
 				}
 				else {
@@ -77,7 +77,8 @@ public class FavoritesListDao {
 				}
 			}
 
-			PreparedStatement psCleanUp = con.prepareStatement("delete from favoriteteam3 where userId=? and position > ?");
+			
+			/*PreparedStatement psCleanUp = con.prepareStatement("delete from favoriteteam3 where userId=? and position > ?");
 			if (favoritesList.size() > 0) {
 				psCleanUp.setInt(1, fl.getUserId());
 				psCleanUp.setInt(2, favoritesList.size()-1);
@@ -85,6 +86,7 @@ public class FavoritesListDao {
 			}
 			
 			con.close();
+			*/
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

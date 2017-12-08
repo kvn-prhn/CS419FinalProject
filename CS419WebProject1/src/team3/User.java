@@ -1,4 +1,7 @@
 package team3;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,14 +63,24 @@ public class User {
 	}
 	
 	public int removeFromFavorites(int movieId) {
-		if (favoritesList != null && !favoritesList.contains(movieId))
-			favoritesList.remove(movieId);
+		if (favoritesList != null && favoritesList.contains(movieId)) {
+			favoritesList.remove(favoritesList.indexOf(movieId));
+			Connection con = DBLink.getConnection();
+			try {
+				PreparedStatement ps = con.prepareStatement("delete from favoriteteam3 where movieId = " + movieId + " and userId = " + id);
+				int status = ps.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
 		else
 			return 1;
 		FavoritesList fl = new FavoritesList();
 		fl.setUserId(id);
 		fl.setMovieIdList(favoritesList);
-		return FavoritesListDao.update(fl);
+		FavoritesListDao.update(fl);
+		return 0;
 	}
 	
 	public int addToQueue(int movieId) {
