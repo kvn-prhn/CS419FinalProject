@@ -60,7 +60,7 @@ public class User {
 	}
 	
 	public int removeFromFavorites(int movieId) {
-		if (!favoritesList.contains(movieId))
+		if (favoritesList != null && !favoritesList.contains(movieId))
 			favoritesList.remove(movieId);
 		else
 			return 1;

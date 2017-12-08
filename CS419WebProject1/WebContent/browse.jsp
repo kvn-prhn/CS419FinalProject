@@ -3,6 +3,10 @@
 <jsp:useBean id="browseListBean" scope="session" class="team3.BrowseListBean"></jsp:useBean>
 <%@ page import = "team3.Movie" %>
 <%@ page import = "team3.MovieRatingDao" %>
+<%@ page import = "team3.FavoritesListDao" %>
+<%@ page import = "team3.QueueDao" %>
+<%@ page import = "java.util.List" %>
+
 
 <!doctype html>
 <html lang="en">
@@ -14,6 +18,8 @@
 
 <%@include file='WEB-INF/modules/header_common.jspf'%>
 
+<% int userId = userBean.getId(); %>
+
 <!-- Copied from: https://github.com/jorgechavz/pure-css-modal/blob/master/index.html -->
  <!-- Center modal for showing information about a movie after clicking on it. -->
  <div class="modal">
@@ -24,7 +30,12 @@
        <label for="modal-trigger-center" class="close">&#10006;</label>
        <div class="pure-g">
 	       <div class="pure-u-1">
-				<h2 id="modal-label-movie-title">Movie Title</h2>
+				<h2>
+					<span class="fav-style-marker">*</span>
+					<span id="modal-label-movie-title">Movie Title</span>
+					<span class="fav-style-marker">*</span>
+					<span class="queue-position-marker"></span>
+				</h2>
 	       </div>
 	       <div class="pure-u-1-5">
 	       	<img class="pure-img" id="modal-movie-image" alt="movie image" src=""></img>
@@ -86,16 +97,43 @@
             	</form>
             </div>
          	<% int movieOn = 0; %>
+         	<% List<Integer> userFavList = FavoritesListDao.getFavoritesListByUserId(userId).getMovieIdList(); %>
+         	<% List<Integer> userQueue = QueueDao.getQueueByUserId(userId).getMovieIdList(); %>
 			<% for (Movie movie : browseListBean.getMovies()) { %>
 				<div class="pure-u-sm-1 pure-u-lg-1-2">
 					<div class="movie-display-block-<%= movieOn %>">
 						<div class="pure-u-1">
-							<h2 for="modal-trigger-center" class="modal-open movie-title">
-								<% out.println(movie.getTitle()); %>
-							</h2>
-							<%-- Meta-data for the movie for the modal --%>
+							<%-- Meta-data for the movie for the modal. --%>
 							<div style="display: none;" class="movie-full-description"> <%= movie.getDescription() %> </div>
 							<div style="display: none;" class="movie-id-num"><%= movie.getId() %></div>
+							<div style="display: none;" class="fav-marker"><%  
+								System.out.println(userFavList);  // debugging
+								String fav_marker_initial_style = "";   // initial styling of the movies for favorite marker.
+								if (userFavList.contains(movie.getId())) {
+									out.print("1");   // have a 1 here if this is in the users favorites
+								} else { 
+									out.print("0");   // have a 0 here if it is NOT in the users favorites.
+									fav_marker_initial_style = "style=\"display: none;\"";  // show a display tag to be invisible.
+								} %></div>
+								<%-- If the queue position is less than 0, it means its not in the queue --%>
+							<div style="display: none;" class="queue-position"><%
+								if (userQueue != null && userQueue.contains(movie.getId())) {
+									out.println("1"); // TODO: add in code to get the position of the movie in the queue for this user.
+								} else {
+									out.println("-1"); // not in queue
+								}
+								%></div>
+							
+							<h2 for="modal-trigger-center">
+								<span <%= fav_marker_initial_style %> class="fav-style-marker">*</span>
+								<span class="modal-open movie-title"><%= movie.getTitle() %></span>
+								<span <%= fav_marker_initial_style %> class="fav-style-marker">*</span>
+								<span class="queue-position-marker"><%
+									if (userQueue != null && userQueue.contains(movie.getId())) {
+										out.println("[1]");  // TODO: style as the position in the queue.
+									}
+								%></span>
+							</h2>
 						</div>
 						<div class="pure-u-1-24"></div><!-- spacing -->
 						<div class="pure-u-5-24">
@@ -147,35 +185,59 @@
 		var current_page_id = "browse-link";
 		$("#" + current_page_id).addClass("pure-menu-selected");
 		
+		// iterate for each movie.
 		for (var i = 0; i < <%= movieOn %>; i++) {
-			var currentMovieId = ".movie-display-block-" + i;
+			var currentMovieId = ".movie-display-block-" + i;		// class of the block of this movie.
 			var currentMovieTitle = $(currentMovieId).find(".movie-title").text().trim();
+			// set adding all the data and button listeners when clicking on the movie.
 			$(currentMovieId).click(
-				{	// these are the parameters given when the modal is opened
-					movieId: $(currentMovieId).find(".movie-id-num").text(),	// a string
-					movieTitle: currentMovieTitle,
-					movieDescription: $(currentMovieId).find(".movie-full-description").text(),
-					movieImgSrc : $(currentMovieId).find("#movie-display-img").attr("src")
+				{	// these are the parameters given when the modal is opened.
+					classToReferenceMovieBlock : currentMovieId,
+					movieId: $(currentMovieId).find(".movie-id-num").text(),	// a string that is the ID number of the movie.
+					movieTitle: currentMovieTitle,								// a string of the title of the movie.
+					movieDescription: $(currentMovieId).find(".movie-full-description").text(), // the full description of the movie
+					movieImgSrc : $(currentMovieId).find("#movie-display-img").attr("src")		// the source of the image for the movie.
 				}, 
 				function(e) {	// what happens when the modal opens up...
-					//console.log(e.data);
+					console.log(e.data);
+					// set all of the attributes on the modal 
 					$("#movie-id-current").html(e.data.movieId);
 					$("#modal-label-movie-title").html(e.data.movieTitle);
 					$("#modal-label-movie-description").html(e.data.movieDescription);
 					$("#modal-movie-image").attr("src", e.data.movieImgSrc);
+					// class to reference the movie block we're on
+					var classToReferenceMovieBlock = e.data.classToReferenceMovieBlock;
+					// BOOLEAN to see if this movie is in favorites list
+					var currMovieInFavorites = $(classToReferenceMovieBlock).find(".fav-marker").text() === "1";
+					// Number to see what position the queue is in, if anything.
+					var currQueuePosition = parseInt( $(classToReferenceMovieBlock).find(".queue-position").text() );
+					console.log(currQueuePosition);
+					
+					// change the favorites button based on if its in the favorites list or not.
+					if (currMovieInFavorites) {
+						$(".modal").find(".fav-style-marker").show();
+						$("#favoritesButton").text("Remove from Favorites");
+					} else {
+						$(".modal").find(".fav-style-marker").hide();
+						$("#favoritesButton").text("Add to Favorites");
+					}
+					
+					// change the queue styling based on if it is in the queue or not.
+					// TODO: Change modal styling based on the queue.
+					
+					console.log(currMovieInFavorites);
 					
 					// If you are logged into the user, show the buttons
 					if (<%= userBean.isLoggedIn() ? "true" : "false" %>) {
 						//$("#favoritesButton").show();
 						//$("#queueButton").show();
-						var paramsToAjax = {ajaxParams : "accountID=" + (<%= userBean.getAccountId() %>) + "&movieID=" + (e.data.movieId) };
+						var paramsToAjax = {ajaxParams : "userID=" + (<%= userBean.getId() %>) + "&movieID=" + (e.data.movieId) };
 						// TODO: Event listeners for the modal.
 						$("#favoritesButton").off("click");  // remove the old event handler.
 						$("#favoritesButton").click(paramsToAjax, function(e) {
 							console.log("favorites button");
-							var isInFavorites = false;
 							var actionToDo = "";
-							if (isInFavorites) {
+							if (currMovieInFavorites) {		// different message depending on if its in favorites or not.
 								// remove from the queue
 								actionToDo = "remove_favorite";
 							} else {
@@ -188,6 +250,20 @@
 								console.log(data);
 								if (data.success) {
 									console.log("updated favorites");
+									if (actionToDo == "add_favorite") {  // add the favorite markers to it.
+										console.log("ADDED TO THE FAVORITES");
+										currMovieInFavorites = true;
+										$(".modal").find(".fav-style-marker").show();
+										$(classToReferenceMovieBlock).find(".fav-marker").text("1");   // mark as favorite
+										$(classToReferenceMovieBlock).find(".fav-style-marker").show();	// show favorite markers
+										$("#favoritesButton").text("Remove from Favorites");
+									} else { // remove_favorites
+										currMovieInFavorites = false;
+										$(".modal").find(".fav-style-marker").hide();
+										$(classToReferenceMovieBlock).find(".fav-marker").text("0");  // mark as not favorite
+										$(classToReferenceMovieBlock).find(".fav-style-marker").hide();
+										$("#favoritesButton").text("Add to Favorites");
+									}
 									// TODO: change styling for queue
 								} else {
 									console.error("Error with updating favorites");

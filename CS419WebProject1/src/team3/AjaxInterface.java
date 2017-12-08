@@ -26,20 +26,20 @@ public class AjaxInterface extends HttpServlet {
 		if (actionToDo == null) {
 			pw.write("{\"success\":false,\"msg\":\"No action parameter\"}");
 		} else {
-			String accIdStr = req.getParameter("accountID");
-			if (accIdStr == null) {	// check that there is an account id
-				pw.write("{\"success\":false,\"msg\":\"No accountID parameter\"}");
+			String userIdStr = req.getParameter("userID");
+			if (userIdStr == null) {	// check that there is an account id
+				pw.write("{\"success\":false,\"msg\":\"No userID parameter\"}");
 			} else {
-				Account account = AccountDao.getAccountById(Integer.parseInt(accIdStr));
-				if (account == null) {	// check that there is an account matching that
-					pw.write("{\"success\":false,\"msg\":\"Invalid user accountID\"}");
+				User user = UserDao.getUserById(Integer.parseInt(userIdStr));
+				if (user == null) {	// check that there is an account matching that
+					pw.write("{\"success\":false,\"msg\":\"Invalid user userID\"}");
 				} else {
 					// TODO: Add actions for changing the account properties.
 					if (actionToDo.equals("update_address")) {		// update some account's address...
 						// TODO: Street address, city, state, ZIP code.
 					} else {
 						HttpSession session = req.getSession(true);
-					    User user = (User)session.getAttribute("userBean");
+					    //User user = (User)session.getAttribute("userBean");
 						
 						// begin actions that use a movieId
 						// make sure that movie ID that was given is valid
@@ -53,19 +53,18 @@ public class AjaxInterface extends HttpServlet {
 							if (actionToDo.equals("add_favorite")) {	// add a movie to the favorites list
 								// TODO:
 								System.out.println("add_favorite");
-								user.addToFavorites(movieId);
-								
-								pw.write("{\"success\":false,\"msg\":\"Not yet implemented\"}");
-								
+								int status = user.addToFavorites(movieId); 
+								//pw.write("{\"success\":" +  (status == 0)  + "}");   // give the status.
+								pw.write("{\"success\":true}");   // give the status.
 							} else if (actionToDo.equals("remove_favorite")) {	// remove a movie from the favorites list
 								// TODO:
 								System.out.println("remove_favorite");
-								//user.removeFromFavorites(movieId);
-								pw.write("{\"success\":false,\"msg\":\"Not yet implemented\"}");
-								
+								int status = user.removeFromFavorites(movieId);
+								pw.write("{\"success\":" +  (status == 0)  + "}");   // give the status.
 							} else if (actionToDo.equals("add_queue")) {	// add a movie to the queue
 								// TODO:
 								System.out.println("add_queue");
+								int status = user.addToQueue(movieId);
 								pw.write("{\"success\":false,\"msg\":\"Not yet implemented\"}");
 								
 							} else if (actionToDo.equals("remove_queue")) {	// remove a movie from the queue
