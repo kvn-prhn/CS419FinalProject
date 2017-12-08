@@ -84,7 +84,7 @@ public class User {
 	}
 	
 	public int addToQueue(int movieId) {
-		if (!queue.contains(movieId))
+		if (queue != null && !queue.contains(movieId))
 			queue.add(movieId);
 		else
 			return 1;
@@ -95,14 +95,23 @@ public class User {
 	}
 	
 	public int removeFromQueue(int movieId) {
-		if (!queue.contains(movieId))
-			queue.remove(movieId);
+		if (queue != null && queue.contains(movieId)) {
+			queue.remove(queue.indexOf(movieId));
+			Connection con = DBLink.getConnection();
+			try {
+				PreparedStatement ps = con.prepareStatement("delete from queueteam3 where movieId = " + movieId + " and userId = " + id);
+				int status = ps.executeUpdate();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}	
+		}
 		else
 			return 1;
 		Queue q = new Queue();
 		q.setUserId(id);
 		q.setMovieIdList(queue);
-		return QueueDao.update(q);
+		QueueDao.update(q);
+		return 0;
 	}
 
 	public List<Integer> getQueue() {

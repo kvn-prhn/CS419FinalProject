@@ -70,6 +70,7 @@ public class AjaxInterface extends HttpServlet {
 							} else if (actionToDo.equals("remove_queue")) {	// remove a movie from the queue
 								// TODO:
 								System.out.println("remove_queue");
+								int status = user.removeFromQueue(movieId);
 								pw.write("{\"success\":false,\"msg\":\"Not yet implemented\"}");
 								
 							} else {

@@ -48,19 +48,33 @@ public class QueueDao {
 		int status = 0;
 		try {
 			Connection con = DBLink.getConnection();
-			PreparedStatement ps = con.prepareStatement("update queue set movieID=? where userID=? and position=?");
-			List<Integer> Queue = q.getMovieIdList();
-			for (int position = 0; position < Queue.size(); position++) {
-				ps.setInt(1, Queue.get(position));
-				ps.setInt(2, q.getUserId());
-				ps.setInt(3, position);
-				status = (ps.executeUpdate() == 1 || status == 1) ? 1 : 0;
+			
+			PreparedStatement ifExists = con.prepareStatement("select * from queueteam3 where movieId = ? and userId = ?");
+			PreparedStatement update = con.prepareStatement("update queueteam3 set position=? where movieId=? and userId=?");
+			PreparedStatement insert = con.prepareStatement("insert into queueteam3(movieId, userId, position) values (?,?,?)");
+			
+			ResultSet rs;
+			
+			List<Integer> queue = q.getMovieIdList();
+			
+			for (int i = 0; i < queue.size(); i++) {
+				ifExists.setInt(1, queue.get(i));
+				ifExists.setInt(2, q.getUserId());
+				rs = ifExists.executeQuery();
+				if (rs.next()) {
+					update.setInt(1, i);
+					update.setInt(2, queue.get(i));
+					update.setInt(3, q.getUserId());
+					status = (update.executeUpdate() == 1 || status == 1) ? 1 : 0;
+				}
+				else {
+					insert.setInt(1, queue.get(i));
+					insert.setInt(2, q.getUserId());
+					insert.setInt(3, i);
+					insert.executeUpdate();
+				}
 			}
 
-			PreparedStatement psCleanUp = con.prepareStatement("delete from queue where userID=? and position > ?");
-			psCleanUp.setInt(q.getUserId(), Queue.size() - 1);
-
-			con.close();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
