@@ -78,24 +78,30 @@
 									value="<%= request.getParameter("zipcode") != null ? request.getParameter("zipcode") : "" %>" placeholder="ZIP Code">
 							</div>
 							<!--Radio buttons for choosing a plan-->
-							<div class="l-box pure-u-1-4">
+							<div class="l-box pure-u-1-4" style="background-color:#B87333">
 								<label for="subChoice1">Bronze</label>
 								<input type="radio" id="subChoice1" name="subscriptionTier" value="1">
+								<p style="color:#6d4d35"><b> 10 hours of watch time per month
+								<br><br>Ideal for those who watch a movie about every week</b></p>
 							</div>
-							<div class="l-box pure-u-1-4">
+							<div class="l-box pure-u-1-4" style="background-color:silver">
 								<label for="subChoice2">Silver</label>
 								<input type="radio" id="subChoice2" name="subscriptionTier" value="2">
-								
+								<p style="color:#777676"><b> 30 hours of watch time per month
+								<br><br>Ideal for those who watch a couple movies every week</b></p>
 							</div>
-							<div class="l-box pure-u-1-4">
+							<div class="l-box pure-u-1-4" style="background-color:gold">
 								<label for="subChoice3">Gold</label>
 								<input type="radio" id="subChoice3" name="subscriptionTier" value="3">
+								<p style="color:#a38b15"> <b>50 hours of watch time per month!
+								<br><br>Ideal for an individual loves to watch movies</b></p>
 								
 							</div>
-							<div class="l-box pure-u-1-4">
+							<div class="l-box pure-u-1-4" style="background-color:#e5e4e2">
 								<label for="subChoice4">Platinum</label>
 								<input type="radio" id="subChoice4" name="subscriptionTier" value="4">
-								
+								<p> <b>100 hours of watch time per month!!!
+								<br><br>Great for binge watching!</b></p>
 							</div>
 							
 							<div class="l-box pure-u-1">
