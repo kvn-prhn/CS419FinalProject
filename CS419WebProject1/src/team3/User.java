@@ -87,10 +87,11 @@ public class User {
 		if (queue != null && !queue.contains(movieId))
 			queue.add(movieId);
 		else
-			return 1;
+			return 1;	// return 1 on failure.
 		Queue q = new Queue();
 		q.setUserId(id);
 		q.setMovieIdList(queue);
+		System.out.println(q);
 		return QueueDao.update(q);
 	}
 	
@@ -115,6 +116,13 @@ public class User {
 	}
 
 	public List<Integer> getQueue() {
+		if (queue == null || queue.isEmpty()) {	// try to update the queue if there is nothing in there.
+			System.out.println("updated queue");
+			List<Integer> movieIdList = QueueDao.getQueueByUserId(id).getMovieIdList();
+			if (movieIdList != null) {
+				queue = movieIdList;
+			} 
+		}
 		return queue;
 	}
 

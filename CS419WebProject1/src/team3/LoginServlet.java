@@ -27,7 +27,7 @@ public class LoginServlet extends HttpServlet {
 	    User userBean = (User)session.getAttribute("userBean");
 
 	    // if the bean is not logged in.
-	    if (!userBean.isLoggedIn()) 
+	    if (userBean != null && !userBean.isLoggedIn()) 
 	    { 
 	    	// search for user that matches login info in database
 			try {

@@ -26,7 +26,7 @@ public class QueueDao {
 		try {
 			Connection con = DBLink.getConnection();
 			PreparedStatement ps = con
-					.prepareStatement("insert into queue(movieID, userID, position) values (?,?,?)");
+					.prepareStatement("insert into queueteam3(movieID, userID, position) values (?,?,?)");
 			List<Integer> Queue = q.getMovieIdList();
 			for (int position = 0; position < Queue.size(); position++) {
 				ps.setInt(1, Queue.get(position));
@@ -87,7 +87,7 @@ public class QueueDao {
 
 		try {
 			Connection con = DBLink.getConnection();
-			PreparedStatement ps = con.prepareStatement("delete from queue where userID=?");
+			PreparedStatement ps = con.prepareStatement("delete from queueteam3 where userID=?");
 			ps.setInt(1, q.getUserId());
 
 			status = ps.executeUpdate();
@@ -107,7 +107,7 @@ public class QueueDao {
 
 		try {
 			Connection con = DBLink.getConnection();
-			PreparedStatement ps = con.prepareStatement("select * from queue where userID=? order by position asc");
+			PreparedStatement ps = con.prepareStatement("select * from queueteam3 where userID=? order by position asc");
 			ps.setInt(1, id);
 
 			ResultSet rs = ps.executeQuery();

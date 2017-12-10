@@ -98,16 +98,28 @@
             </div>
          	<% int movieOn = 0; %>
          	<% List<Integer> userFavList = FavoritesListDao.getFavoritesListByUserId(userId).getMovieIdList(); %>
-         	<% List<Integer> userQueue = QueueDao.getQueueByUserId(userId).getMovieIdList(); %>
+         	<% List<Integer> userQueue = userBean.getQueue(); %>
 			<% for (Movie movie : browseListBean.getMovies()) { %>
 				<div class="pure-u-sm-1 pure-u-lg-1-2">
 					<div class="movie-display-block-<%= movieOn %>">
 						<div class="pure-u-1">
-							<%-- Meta-data for the movie for the modal. --%>
+							<%-- Meta-data for the movie for the modal. 
+								Meta data lives inside of <div> tags that have the display: none; style
+								and are identified bytheir class. The content of the <div> tag is 
+								the content of the meta data.
+								 movie-full-description: The full description of this film
+								 movie-id-num: a STRING of the id number of this movie.
+								 fav-marker: A String that will be either "1" if this movie is
+									in the favorites list of the user. "0" if this movie is
+									not in the favorites list of the user. If no user is logged in
+									this value will be 0.
+								 queue-position: A STRING that is what position this movie is
+									in the logged in user's queue. If there is no user logged
+									in or the movie is not in the users queue, this value is -1. 
+							--%>
 							<div style="display: none;" class="movie-full-description"> <%= movie.getDescription() %> </div>
 							<div style="display: none;" class="movie-id-num"><%= movie.getId() %></div>
 							<div style="display: none;" class="fav-marker"><%  
-								System.out.println(userFavList);  // debugging
 								String fav_marker_initial_style = "";   // initial styling of the movies for favorite marker.
 								if (userFavList.contains(movie.getId())) {
 									out.print("1");   // have a 1 here if this is in the users favorites
@@ -117,8 +129,13 @@
 								} %></div>
 								<%-- If the queue position is less than 0, it means its not in the queue --%>
 							<div style="display: none;" class="queue-position"><%
+								System.out.print("userBean: ");
+								System.out.println(userBean.getId());
+								System.out.print("userQueue: ");
+								System.out.println(userQueue);	// debugging 
 								if (userQueue != null && userQueue.contains(movie.getId())) {
-									out.println("1"); // TODO: add in code to get the position of the movie in the queue for this user.
+									//out.println("1"); // TODO: add in code to get the position of the movie in the queue for this user.
+									out.println(userQueue.indexOf( new Integer(movie.getId()) ));
 								} else {
 									out.println("-1"); // not in queue
 								}
@@ -199,7 +216,7 @@
 					movieImgSrc : $(currentMovieId).find("#movie-display-img").attr("src")		// the source of the image for the movie.
 				}, 
 				function(e) {	// what happens when the modal opens up...
-					console.log(e.data);
+					// console.log(e.data);
 					// set all of the attributes on the modal 
 					$("#movie-id-current").html(e.data.movieId);
 					$("#modal-label-movie-title").html(e.data.movieTitle);
@@ -222,11 +239,15 @@
 						$("#favoritesButton").text("Add to Favorites");
 					}
 					
+					if (currQueuePosition >= 0) {
+						$("#queueButton").text("Remove from Queue");
+					} else {
+						$("#queueButton").text("Add to Queue");
+					}
+					
 					// change the queue styling based on if it is in the queue or not.
 					// TODO: Change modal styling based on the queue.
-					
-					console.log(currMovieInFavorites);
-					
+										
 					// If you are logged into the user, show the buttons
 					if (<%= userBean.isLoggedIn() ? "true" : "false" %>) {
 						//$("#favoritesButton").show();
@@ -235,7 +256,6 @@
 						// TODO: Event listeners for the modal.
 						$("#favoritesButton").off("click");  // remove the old event handler.
 						$("#favoritesButton").click(paramsToAjax, function(e) {
-							console.log("favorites button");
 							var actionToDo = "";
 							if (currMovieInFavorites) {		// different message depending on if its in favorites or not.
 								// remove from the queue
@@ -245,7 +265,7 @@
 								actionToDo = "add_favorite";
 							}
 							var URL = "AjaxInterface?action=" + actionToDo + "&" + e.data.ajaxParams;
-							console.log(URL);
+							//console.log(URL);
 							$.getJSON(URL).done(function(data) {
 								console.log(data);
 								if (data.success) {
@@ -274,20 +294,29 @@
 						$("#queueButton").click(paramsToAjax, function(e) {
 							console.log("queue button");
 							// if the movie is NOT in the queue...
-							var isInQueue = false;
 							var actionToDo = "";
-							if (isInQueue) {
-								// remove from the queue
+							if (currQueuePosition >= 0) {  // item is already in queue, and can be removed.
 								actionToDo = "remove_queue";
-							} else {
+							} else { // queue value is less than 0, and can be added
 								// add to the queue
 								actionToDo = "add_queue";
 							}
-							$.getJSON("AjaxInterface?action=" + actionToDo + "&" + e.data.ajaxParams).done(function(data) {
+							var URL = "AjaxInterface?action=" + actionToDo + "&" + e.data.ajaxParams;
+							console.log(URL);
+							$.getJSON(URL).done(function(data) {
 								console.log(data);
 								if (data.success) {
 									console.log("updated the queue");
 									// TODO: change styling for queue
+									if (actionToDo == "add_queue") {
+										// if we have just added to the queue, then set
+										// it as removing from the queue.
+										$(classToReferenceMovieBlock).find(".queue-position").text(e.data.new_pos);  // set to current position
+										$("#queueButton").text("Remove from Queue");
+									} else {
+										$(classToReferenceMovieBlock).find(".queue-position").text("-1"); // not in queue
+										$("#queueButton").text("Add to Queue");
+									}
 								} else {
 									console.error("Error with updating queue");
 								}

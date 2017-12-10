@@ -62,17 +62,19 @@ public class AjaxInterface extends HttpServlet {
 								int status = user.removeFromFavorites(movieId);
 								pw.write("{\"success\":" +  (status == 0)  + "}");   // give the status.
 							} else if (actionToDo.equals("add_queue")) {	// add a movie to the queue
-								// TODO:
 								System.out.println("add_queue");
-								int status = user.addToQueue(movieId);
-								pw.write("{\"success\":false,\"msg\":\"Not yet implemented\"}");
-								
+								int status = user.addToQueue(movieId); 
+								int newPosition = user.getQueue().indexOf(new Integer(movieId));
+								if (status == 0) {
+									pw.write("{\"success\":true,\"new_pos\":" + newPosition + "}");   // give the status.
+								} else {
+									pw.write("{\"success\":false}"); 	// unsuccessfull add to queue.
+								}
 							} else if (actionToDo.equals("remove_queue")) {	// remove a movie from the queue
 								// TODO:
 								System.out.println("remove_queue");
 								int status = user.removeFromQueue(movieId);
-								pw.write("{\"success\":false,\"msg\":\"Not yet implemented\"}");
-								
+								pw.write("{\"success\":" +  (status == 0)  + "}");   // give the status.
 							} else {
 								pw.write("{\"success\":false,\"msg\":\"Invalid action\"}");
 							}
