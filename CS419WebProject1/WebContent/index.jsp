@@ -8,7 +8,7 @@
 <html lang="en">
 <head>
     <%@include file='WEB-INF/modules/head_common.jspf'%>
-    <title>Awesome Web Page</title>
+    <title>GetFlix</title>
 </head>
 <body>
 
