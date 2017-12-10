@@ -73,20 +73,38 @@ public class MovieRatingDao {
         return status;  
 	}
 	
+	public static MovieRating getAverageMovieRating(int movieId) {
+		MovieRating mr = new MovieRating();
+		mr.setUserId(-1); 			// rating not tied to a single user
+		
+		try {
+			Connection con = DBLink.getConnection();  
+            PreparedStatement ps = con.prepareStatement("SELECT AVG(rating) as avgRating FROM movieratingteam3 WHERE movieId = ?;");  
+            ps.setInt(1, movieId);  
+            
+            ResultSet rs = ps.executeQuery();  
+            
+            if(rs.next()){  
+                mr.setMovieId(movieId);  	// rating for the selected movieId
+                mr.setRating(rs.getInt(1)); // average user rating fetched from DB 
+            }  
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return mr;
+	}
+	
 	public static MovieRating getMovieRatingByUserId(int movieId, int userId) {
 		MovieRating mr = new MovieRating();  
         
         try{  
             Connection con = DBLink.getConnection();  
-            PreparedStatement ps = con.prepareStatement("SELECT movieratingteam3.* "
-            										  + "FROM movieratingteam3 " 
-            										  + "INNER JOIN userteam3 on movieratingteam3.userId = userteam3.id "
-            										  + "INNER JOIN movie on movie.movieID = movieratingteam3.movieId "
-            										  + "WHERE movieratingteam3.movieId = ? AND movieratingteam3.userId = ? ");  
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM movieratingteam3 "
+            										  + "WHERE movieId = ? AND userId = ? ");  
             ps.setInt(1, movieId);  
             ps.setInt(2, userId);
             
-            System.out.println(ps.toString());
+            //System.out.println(ps.toString());
             
             ResultSet rs = ps.executeQuery();  
             
