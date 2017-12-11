@@ -112,11 +112,11 @@ public class QueueDao {
 
 			ResultSet rs = ps.executeQuery();
 
-			if (rs.next()) {
+			while (rs.next()) {
 				Queue.add(rs.getInt(1));
 			}
 			q.setMovieIdList(Queue);
-			con.close();
+			//con.close();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
