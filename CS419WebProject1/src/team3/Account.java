@@ -50,6 +50,9 @@ public class Account {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	public void setAddress(String street, String city, String state, String zipCode) {
+		this.address = street + ", " + city + 	", " + state + " " + zipCode;
+	}
 	public int getSubscriptionTier() {
 		return subscriptionTier;
 	}

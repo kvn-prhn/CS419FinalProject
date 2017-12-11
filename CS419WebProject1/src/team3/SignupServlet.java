@@ -61,8 +61,8 @@ public class SignupServlet extends HttpServlet {
 				a.setLastName((String)request.getParameter("lastName"));
 				a.setPassword((String)request.getParameter("password"));
 				a.setEmail((String)request.getParameter("email"));
-				a.setAddress((String)request.getParameter("streetAddress") + ", " + (String)request.getParameter("city") + 
-						", " + (String)request.getParameter("state") + " " + (String)request.getParameter("zipcode"));
+				a.setAddress((String)request.getParameter("streetAddress"), (String)request.getParameter("city"),
+							(String)request.getParameter("state"), (String)request.getParameter("zipcode"));
 				a.setSubscriptionTier(Integer.parseInt(request.getParameter("subscriptionTier")));
 				
 				// TODO: Centralize all of this information somewhere.
