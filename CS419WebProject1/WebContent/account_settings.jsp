@@ -51,26 +51,45 @@
 				 		<div class="pure-control-group pure-u-1">
 				            <div class="pure-u-1">
 				            	<legend>Update password</legend>
-				   				<div class="pure-u-1-3">
+				            	
+				   				<div class="pure-u-3-5">
 				            		<input id="password" type="password" placeholder="New password">
 				            	</div>
-				            	<div class="pure-u-1-3">
+				            		
+				            	<div style="padding-bottom:45px" class="pure-u-3-5">
 				            		<button class="pure-button pure-button-primary" id="update_password">Update Password</button>
 				            	</div>
 				            </div>
+
 				        </div>
 				        <div class="pure-control-group pure-u-1">
 				            <div class="pure-u-1">
 				            	<legend>Update Address</legend>
-				            	<label for="streetAddress">Street Address</label>
-								<input id="streetAddress" type="text" name="streetAddress" value="" placeholder="Street Address">
-								<label for="city">City</label>
-								<input id="city" type="text" name="city" value="" placeholder="City">
-								<label for="state">State</label>
-								<input id="state" type="text" name="state" value="" placeholder="State">
-								<label for="zipCode">ZIP Code</label>
-								<input id="zipCode" type="text" name="zipcode" value="" placeholder="ZIP Code">
-							</div>
+				            	
+				            	<div class="pure-u-3-5">
+				            		<label for="streetAddress">Street Address</label>
+									<input id="streetAddress" type="text" name="streetAddress" value="" placeholder="Street Address" >
+								</div>
+								
+								
+								<div class="pure-u-3-5">
+									<label for="city">City</label>
+									<input id="city" type="text" name="city" value="" placeholder="City" >
+								</div>
+								
+								<div class="pure-u-3-5">
+									<label for="state">State</label>
+									<input id="state" type="text" name="state" value="" placeholder="State" >
+								</div>
+								
+								<div class="pure-u-3-5">
+									<label for="zipCode">ZIP Code</label>
+									<input id="zipCode" type="text" name="zipcode" value="" placeholder="ZIP Code" >
+								</div>
+								
+								<div style="padding-bottom:45px" class="pure-u-3-5">
+								<button class="pure-button pure-button-primary" id="update_address">Update Address</button>
+								</div>
 				        </div>
 				        <div class="pure-control-group">
 			            	<legend>Update Subscription change</legend>
@@ -91,6 +110,10 @@
 							<div class="pure-u-1-5">
 								<label for="subChoice4">Platinum</label>
 								<input type="radio" id="subChoice4" name="subscriptionTier" value="4">
+							</div>
+							
+							<div style="padding-bottom:45px" class="pure-u-3-5">
+								<button  class="pure-button pure-button-primary" id="update_subscriptionTier">Update Subscription</button>
 							</div>
 				        </div>
 				 	</fieldset>
