@@ -154,13 +154,24 @@
 						</div>
 						<div class="pure-u-2-24"></div><!-- spacing -->
 						<div class="pure-u-2-5">  
+							
 							<p>
-								<%= movie.getTruncatedDescription() %>
+								<b>Starring:</b> <%= movie.getActor1() + ", " + movie.getActor2() %>
+								<br>
+								<b>Genre:</b> <%= movie.getGenre() %>
+								<br>
+								<b>Rated:</b> <%= movie.getMPAARating() %>
+								<br>
+								<b>Directed by:</b> <%= movie.getDirector() %>
+							</p>
+							
+							<p>
+								<%= movie.getTruncatedDescription() %>...
 							</p>
 							<p>
-								Ratings are fun
+								User Rating:
 								<div class="pure-u-1">							 
-									 <%= MovieRatingDao.getMovieRatingByUserId(movie.getId(), userBean.getId()).getRating() %>
+									 <%= (movie.getUserRating() == 0 ? MovieRatingDao.getAverageMovieRating(movie.getId()).getRating() : movie.getUserRating()) %>
 								</div>
 							</p>
 							<p>

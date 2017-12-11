@@ -9,36 +9,40 @@ import java.util.List;
 public class MovieDao {
 
 	public static Movie getMovieById(int id) {
-		Movie movie = null;
+		Movie m = null;
 		try{  
             Connection con = DBLink.getConnection();
-            PreparedStatement ps=con.prepareStatement("select " +
+            /*PreparedStatement ps=con.prepareStatement("select " +
             		"movieID, movieGenre, movieTitle, movieDescription, movieYearReleased," +
             		"movieImage, movieTrailer, movieMPAARating, movieLength  "
-            		+ "from movie where movieID = " + id);  
+            		+ "from movie where movieID = " + id);*/
+            PreparedStatement ps = con.prepareStatement("select * from movie where movieID = ?");
             
             System.out.println(ps.toString());      
             
             ResultSet rs = ps.executeQuery(); 
             
             if (rs.next()) {
-            	movie = new Movie();
-            	movie.setId(rs.getInt(1));
-            	movie.setGenre(rs.getString(2));
-            	movie.setTitle(rs.getString(3));
-            	movie.setDescription(rs.getString(4));
-            	movie.setReleaseYear(rs.getInt(5));
-            	movie.setImageURL(rs.getString(6));
-            	movie.setTrailerURL(rs.getString(7));
-            	movie.setRating(rs.getInt(8));
-            	movie.setLength(rs.getInt(9));
+            	m = new Movie();
+            	m.setId(rs.getInt(1));
+                m.setGenre(rs.getString(2));
+                m.setTitle(rs.getString(3));
+                m.setDescription(rs.getString(4));
+                m.setReleaseYear(rs.getInt(5));
+                m.setImageURL(rs.getString(6));
+                m.setTrailerURL(rs.getString(7));
+                m.setReleaseDate(rs.getDate(8));
+                m.setMPAARating(rs.getString(9));
+                m.setDirector(rs.getString(10));
+                m.setActor1(rs.getString(11));
+                m.setActor2(rs.getString(12));
             }
             con.close();  
         }catch(Exception e){
         	e.printStackTrace(); 
     	} 
 		
-		return movie;
+		return m;
 	}
 	
 	public static List<Movie> searchMovies(String searchString, MovieFilter filter){
@@ -64,8 +68,15 @@ public class MovieDao {
                 m.setGenre(rs.getString(2));
                 m.setTitle(rs.getString(3));
                 m.setDescription(rs.getString(4));
-                //m.setReleaseYear(rs.getInt(5));
+                m.setReleaseYear(rs.getInt(5));
                 m.setImageURL(rs.getString(6));
+                m.setTrailerURL(rs.getString(7));
+                m.setReleaseDate(rs.getDate(8));
+                m.setMPAARating(rs.getString(9));
+                m.setDirector(rs.getString(10));
+                m.setActor1(rs.getString(11));
+                m.setActor2(rs.getString(12));
+                
                 //m.setLanguage(rs.getString(5));
                 //m.setLength(rs.getInt(6));
                 //m.setRating(rs.getInt(7));
@@ -89,12 +100,14 @@ public class MovieDao {
 	                m.setGenre(rs.getString(2));
 	                m.setTitle(rs.getString(3));
 	                m.setDescription(rs.getString(4));
-	                //m.setReleaseYear(rs.getInt(5));
+	                m.setReleaseYear(rs.getInt(5));
 	                m.setImageURL(rs.getString(6));
-	                //m.setLanguage(rs.getString(5));
-	                //m.setLength(rs.getInt(6));
-	                //m.setRating(rs.getInt(7));
-	                //m.setUserRating(rs.getInt(8));
+	                m.setTrailerURL(rs.getString(7));
+	                m.setReleaseDate(rs.getDate(8));
+	                m.setMPAARating(rs.getString(9));
+	                m.setDirector(rs.getString(10));
+	                m.setActor1(rs.getString(11));
+	                m.setActor2(rs.getString(12));
 	                
 	                if (!list.stream().filter(o -> o.getTitle().equals(m.getTitle())).findFirst().isPresent())
 	                	list.add(m);
@@ -122,12 +135,14 @@ public class MovieDao {
                 m.setGenre(rs.getString(2));
                 m.setTitle(rs.getString(3));
                 m.setDescription(rs.getString(4));
-                //m.setReleaseYear(rs.getInt(5));
+                m.setReleaseYear(rs.getInt(5));
                 m.setImageURL(rs.getString(6));
-                //m.setLanguage(rs.getString(5));
-                //m.setLength(rs.getInt(6));
-                //m.setRating(rs.getInt(7));
-                //m.setUserRating(rs.getInt(8));
+                m.setTrailerURL(rs.getString(7));
+                m.setReleaseDate(rs.getDate(8));
+                m.setMPAARating(rs.getString(9));
+                m.setDirector(rs.getString(10));
+                m.setActor1(rs.getString(11));
+                m.setActor2(rs.getString(12));
                 
                 list.add(m);  
             }  
