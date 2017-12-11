@@ -44,7 +44,8 @@
 				 			</div>
 				 			<div class="pure-u-1">
 				 				<div class="pure-u-1-4">Subscription Tier:</div>
-				 				<div class="pure-u-2-3"><%= account.getSubscriptionTier() %></div>
+				 				<div class="pure-u-2-3"><img src="img/<%= account.getSubscriptionTierString() %>.png"></div>
+				 				
 				 			</div> 
 				 		</div>
 				 		<div class="pure-control-group pure-u-1">

@@ -56,6 +56,15 @@ public class Account {
 	public void setSubscriptionTier(int subscriptionTier) {
 		this.subscriptionTier = subscriptionTier;
 	}
+	public String getSubscriptionTierString() {
+		switch(this.subscriptionTier) {
+			case 1: 	return "Bronze"; 	
+			case 2: 	return "Silver"; 	
+			case 3: 	return "Gold"; 		
+			case 4: 	return "Platinum"; 	
+		}
+		return "INVALID_SUB_TIER";
+	}
 	public Date getHoursResetDate() {
 		return hoursResetDate;
 	}

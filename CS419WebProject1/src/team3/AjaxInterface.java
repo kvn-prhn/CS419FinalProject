@@ -39,46 +39,56 @@ public class AjaxInterface extends HttpServlet {
 						// TODO: Street address, city, state, ZIP code.
 					} else {
 						HttpSession session = req.getSession(true);
-					    //User user = (User)session.getAttribute("userBean");
-						
-						// begin actions that use a movieId
-						// make sure that movie ID that was given is valid
-						String movieIdStr = req.getParameter("movieID");
-						if (movieIdStr == null) {
-							pw.write("{\"success\":false,\"msg\":\"No movieID parameter\"}");
-						} else {
-							int movieId = Integer.parseInt(movieIdStr);
-							// TODO: make sure the movieId given is valid?
+
+						// these are all of the user ID functions.
+						if (actionToDo.equals("update_password")) {				// update the password
 							
-							if (actionToDo.equals("add_favorite")) {	// add a movie to the favorites list
-								// TODO:
-								System.out.println("add_favorite");
-								int status = user.addToFavorites(movieId); 
-								//pw.write("{\"success\":" +  (status == 0)  + "}");   // give the status.
-								pw.write("{\"success\":true}");   // give the status.
-							} else if (actionToDo.equals("remove_favorite")) {	// remove a movie from the favorites list
-								// TODO:
-								System.out.println("remove_favorite");
-								int status = user.removeFromFavorites(movieId);
-								pw.write("{\"success\":" +  (status == 0)  + "}");   // give the status.
-							} else if (actionToDo.equals("add_queue")) {	// add a movie to the queue
-								System.out.println("add_queue");
-								int status = user.addToQueue(movieId); 
-								int newPosition = user.getQueue().indexOf(new Integer(movieId));
-								if (status == 0) {
-									pw.write("{\"success\":true,\"new_pos\":" + newPosition + "}");   // give the status.
-								} else {
-									pw.write("{\"success\":false}"); 	// unsuccessfull add to queue.
-								}
-							} else if (actionToDo.equals("remove_queue")) {	// remove a movie from the queue
-								// TODO:
-								System.out.println("remove_queue");
-								int status = user.removeFromQueue(movieId);
-								pw.write("{\"success\":" +  (status == 0)  + "}");   // give the status.
+						} else if (actionToDo.equals("update_address")) {				// update the password
+							
+						} else if (actionToDo.equals("update_sub_tier")) {				// update the password
+							
+						} else { // if not one of these, then it's an action that needs a movie ID.
+							
+							// begin actions that use a movieId
+							// make sure that movie ID that was given is valid
+							String movieIdStr = req.getParameter("movieID");
+							if (movieIdStr == null) {
+								pw.write("{\"success\":false,\"msg\":\"No movieID parameter\"}");
 							} else {
-								pw.write("{\"success\":false,\"msg\":\"Invalid action\"}");
-							}
-						} // End actions that use a movie ID
+								int movieId = Integer.parseInt(movieIdStr);
+								// TODO: make sure the movieId given is valid?
+								
+								if (actionToDo.equals("add_favorite")) {	// add a movie to the favorites list
+									// TODO:
+									System.out.println("add_favorite");
+									int status = user.addToFavorites(movieId); 
+									//pw.write("{\"success\":" +  (status == 0)  + "}");   // give the status.
+									pw.write("{\"success\":true}");   // give the status.
+								} else if (actionToDo.equals("remove_favorite")) {	// remove a movie from the favorites list
+									// TODO:
+									System.out.println("remove_favorite");
+									int status = user.removeFromFavorites(movieId);
+									pw.write("{\"success\":" +  (status == 0)  + "}");   // give the status.
+								} else if (actionToDo.equals("add_queue")) {	// add a movie to the queue
+									System.out.println("add_queue");
+									int status = user.addToQueue(movieId); 
+									int newPosition = user.getQueue().indexOf(new Integer(movieId));
+									if (status == 0) {
+										pw.write("{\"success\":true,\"new_pos\":" + newPosition + "}");   // give the status.
+									} else {
+										pw.write("{\"success\":false}"); 	// unsuccessfull add to queue.
+									}
+								} else if (actionToDo.equals("remove_queue")) {	// remove a movie from the queue
+									// TODO:
+									System.out.println("remove_queue");
+									int status = user.removeFromQueue(movieId);
+									pw.write("{\"success\":" +  (status == 0)  + "}");   // give the status.
+								} else {
+									pw.write("{\"success\":false,\"msg\":\"Invalid action\"}");
+								}
+							} // End actions that use a movie ID
+							
+						}
 					}
 				}
 			}

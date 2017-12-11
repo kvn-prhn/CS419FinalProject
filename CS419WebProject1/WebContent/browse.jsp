@@ -228,7 +228,8 @@
 					var currMovieInFavorites = $(classToReferenceMovieBlock).find(".fav-marker").text() === "1";
 					// Number to see what position the queue is in, if anything.
 					var currQueuePosition = parseInt( $(classToReferenceMovieBlock).find(".queue-position").text() );
-					console.log(currQueuePosition);
+					
+					console.log("Queue position: " + currQueuePosition);
 					
 					// change the favorites button based on if its in the favorites list or not.
 					if (currMovieInFavorites) {
