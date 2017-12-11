@@ -37,7 +37,7 @@
 				 			<div class="pure-u-1">
 				 				<div class="pure-u-1-4">Reset date:</div>
 				 				<% Date d1 = account.getHoursResetDate(); %>
-				 				<div class="pure-u-2-3"><% out.print( d1.getMonth() + "/" + d1.getDay() + "/" + d1.getYear()); %></div>
+				 				<div class="pure-u-2-3"><% out.print( (d1.getMonth() + 1) + "/" + d1.getDay() + "/" + (d1.getYear() + 1900)); %></div>
 				 			</div> 
 				 			<div class="pure-u-1">
 				 				<div class="pure-u-1-4">Hours Left:</div>
