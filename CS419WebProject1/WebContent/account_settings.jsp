@@ -22,7 +22,7 @@
             		account = AccountDao.getAccountById(userBean.getAccountId()); 
            		}
             	if (account != null) { %>
-				<form class="pure-form">
+				<form class="pure-form" action="UpdateAccount" method="POST">
 				 	<fieldset>
 				 		<div class="pure-u-1">
 				 			<legend>Account Information</legend>
@@ -51,7 +51,12 @@
 				 		<div class="pure-control-group pure-u-1">
 				            <div class="pure-u-1">
 				            	<legend>Update password</legend>
-				            	<input id="password" type="password" placeholder="New password">
+				   				<div class="pure-u-1-3">
+				            		<input id="password" type="password" placeholder="New password">
+				            	</div>
+				            	<div class="pure-u-1-3">
+				            		<input class="pure-button pure-button-primary" id="update_password" type="submit" value="Update Password">
+				            	</div>
 				            </div>
 				        </div>
 				        <div class="pure-control-group pure-u-1">

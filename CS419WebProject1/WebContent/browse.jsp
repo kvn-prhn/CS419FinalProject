@@ -129,10 +129,6 @@
 								} %></div>
 								<%-- If the queue position is less than 0, it means its not in the queue --%>
 							<div style="display: none;" class="queue-position"><%
-								System.out.print("userBean: ");
-								System.out.println(userBean.getId());
-								System.out.print("userQueue: ");
-								System.out.println(userQueue);	// debugging 
 								if (userQueue != null && userQueue.contains(movie.getId())) {
 									//out.println("1"); // TODO: add in code to get the position of the movie in the queue for this user.
 									out.println(userQueue.indexOf( new Integer(movie.getId()) ));

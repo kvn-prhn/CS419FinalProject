@@ -84,7 +84,7 @@ public class User {
 	}
 	
 	public int addToQueue(int movieId) {
-		if (queue != null && !queue.contains(movieId))
+		if (!queue.contains(movieId))
 			queue.add(movieId);
 		else
 			return 1;	// return 1 on failure.
