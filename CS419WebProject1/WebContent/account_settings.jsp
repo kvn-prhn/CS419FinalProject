@@ -1,5 +1,5 @@
 <%@include file='WEB-INF/modules/beans_common.jspf'%>
-
+<%@page import = "java.util.Date" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -36,7 +36,8 @@
 				 			</div> 
 				 			<div class="pure-u-1">
 				 				<div class="pure-u-1-4">Reset date:</div>
-				 				<div class="pure-u-2-3"><%= account.getHoursResetDate() %></div>
+				 				<% Date d1 = account.getHoursResetDate(); %>
+				 				<div class="pure-u-2-3"><% out.print( d1.getMonth() + "/" + d1.getDay() + "/" + d1.getYear()); %></div>
 				 			</div> 
 				 			<div class="pure-u-1">
 				 				<div class="pure-u-1-4">Hours Left:</div>
@@ -51,13 +52,17 @@
 				 		<div class="pure-control-group pure-u-1">
 				            <div class="pure-u-1">
 				            	<legend>Update password</legend>
-				            	
-				   				<div class="pure-u-3-5">
-				            		<input id="password" type="password" placeholder="New password">
+
+				   				<div class="pure-u-1-3">
+				            		<input id="password" type="password" name="update_password" placeholder="New password">
 				            	</div>
-				            		
-				            	<div style="padding-bottom:45px" class="pure-u-3-5">
-				            		<button class="pure-button pure-button-primary" id="update_password">Update Password</button>
+				            	<div class="pure-u-1-3">
+				            		<input id="update_password" class="pure-button pure-button-primary" type="submit" 
+				            			name="update_submit" value="Update Password">
+				            	</div>
+				            	<div class="pure-u-1-3">
+				            		<input id="update_password" class="pure-button pure-button-primary" type="submit" 
+				            			name="update_submit" value="Testing Button">
 				            	</div>
 				            </div>
 
