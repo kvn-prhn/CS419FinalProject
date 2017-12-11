@@ -84,14 +84,16 @@ public class User {
 	}
 	
 	public int addToQueue(int movieId) {
-		if (!queue.contains(movieId))
+		if (!queue.contains(movieId)) {
+			System.out.println("Added this movie: " + movieId);
 			queue.add(movieId);
-		else
+		} else {
+			System.err.println("Error adding tot he queue");
 			return 1;	// return 1 on failure.
+		}
 		Queue q = new Queue();
 		q.setUserId(id);
 		q.setMovieIdList(queue);
-		System.out.println(q);
 		return QueueDao.update(q);
 	}
 	

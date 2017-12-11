@@ -55,7 +55,7 @@
 				            		<input id="password" type="password" placeholder="New password">
 				            	</div>
 				            	<div class="pure-u-1-3">
-				            		<input class="pure-button pure-button-primary" id="update_password" type="submit" value="Update Password">
+				            		<button class="pure-button pure-button-primary" id="update_password">Update Password</button>
 				            	</div>
 				            </div>
 				        </div>
