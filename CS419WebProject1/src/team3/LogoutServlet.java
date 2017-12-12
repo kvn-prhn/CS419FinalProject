@@ -37,8 +37,13 @@ public class LogoutServlet extends HttpServlet {
 				// move back to the home page
 				response.sendRedirect("index.jsp");
 				
+			} else {
+				session.setAttribute("error_message", "Error logging out.");		// display an error 
+				///response.getWriter().println("ERROR WITH LOGGING OUT");
+				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}
-			response.getWriter().println("ERROR WITH LOGGING OUT");
+		} else {
+			response.sendRedirect("index.jsp");
 		}
 	}
 

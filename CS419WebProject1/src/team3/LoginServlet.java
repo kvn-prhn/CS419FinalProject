@@ -46,15 +46,20 @@ public class LoginServlet extends HttpServlet {
 					userBean.setLoggedIn(true);   // let them know the user is logged in
 					response.sendRedirect("browse.jsp");  // browse after successful login.
 				} else {
-					response.getWriter().println("No user found.");
+					//response.getWriter().println("No user found.");
+					session.setAttribute("error_message", "Error logging in: Email or Password Incorrect.");
+					response.sendRedirect("login.jsp");
+					return;
 				}
 				session.setAttribute("notification_message", "Logged in Successfully");		// display a notification
 
 				con.close();
 			} catch (Exception ex) {
 				ex.printStackTrace();
-				response.getWriter().println("Error logging in: " + ex);
-				session.setAttribute("error_message", "Log in Failed. Please Try Again.");		// display a notification
+				//response.getWriter().println("Error logging in: " + ex);
+				session.setAttribute("error_message", "Log in Failed. Please Try Again.");		// display an error
+				response.sendRedirect("login.jsp");
+				return;
 			}
 	        
 	    } else {

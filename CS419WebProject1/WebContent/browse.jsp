@@ -38,8 +38,8 @@
 					<span class="queue-position-marker"></span>
 				</h2>
 			</div>
-			<div class="pure-u-1-4"><a id="favoritesButton" class="pure-button pure-button-active">Add to Favorites</a></div>
-			<div class="pure-u-1-4"><a id="queueButton" class="pure-button pure-button-active">Add to Queue</a></div>
+			<div class="pure-u-1-4"><a id="favoritesButton" class="pure-button pure-button-active" style="border: 2px solid black;">Add to Favorites</a></div>
+			<div class="pure-u-1-4"><a id="queueButton" class="pure-button pure-button-active" style="border: 2px solid black;">Add to Queue</a></div>
 			
 			<!-- Row 2, which is the rest. -->
 	       <div class="pure-u-1-4">
@@ -66,7 +66,7 @@
 	       		</div>
 	       		<div class="pure-u-1">
 	       			<div class="l-box"><% if (userBean.isLoggedIn()) { %>
-	       				<a id="watchButton" class="pure-button pure-button-active">Watch Now!</a>
+	       				<a id="watchButton" class="pure-button pure-button-active" style="border: 2px solid black;">Watch Now!</a>
 	       			<% } %></div>
 	       		</div>
 	       </div>
@@ -114,7 +114,7 @@
 	            	</div>
 	            	
 	            	<div class="pure-u-3-24">
-	            		<input type="submit" value="Update" class="pure-button"></input>
+	            		<input type="submit" value="Update" class="pure-button" style="border: 2px solid black;"></input>
 	            	</div>
             	</form>
             </div>
@@ -207,17 +207,14 @@
         </div>
     </div>
 
-	<div class="ribbon l-box-lrg pure-g">
-        <div class="l-box-lrg is-center pure-u-1 pure-u-md-1-2 pure-u-lg-2-5">
-            <img width="300" alt="File Icons" class="pure-img-responsive" src="img/common/movie-theater-auditorium.jpg">
-        </div>
+	<div class="ribbon l-box-lrg pure-g " >
         <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-3-5">
-
-            <h2 class="content-head content-head-ribbon">Blah Blah</h2>
-
-            <p>
-                Placeholder stuff 
-            </p>
+			<div class = "pure-u-4-10">
+				<p>This website and its contents are all part of Team_Three_Entertainment(); 2017 - 2018 Ltd. <br /> 190 S Prospect Ave, Elmhurst, IL 60126, United States <br/> Use of this website is subject to our <a href="term_and_conditions.jsp">Terms & Conditions</a> and <a href="privacy_policy.jsp">Privacy Policy</a>. </p>
+			</div>
+			<div class = "pure-u-4-10">
+				<p class="content-head content-head-ribbon">Contact us at getflixmovie@gmail.com</p>
+			</div>
         </div>
     </div>
 </div>
