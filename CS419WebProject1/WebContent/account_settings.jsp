@@ -53,16 +53,12 @@
 				            <div class="pure-u-1">
 				            	<legend>Update password</legend>
 
-				   				<div class="pure-u-1-3">
+				   				<div class="pure-u-3-5">
 				            		<input id="password" type="password" name="update_password" placeholder="New password">
 				            	</div>
-				            	<div class="pure-u-1-3">
+				            	<div class="pure-u-1-5">
 				            		<input id="update_password" class="pure-button pure-button-primary" type="submit" 
 				            			name="update_submit" value="Update Password">
-				            	</div>
-				            	<div class="pure-u-1-3">
-				            		<input id="update_password" class="pure-button pure-button-primary" type="submit" 
-				            			name="update_submit" value="Testing Button">
 				            	</div>
 				            </div>
 
