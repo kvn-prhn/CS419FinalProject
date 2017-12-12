@@ -49,20 +49,20 @@
 	       		<div class="pure-u-1">
 		       		<div id="modal-label-movie-description"  class="l-box">Description.</div>
 	       		</div>
-	       		<div id="modal-label-genre" class="pure-u-1-2">
-	       			<div class="l-box">Genre.</div>
+	       		<div class="pure-u-1-3">
+	       			<div class="l-box">Genre: <span id="modal-label-genre">Genre.</span></div>
 	       		</div>
-	       		<div id="modal-label-mpaa" class="pure-u-1-2">
-	       			<div class="l-box">MPAA Rating.</div>
+	       		<div class="pure-u-1-3">
+	       			<div class="l-box">Rated: <span id="modal-label-mpaa">MPAA Rating.</span></div>
 	       		</div>
-	       		<div id="modal-label-director" class="pure-u-1">
-	       			<div class="l-box">Director.</div>
+	       		<div class="pure-u-1">
+	       			<div class="l-box">Directed by: <span id="modal-label-director">Director.</span></div>
 	       		</div>
-	       		<div id="modal-label-actor" class="pure-u-1">
-	       			<div class="l-box">Actor.</div>
+	       		<div class="pure-u-1">
+	       			<div class="l-box">Actors: <span id="modal-label-actors">Actors.</span></div>
 	       		</div>
-	       		<div id="modal-label-rating" class="pure-u-1">
-	       			<div class="l-box">Rating</div>
+	       		<div class="pure-u-1">
+	       			<div class="l-box">Community Rating: <span id="modal-label-rating">Rating.</span></div>
 	       		</div>
 	       		<div class="pure-u-1">
 	       			<div class="l-box"><% if (userBean.isLoggedIn()) { %>
@@ -174,7 +174,7 @@
 								<%= movie.getDirector() %>
 							</div>
 							<div style="display: none;" class="movie_rating">
-								 <%= (movie.getUserRating() == 0 ? MovieRatingDao.getAverageMovieRating(movie.getId()).getRating() : movie.getUserRating()) %>
+								<%= (movie.getUserRating() == 0 ? MovieRatingDao.getAverageMovieRating(movie.getId()).getRating() : movie.getUserRating()) %>
 							</div>
 							<div class="pure-u-1">
 								<img class="pure-img" id="movie-display-img" alt="loading..." src="<%= movie.getImageURL() %>">
@@ -255,21 +255,37 @@
 					movieImgSrc : $(currentMovieId).find("#movie-display-img").attr("src")		// the source of the image for the movie.
 				}, 
 				function(e) {	// what happens when the modal opens up...
-					// console.log(e.data);
+					// class to reference the movie block we're on
+					var classToReferenceMovieBlock = e.data.classToReferenceMovieBlock;
+				
 					// set all of the attributes on the modal 
 					$("#movie-id-current").html(e.data.movieId);
 					$("#modal-label-movie-title").html(e.data.movieTitle);
 					$("#modal-label-movie-description").html(e.data.movieDescription);
 					$("#modal-movie-image").attr("src", e.data.movieImgSrc);
-					// class to reference the movie block we're on
-					var classToReferenceMovieBlock = e.data.classToReferenceMovieBlock;
+
+					// add more information about the movie to the modal
+					$("#modal-label-genre").html( $(classToReferenceMovieBlock).find(".genre").text() );
+					$("#modal-label-mpaa").html( $(classToReferenceMovieBlock).find(".mpaa").text() );
+					$("#modal-label-director").html( $(classToReferenceMovieBlock).find(".director").text() );
+					$("#modal-label-actors").html( $(classToReferenceMovieBlock).find(".actors").text() );
+					//$("#modal-label-rating").html( $(classToReferenceMovieBlock).find(".movie_rating").text() );
+					var ratingNum = parseInt( $(classToReferenceMovieBlock).find(".movie_rating").text() );
+
+					var ratingHtmlImg = "";
+					for (var i = 0; i < ratingNum; i++) {
+						ratingHtmlImg += "<img src=\"img/star_gold.png\" height=\"16\">";
+					}
+					for (var i = 0; i < 5 - ratingNum; i++) {
+						ratingHtmlImg += "<img src=\"img/star_gray.png\" height=\"16\">";  
+					}
+					$("#modal-label-rating").html(ratingHtmlImg);
+					
 					// BOOLEAN to see if this movie is in favorites list
 					var currMovieInFavorites = $(classToReferenceMovieBlock).find(".fav-marker").text() === "1";
 					// Number to see what position the queue is in, if anything.
 					var currQueuePosition = parseInt( $(classToReferenceMovieBlock).find(".queue-position").text() );
-					
-					console.log("Queue position: " + currQueuePosition);
-					
+										
 					// change the favorites button based on if its in the favorites list or not.
 					if (currMovieInFavorites) {
 						$(".modal").find(".fav-style-marker").show();
@@ -284,10 +300,7 @@
 					} else {
 						$("#queueButton").text("Add to Queue");
 					}
-					
-					// change the queue styling based on if it is in the queue or not.
-					// TODO: Change modal styling based on the queue.
-										
+
 					// If you are logged into the user, show the buttons
 					if (<%= userBean.isLoggedIn() ? "true" : "false" %>) {
 						//$("#favoritesButton").show();
@@ -307,9 +320,7 @@
 							var URL = "AjaxInterface?action=" + actionToDo + "&" + e.data.ajaxParams;
 							//console.log(URL);
 							$.getJSON(URL).done(function(data) {
-								console.log(data);
 								if (data.success) {
-									console.log("updated favorites");
 									if (actionToDo == "add_favorite") {  // add the favorite markers to it.
 										console.log("ADDED TO THE FAVORITES");
 										currMovieInFavorites = true;
