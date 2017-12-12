@@ -28,7 +28,7 @@
 						<div class="pure-u-1-4">	
 							<form style="position: relative; float: left;" method="get" action="Search">
 								<input style="display:none" name="search" value=":queue"></input>
-								<li><input class="pure-menu-link" type="submit" value="Items in Queue: <%= userBean.getQueue().size() %>"></input></li>
+								<input class="pure-menu-link" type="submit" value="Items in Queue: <%= userBean.getQueue().size() %>"></input>
 							</form>
 						</div>
 						<!-- </ul> -->
