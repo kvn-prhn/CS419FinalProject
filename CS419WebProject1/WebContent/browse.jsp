@@ -29,19 +29,42 @@
      <div class="modal-wrap a-center">
        <label for="modal-trigger-center" class="close">&#10006;</label>
        <div class="pure-g">
-	       <div class="pure-u-1">
+       		<!-- Row 1 of modal -->
+			<div class="pure-u-1-4"></div><!-- padding -->
+			<div class="pure-u-1-2">
 				<h2>
 					<span class="fav-style-marker">*</span>
 					<span id="modal-label-movie-title">Movie Title</span>
 					<span class="fav-style-marker">*</span>
 					<span class="queue-position-marker"></span>
 				</h2>
-	       </div>
-	       <div class="pure-u-1-5">
+			</div>
+			<div class="pure-u-1-8"></div>
+			<div class="pure-u-1-8"></div>
+			
+			<!-- Row 2, which is the rest. -->
+	       <div class="pure-u-1-4">
 	       	<img class="pure-img" id="modal-movie-image" alt="movie image" src=""></img>
 	       </div>
-	       <div class="pure-u-4-5" id="modal-label-movie-description">
-		       Description.
+	       <div class="pure-u-3-4"><!-- Content section to right of movie. -->
+	       		<div id="modal-label-movie-description" class="pure-u-1">
+		       		Description.
+	       		</div>
+	       		<div id="modal-label-genre" class="pure-u-1-2">
+	       			Genre.
+	       		</div>
+	       		<div id="modal-label-mpaa" class="pure-u-1-2">
+	       			MPAA Rating.
+	       		</div>
+	       		<div id="modal-label-director" class="pure-u-1">
+	       			Director.
+	       		</div>
+	       		<div id="modal-label-actor" class="pure-u-1">
+	       			Actor.
+	       		</div>
+	       		<div id="modal-label-rating" class="pure-u-1">
+	       			Rating
+	       		</div>
 	       </div>
 	       <div class="pure-u-1">
 	       	<div class="pure-u-2-5"><a id="favoritesButton" class="pure-button pure-button-active">Add to Favorites</a></div>
@@ -115,6 +138,11 @@
 								 queue-position: A STRING that is what position this movie is
 									in the logged in user's queue. If there is no user logged
 									in or the movie is not in the users queue, this value is -1. 
+								actors: The actors of the movie
+								genre: the movie genre
+								mpaa: the mpaa rating of the movie
+								director: the director of the movie.
+								movie_rating: The rating of the movie
 							--%>
 							<div style="display: none;" class="movie-full-description"> <%= movie.getDescription() %> </div>
 							<div style="display: none;" class="movie-id-num"><%= movie.getId() %></div>
@@ -135,6 +163,21 @@
 									out.println("-1"); // not in queue
 								}
 								%></div>
+							<div style="display: none;" class="actors">
+								<%= movie.getActor1() + ", " + movie.getActor2() %>
+							</div>
+							<div style="display: none;" class="genre">
+								<%= movie.getGenre() %>
+							</div>
+							<div style="display: none;" class="mpaa">
+								<%= movie.getMPAARating() %>
+							</div>
+							<div style="display: none;" class="director">
+								<%= movie.getDirector() %>
+							</div>
+							<div style="display: none;" class="movie_rating">
+								 <%= (movie.getUserRating() == 0 ? MovieRatingDao.getAverageMovieRating(movie.getId()).getRating() : movie.getUserRating()) %>
+							</div>
 							<div class="pure-u-1">
 								<img class="pure-img" id="movie-display-img" alt="loading..." src="<%= movie.getImageURL() %>">
 							</div>

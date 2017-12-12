@@ -93,7 +93,7 @@ public class UserDao {
                 u.setAccountId(rs.getInt(2)); 
                 u.setUsername(rs.getString(3)); 
                 u.setFavoritesList(FavoritesListDao.getFavoritesListByUserId(u.getId()).getMovieIdList());
-                //u.setQueue(QueueDao.getQueueByUserId(u.getId()).getMovieIdList());
+                u.setQueue(QueueDao.getQueueByUserId(u.getId()).getMovieIdList());
                 u.setLoggedIn(rs.getBoolean(4)); 
             }  
             con.close();  
@@ -121,7 +121,7 @@ public class UserDao {
                 u.setAccountId(rs.getInt(2)); 
                 u.setUsername(rs.getString(3)); 
                 u.setFavoritesList(FavoritesListDao.getFavoritesListByUserId(u.getId()).getMovieIdList());
-                //u.setQueue(QueueDao.getQueueByUserId(u.getId()).getMovieIdList());
+                u.setQueue(QueueDao.getQueueByUserId(u.getId()).getMovieIdList());
                 u.setLoggedIn(rs.getBoolean(4)); 
                 list.add(u);
             }  
