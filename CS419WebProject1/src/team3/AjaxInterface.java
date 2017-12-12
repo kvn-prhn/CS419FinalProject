@@ -50,13 +50,11 @@ public class AjaxInterface extends HttpServlet {
 							// TODO: make sure the movieId given is valid?
 							
 							if (actionToDo.equals("add_favorite")) {	// add a movie to the favorites list
-								// TODO:
 								System.out.println("add_favorite");
 								int status = user.addToFavorites(movieId); 
 								//pw.write("{\"success\":" +  (status == 0)  + "}");   // give the status.
 								pw.write("{\"success\":true}");   // give the status.
 							} else if (actionToDo.equals("remove_favorite")) {	// remove a movie from the favorites list
-								// TODO:
 								System.out.println("remove_favorite");
 								int status = user.removeFromFavorites(movieId);
 								pw.write("{\"success\":" +  (status == 0)  + "}");   // give the status.
@@ -71,11 +69,13 @@ public class AjaxInterface extends HttpServlet {
 								} else {
 									pw.write("{\"success\":false}"); 	// unsuccessfull add to queue.
 								}
+								System.out.println(user.getQueue());
 							} else if (actionToDo.equals("remove_queue")) {	// remove a movie from the queue
-								// TODO:
 								System.out.println("remove_queue");
 								int status = user.removeFromQueue(movieId);
 								pw.write("{\"success\":" +  (status == 0)  + "}");   // give the status.
+								System.out.print("New queue");
+								System.out.println(user.getQueue());
 							} else {
 								pw.write("{\"success\":false,\"msg\":\"Invalid action\"}");
 							}

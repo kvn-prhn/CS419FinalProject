@@ -364,6 +364,7 @@
 								console.log(data);
 								if (data.success) {
 									console.log("updated the queue");
+									console.log(data);
 									// TODO: change styling for queue
 									if (actionToDo == "add_queue") {
 										// if we have just added to the queue, then set
@@ -388,47 +389,6 @@
 						$("#watchButton").attr("disabled", "");
 					}
 			});
-			
-			(function(movieId, movieTitle) {
-				
-				function getMovieImageFor(id, searchQuery) {
-					var API_KEY = '7130256-0e83e707d7f0f3407d56ce8aa';
-					var URL = "https://pixabay.com/api/?key="+API_KEY+"&q="+encodeURIComponent(searchQuery)+"&callback=?";
-					$.getJSON(URL).done(function(data){
-						if (data.totalHits > 0) {
-							// set the source of the image to wherever this is. 
-							
-							// find the first image that is a good size...
-							var bestImg = 0;
-							var bestRatio = data.hits[0].imageWidth / data.hits[0].imageHeight; 
-							for (var i = 1; i < data.hits.length; i++) {
-								var testRatio = data.hits[i].imageWidth / data.hits[i].imageHeight;
-								if (Math.abs(testRatio - 1) < Math.abs(bestRatio - 1)) {
-									bestImg = i;
-									bestRatio = testRatio;
-								}
-							}
-							$(id).find(".movie-display-img").attr("src", data.hits[bestImg].webformatURL);
-						} else {
-							$(id).find(".movie-display-img").attr("alt", "No image found.");
-							// do another search, chopping off the last word in the search query
-							var searchTerms = searchQuery.split(" ");
-							searchTerms.splice( searchTerms.length - 1, 1);
-							var newSearchQuery = searchTerms.join(" ");
-							console.log("Shorter term: " + newSearchQuery);
-							if (newSearchQuery !== "") {
-								getMovieImageFor(id, newSearchQuery);
-							}
-						}
-					});
-					
-				}
-				// update the movie image.
-				//getMovieImageFor(movieId, movieTitle);
-				
-				
-				// TODO: Make all the event handlers for adding to favorites and stuff.
-			})(currentMovieId, currentMovieTitle);
 			
 		}
 	});
