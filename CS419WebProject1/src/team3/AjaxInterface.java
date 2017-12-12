@@ -30,7 +30,8 @@ public class AjaxInterface extends HttpServlet {
 			if (userIdStr == null) {	// check that there is an account id
 				pw.write("{\"success\":false,\"msg\":\"No userID parameter\"}");
 			} else {
-				User user = UserDao.getUserById(Integer.parseInt(userIdStr));
+				HttpSession session = req.getSession(true);
+				User user = (User)session.getAttribute("userBean");
 				if (user == null) {	// check that there is an account matching that
 					pw.write("{\"success\":false,\"msg\":\"Invalid user userID\"}");
 				} else {
@@ -43,7 +44,7 @@ public class AjaxInterface extends HttpServlet {
 							pw.write("{\"success\":false}");
 						}
 					} else {
-						HttpSession session = req.getSession(true);
+						
 
 						// begin actions that use a movieId
 						// make sure that movie ID that was given is valid
