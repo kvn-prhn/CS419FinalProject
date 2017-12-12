@@ -510,14 +510,32 @@ div[class*="movie-display-block"]:hover {
 /*Add more styling so that it can behave how we want.*/
 div[class*="movie-display-block"] > label {
   display: block;
-  padding: 0.5em;
+  /* padding: 0.5em; */
+}
+.movie-display-lower {
+  position: relative;
+  bottom: 0;
 }
 /*Add more styling so that it can behave how we want.*/
 h2 {
   text-align: center;
 }
+.modal-trigger-center-lbl h2 {
+  min-height: 2.5em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  position: relative;
+  bottom: 0;
+}
+.modal-trigger-center-lbl h2:hover {
+  background-color: #cfcfcf;
+  cursor: pointer;
+}
+.movie-display-lower > .movie-shorter-desc {
+  bottom: 0;
+}
 #movie-display-img {
-  margin: 15px;
+  /*margin: 15px; */
 }
 .ratings-img {
   min-height: 3em;

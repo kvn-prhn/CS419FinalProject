@@ -100,9 +100,8 @@
          	<% List<Integer> userFavList = FavoritesListDao.getFavoritesListByUserId(userId).getMovieIdList(); %>
          	<% List<Integer> userQueue = userBean.getQueue(); %>
 			<% for (Movie movie : browseListBean.getMovies()) { %>
-				<div class="pure-u-sm-1 pure-u-lg-1-2">
-					<div class="movie-display-block-<%= movieOn %>">
-						<div class="pure-u-1">
+				<div class="pure-u-sm-1-2  pure-u-md-1-4  pure-u-lg-1-5  pure-u-xl-1-6  movie-display-block-<%= movieOn %> "> 						
+						<div class="pure-u-1  movie-display-upper">
 							<%-- Meta-data for the movie for the modal. 
 								Meta data lives inside of <div> tags that have the display: none; style
 								and are identified bytheir class. The content of the <div> tag is 
@@ -136,40 +135,27 @@
 									out.println("-1"); // not in queue
 								}
 								%></div>
-							
-							<h2 for="modal-trigger-center">
+							<div class="pure-u-1">
+								<img class="pure-img" id="movie-display-img" alt="loading..." src="<%= movie.getImageURL() %>">
+							</div>
+						</div>
+						<div class="pure-u-1 movie-display-lower">  
+							<label class="modal-trigger-center-lbl modal-open" for="modal-trigger-center">
+								<h2>
 								<span <%= fav_marker_initial_style %> class="fav-style-marker">*</span>
-								<span class="modal-open movie-title"><%= movie.getTitle() %></span>
+								<span class="movie-title"><%= movie.getTitle() %></span>
 								<span <%= fav_marker_initial_style %> class="fav-style-marker">*</span>
 								<span class="queue-position-marker"><%
 									if (userQueue != null && userQueue.contains(movie.getId())) {
 										out.println("[1]");  // TODO: style as the position in the queue.
 									}
 								%></span>
-							</h2>
-						</div>
-						<div class="pure-u-1-24"></div><!-- spacing -->
-						<div class="pure-u-5-24">
-							<img class="pure-img" id="movie-display-img" alt="loading..." src="<%= movie.getImageURL() %>" ></img>
-						</div>
-						<div class="pure-u-2-24"></div><!-- spacing -->
-						<div class="pure-u-2-5">  
-							<p>
-								<%= movie.getTruncatedDescription() %>
-							</p>
-							<p>
-								Ratings are fun
-								<div class="pure-u-1">							 
-									 <%= MovieRatingDao.getMovieRatingByUserId(movie.getId(), userBean.getId()).getRating() %>
-								</div>
-							</p>
-							<p>
-							<label for="modal-trigger-center" class="pure-button pure-button-active open-modal">
-								MORE INFO
+								</h2>
 							</label>
-							</p>
+							<div class="pure-u-1  movie-shorter-desc">
+								<%= movie.getTruncatedDescription() %>
+							</div> 
 						</div>
-					</div>
 				</div>
 			<% movieOn++; // track which block we're iterating on. 
 			} %>
