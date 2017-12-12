@@ -119,7 +119,6 @@
             </div>
          	<% int movieOn = 0; %>
          	<% List<Integer> userFavList = FavoritesListDao.getFavoritesListByUserId(userId).getMovieIdList(); %>
-         	<% List<Integer> userQueue = userBean.getQueue(); %>
 			<% for (Movie movie : browseListBean.getMovies()) { %>
 				<div class="pure-u-sm-1-2  pure-u-md-1-4  pure-u-lg-1-5  pure-u-xl-1-6  movie-display-block-<%= movieOn %> "> 						
 						<div class="pure-u-1  movie-display-upper">
@@ -154,9 +153,9 @@
 								} %></div>
 								<%-- If the queue position is less than 0, it means its not in the queue --%>
 							<div style="display: none;" class="queue-position"><%
-								if (userQueue != null && userQueue.contains(movie.getId())) {
-									System.out.println(userQueue);
-									out.println(1 + userQueue.indexOf( movie.getId() ));
+								if ( userBean.getQueue() != null &&  userBean.getQueue().contains(movie.getId())) {
+									System.out.println( userBean.getQueue());
+									out.println(1 +  userBean.getQueue().indexOf( movie.getId() ));
 								} else {
 									out.println("-1"); // not in queue
 								}
@@ -177,11 +176,12 @@
 								<%= (movie.getUserRating() == 0 ? MovieRatingDao.getAverageMovieRating(movie.getId()).getRating() : movie.getUserRating()) %>
 							</div>
 							<div class="pure-u-1">
-								<div <% if (userQueue == null || !userQueue.contains(movie.getId())) { 
+								<div 
+								<% 	if (userBean.getQueue() == null || !userBean.getQueue().contains(movie.getId())) { 
 											out.print("style=\"display: none;\""); 
 										} %> class="queue-position-marker queue-position-marker-block"><%
-									if (userQueue != null && userQueue.contains(movie.getId())) {
-										out.print("[" + (1 + userQueue.indexOf( movie.getId() )) + "]");  // TODO: style as the position in the queue.
+									if ( userBean.getQueue() != null &&  userBean.getQueue().contains(movie.getId())) {
+										out.print("[" + (1 +  userBean.getQueue().indexOf( movie.getId() )) + "]");  // TODO: style as the position in the queue.
 									}
 								%></div>
 								<img class="pure-img" id="movie-display-img" alt="loading..." src="<%= movie.getImageURL() %>">
@@ -371,9 +371,11 @@
 										// it as removing from the queue.
 										$(classToReferenceMovieBlock).find(".queue-position").text(e.data.new_pos);  // set to current position
 										$("#queueButton").text("Remove from Queue");
+										location.reload(true);   // refresh the page for the queue.
 									} else {
 										$(classToReferenceMovieBlock).find(".queue-position").text("-1"); // not in queue
 										$("#queueButton").text("Add to Queue");
+										location.reload(true);   // refresh the page for the queue.
 									}
 								} else {
 									console.error("Error with updating queue");

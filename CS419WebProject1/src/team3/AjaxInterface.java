@@ -34,9 +34,14 @@ public class AjaxInterface extends HttpServlet {
 				if (user == null) {	// check that there is an account matching that
 					pw.write("{\"success\":false,\"msg\":\"Invalid user userID\"}");
 				} else {
-					// TODO: Add actions for changing the account properties.
-					if (actionToDo.equals("update_address")) {		// update some account's address...
-						// TODO: Street address, city, state, ZIP code.
+
+					if (actionToDo.equals("get_hours_left")) {		// get how much time is left for a user.
+						Account acc = AccountDao.getAccountById(user.getAccountId());
+						if (acc != null) {
+							pw.write("{\"success\":true,\"hours_left\":\"" + acc.getHoursRemaining() + "\"}");
+						} else {
+							pw.write("{\"success\":false}");
+						}
 					} else {
 						HttpSession session = req.getSession(true);
 
@@ -59,23 +64,23 @@ public class AjaxInterface extends HttpServlet {
 								int status = user.removeFromFavorites(movieId);
 								pw.write("{\"success\":" +  (status == 0)  + "}");   // give the status.
 							} else if (actionToDo.equals("add_queue")) {	// add a movie to the queue
-								System.out.println("add_queue");
-								System.out.println(user.getQueue()); // see what the queue looks like before.
-								System.out.println("Adding this movie: " + movieId);
 								int status = user.addToQueue(movieId); 
 								int newPosition = user.getQueue().indexOf(new Integer(movieId));
+								user.forceQueueUpdate();    // force the bean to update the queue
 								if (status == 0) {
 									pw.write("{\"success\":true,\"new_pos\":" + newPosition + "}");   // give the status.
 								} else {
 									pw.write("{\"success\":false}"); 	// unsuccessfull add to queue.
 								}
-								System.out.println(user.getQueue());
+								session.setAttribute("notification_message", "Updated the queue:");
 							} else if (actionToDo.equals("remove_queue")) {	// remove a movie from the queue
 								System.out.println("remove_queue");
 								int status = user.removeFromQueue(movieId);
 								pw.write("{\"success\":" +  (status == 0)  + "}");   // give the status.
-								System.out.print("New queue");
+								user.forceQueueUpdate();   // force the bean to update the queue
 								System.out.println(user.getQueue());
+								
+								session.setAttribute("notification_message", "Updated the queue:");
 							} else {
 								pw.write("{\"success\":false,\"msg\":\"Invalid action\"}");
 							}

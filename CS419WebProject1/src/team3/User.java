@@ -117,6 +117,10 @@ public class User {
 		return 0;
 	}
 
+	public void forceQueueUpdate() {
+		queue = QueueDao.getQueueByUserId(id).getMovieIdList();
+	}
+	
 	public List<Integer> getQueue() {
 		return queue;
 	}
