@@ -10,7 +10,7 @@ public class AccountDao {
         try{  
             Connection con = DBLink.getConnection();  
             PreparedStatement ps = con.prepareStatement(  
-                         "insert into accountteam3 (firstName,lastName,password,email,address,subscription,resetDate,hoursRemaining) " + 
+                         "insert into accountteam3 (firstName,lastName,password,email,address,subscription,resetDate,minutesRemaining) " + 
                         		 "values (?,?,?,?,?,?,NOW(),?)");    // NOW() is temporary - set the date to today
             ps.setString(1, a.getFirstName()); 
             ps.setString(2, a.getLastName()); 
@@ -19,7 +19,7 @@ public class AccountDao {
             ps.setString(5, a.getAddress());
             ps.setInt(6, a.getSubscriptionTier());
             //ps.setDate(7, a.getHoursResetDate());
-            ps.setFloat(7, a.getHoursRemaining());
+            ps.setFloat(7, a.getMinutesRemaining());
               
             status = ps.executeUpdate();  
             System.out.println("********Execution complete!!!");
@@ -87,8 +87,8 @@ public class AccountDao {
                 a.setPassword(rs.getString(4));  
                 a.setEmail(rs.getString(5));  
                 a.setAddress(rs.getString(6));  
-                a.setHoursResetDate(rs.getDate(7));
-                a.setHoursRemaining(rs.getFloat(8));
+                a.setMinutesResetDate(rs.getDate(7));
+                a.setMinutesRemaining(rs.getFloat(8));
                 a.setSubscriptionTier(rs.getInt(9));
                 
             }  
