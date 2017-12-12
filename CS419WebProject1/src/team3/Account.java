@@ -64,7 +64,7 @@ public class Account {
 			case 1: 	return "Bronze"; 	
 			case 2: 	return "Silver"; 	
 			case 3: 	return "Gold"; 		
-			case 4: 	return "Platinum"; 	
+			case 4: 	return "Plat"; 	
 		}
 		return "INVALID_SUB_TIER";
 	}
