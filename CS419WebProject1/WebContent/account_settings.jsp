@@ -27,31 +27,37 @@
 				 		<div class="pure-u-1">
 				 			<legend>Account Information</legend>
 				 			<div class="pure-u-1">
-				 				<div class="pure-u-1-4"> Name:</div>
-				 				<div class="pure-u-2-3"><%= account.getLastName()  %>, <%= account.getFirstName()  %></div>
+				 				<div class="pure-u-1-8"> Name:</div>
+				 				<div class="pure-u-1-3"><%= account.getLastName()  %>, <%= account.getFirstName()  %></div>
 				 			</div>
+				 			<hr style="border-top: dotted 2px;">
 				 			<div class="pure-u-1">
-				 				<div class="pure-u-1-4">Email:</div>
-				 				<div class="pure-u-2-3"><%= account.getEmail() %></div>
+				 				<div class="pure-u-1-8">Email:</div>
+				 				<div class="pure-u-1-3"><%= account.getEmail() %></div>
 				 			</div> 
+				 			<hr style="border-top: dotted 2px;">
 				 			<div class="pure-u-1">
-				 				<div class="pure-u-1-4">Reset date:</div>
+				 				<div class="pure-u-1-8">Reset date:</div>
 				 				<% Date d1 = account.getHoursResetDate(); %>
-				 				<div class="pure-u-2-3"><% out.print( (d1.getMonth() + 1) + "/" + d1.getDay() + "/" + (d1.getYear() + 1900)); %></div>
+				 				<div class="pure-u-1-3"><% out.print( (d1.getMonth() + 1) + "/" + d1.getDay() + "/" + (d1.getYear() + 1900)); %></div>
 				 			</div> 
+				 			<hr>
 				 			<div class="pure-u-1">
-				 				<div class="pure-u-1-4">Hours Left:</div>
-				 				<div class="pure-u-2-3"><%= account.getHoursRemaining() %></div>
+				 				<div class="pure-u-1-8">Hours Left:</div>
+				 				<div class="pure-u-1-3"><%= account.getHoursRemaining() %></div>
 				 			</div>
+				 			<hr style="border-top: dotted 2px;">
 				 			<div class="pure-u-1">
-				 				<div class="pure-u-1-4">Current Address:</div>
-				 				<div class="pure-u-2-3"><%= account.getAddress() %></div>
+				 				<div class="pure-u-1-8">Current Address:</div>
+				 				<div class="pure-u-1-3"><%= account.getAddress() %></div>
 				 			</div>
+				 			<hr style="border-top: dotted 2px;">
 				 			<div class="pure-u-1">
-				 				<div class="pure-u-1-4">Subscription Tier:</div>
-				 				<div class="pure-u-2-3"><img src="img/<%= account.getSubscriptionTierString() %>.png"></div>
+				 				<div class="pure-u-1-8">Subscription Tier:</div>
+				 				<div class="pure-u-1-3"><img src="img/<%= account.getSubscriptionTierString() %>.png"></div>
 				 				
 				 			</div> 
+				 			<hr style="border-top: dotted 2px;">
 				 		</div>
 				 		<div class="pure-control-group pure-u-1">
 				            <div class="pure-u-1">
@@ -62,8 +68,8 @@
 				            	</div>
 				            	
 				            	<div class="pure-u-3-5">
-				            		<input id="update_password" class="pure-button pure-button-primary" type="submit" 
-				            			name="update_submit" value="Update Password">
+				            		<input id="update_password" class="pure-button pure-button-active" type="submit" 
+				            			name="update_submit" value="Update Password" style="border: 1px solid black;">
 				            	</div>
 				            </div>
 
@@ -94,8 +100,8 @@
 								</div>
 								
 								<div style="padding-bottom:45px" class="pure-u-3-5">
-									<input id="update_address" class="pure-button pure-button-primary" type="submit" 
-				            				name="update_submit" value="Update Address">
+									<input id="update_address" class="pure-button pure-button-active" type="submit" 
+				            				name="update_submit" value="Update Address" style="border: 1px solid black;">
 								</div>
 				        </div>
 				        <div class="pure-control-group">
@@ -127,7 +133,7 @@
 								
 							</div>
 							<div class="pure-u-1-5" style="background-color:#e5e4e2">
-																<div class="pure-u-2-5"></div>
+								<div class="pure-u-2-5"></div>
 								<div class="pure-u-1-5">
 									<img src="img/Plat.png">
 								</div>
@@ -136,8 +142,8 @@
 							</div>
 							
 							<div style="padding-bottom:45px" class="pure-u-3-5">
-								<input id="update_address" class="pure-button pure-button-primary" type="submit" 
-				            			name="update_submit" value="Update Subscription"></div>
+								<input id="update_address" class="pure-button pure-button-active" type="submit" 
+				            			name="update_submit" value="Update Subscription" style="border: 1px solid black;"></div>
 				        </div>
 				 	</fieldset>
 				</form>
@@ -151,22 +157,20 @@
         </div>
     </div>
 
-	<div class="ribbon l-box-lrg pure-g">
-        <div class="l-box-lrg is-center pure-u-1 pure-u-md-1-2 pure-u-lg-2-5">
-            <img width="300" alt="File Icons" class="pure-img-responsive" src="img/common/movie-theater-auditorium.jpg">
-        </div>
+	<div class="ribbon l-box-lrg pure-g " style = "padding-bottom:60px" >
         <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-3-5">
-
-            <h2 class="content-head content-head-ribbon">Blah Blah</h2>
-
-            <p>
-                Placeholder stuff 
-            </p>
+			<div class = "pure-u-4-10">
+				<p>This website and its contents are all part of Team_Three_Entertainment(); 2017 - 2018 Ltd. <br /> 190 S Prospect Ave, Elmhurst, IL 60126, United States <br/> Use of this website is subject to our <a href="term_and_conditions.jsp">Terms & Conditions</a> and Privacy Policy. </p>
+			</div>
+			<div class = "pure-u-4-10">
+				<p class="content-head content-head-ribbon">Contact us at getflixmovie@gmail.com</p>
+				<!--  getflixmovie@gmail.com PW: team3entertainment -->
+			</div>
         </div>
     </div>
 	
-    <div class="footer l-box is-center">
-        This is the footer.
+    <div class="footer l-box is-center" >
+            <img width="300" alt="File Icons" class="pure-img-responsive" src="img/common/CLogo.png">
     </div>
 
 </div>
