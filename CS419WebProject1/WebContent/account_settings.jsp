@@ -44,6 +44,10 @@
 				 				<div class="pure-u-2-3"><%= account.getHoursRemaining() %></div>
 				 			</div>
 				 			<div class="pure-u-1">
+				 				<div class="pure-u-1-4">Current Address:</div>
+				 				<div class="pure-u-2-3"><%= account.getAddress() %></div>
+				 			</div>
+				 			<div class="pure-u-1">
 				 				<div class="pure-u-1-4">Subscription Tier:</div>
 				 				<div class="pure-u-2-3"><img src="img/<%= account.getSubscriptionTierString() %>.png"></div>
 				 				
@@ -66,7 +70,7 @@
 				        <div class="pure-control-group pure-u-1">
 				            <div class="pure-u-1">
 				            	<legend>Update Address</legend>
-				            	
+				            	<% Account acc = AccountDao.getAccountById(userBean.getAccountId()); %>
 				            	<div class="pure-u-3-5">
 				            		<label for="streetAddress">Street Address</label>
 									<input id="streetAddress" type="text" name="streetAddress" value="" placeholder="Street Address" >
@@ -89,7 +93,8 @@
 								</div>
 								
 								<div style="padding-bottom:45px" class="pure-u-3-5">
-								<button class="pure-button pure-button-primary" id="update_address">Update Address</button>
+									<input id="update_address" class="pure-button pure-button-primary" type="submit" 
+				            				name="update_submit" value="Update Address">
 								</div>
 				        </div>
 				        <div class="pure-control-group">
@@ -114,8 +119,8 @@
 							</div>
 							
 							<div style="padding-bottom:45px" class="pure-u-3-5">
-								<button  class="pure-button pure-button-primary" id="update_subscriptionTier">Update Subscription</button>
-							</div>
+								<input id="update_address" class="pure-button pure-button-primary" type="submit" 
+				            			name="update_submit" value="Update Subscription"></div>
 				        </div>
 				 	</fieldset>
 				</form>

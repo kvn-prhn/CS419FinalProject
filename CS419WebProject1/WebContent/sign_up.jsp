@@ -70,7 +70,7 @@
 							<div class="l-box pure-u-1-8">
 								<label for="state">State</label>
 								<input id="state" type="text" name="state"
-									value="<%= request.getParameter("state") != null ? request.getParameter("state") : "" %>" placeholder="">
+									value="<%= request.getParameter("state") != null ? request.getParameter("state") : "" %>" placeholder="State">
 							</div>
 							<div class="l-box pure-u-1-5">
 								<label for="zipCode">ZIP Code</label>

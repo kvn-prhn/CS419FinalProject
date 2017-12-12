@@ -49,8 +49,7 @@ public class SignupServlet extends HttpServlet {
 						request.getParameter("city") == null ||
 						request.getParameter("zipcode") == null ||
 						request.getParameter("subscriptionTier") == null) {
-				
-					// return to the sign up page if  everythign is not in there yet.
+					// return to the sign up page if  everything is not in there yet.
 					request.getRequestDispatcher("sign_up.jsp").forward(request, response);
 					con.close();
 					return;

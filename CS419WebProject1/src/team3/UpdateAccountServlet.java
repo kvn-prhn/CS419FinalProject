@@ -36,16 +36,19 @@ public class UpdateAccountServlet extends HttpServlet {
 				if (updateSubmitStr.equalsIgnoreCase("Update Password")) {	// Update Password
 					acc.setPassword(req.getParameter("update_password")); 
 				} else if (updateSubmitStr.equalsIgnoreCase("Update Address")) {	// Update street Address
-					acc.setAddress(req.getParameter("update_street"), req.getParameter("update_city"),
-							req.getParameter("update_state"), req.getParameter("update_zipcode"));
+					acc.setAddress(req.getParameter("streetAddress"), req.getParameter("city"),
+							req.getParameter("state"), req.getParameter("zipcode"));
 				} else if (updateSubmitStr.equalsIgnoreCase("Update Subscription")) {	// Update subscription
-					acc.setSubscriptionTier(Integer.parseInt(req.getParameter("update_sub_tier")));
+					acc.setSubscriptionTier(Integer.parseInt(req.getParameter("subscriptionTier")));
 				} else {
 					System.err.println("Invalid name for a submit button for updating the account");
 				}
 				
 				// make the changes
 				AccountDao.update(acc);
+				
+				// redirect back to the page after updating.
+				req.getRequestDispatcher("account_settings.jsp").forward(req, resp);
 			}
 		}
 	}

@@ -51,11 +51,11 @@ public class Movie {
 		String lessDescription = "";
 		String[] words = description.split(" ");
 		int i = 0;
-		while (i < words.length && lessDescription.length() < 30) {  // keep adding until its longer than 30
+		while (i < words.length && lessDescription.length() < 72) {  // keep adding until its longer than 30
 			lessDescription += words[i] + " ";
 			i++;
 		}
-		return lessDescription;
+		return lessDescription + "...";
 	}
 	public int getReleaseYear() {
 		return releaseYear;
