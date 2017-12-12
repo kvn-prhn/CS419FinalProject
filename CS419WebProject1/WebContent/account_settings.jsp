@@ -38,7 +38,7 @@
 				 			<hr style="border-top: dotted 2px;">
 				 			<div class="pure-u-1">
 				 				<div class="pure-u-1-8">Reset date:</div>
-				 				<% Date d1 = account.getMinutesRemaining(); %>
+				 				<% Date d1 = account.getMinutesResetDate(); %>
 				 				<div class="pure-u-1-3"><% out.print( (d1.getMonth() + 1) + "/" + d1.getDay() + "/" + (d1.getYear() + 1900)); %></div>
 				 			</div> 
 				 			<hr>
