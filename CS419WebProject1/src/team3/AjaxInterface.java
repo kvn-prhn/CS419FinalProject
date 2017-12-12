@@ -48,8 +48,11 @@ public class AjaxInterface extends HttpServlet {
 						if (acc != null) {
 							String hoursChangingStr = req.getParameter("hours");
 							if (hoursChangingStr == null) {
-								
+								pw.write("{\"success\":false,\"msg\":\"No hours parameter\"}");
 							} else {
+								double hoursToChange = Double.parseDouble(hoursChangingStr);
+								
+								
 								pw.write("{\"success\":true,\"hours_left\":\"" + acc.getHoursRemaining() + "\"}");
 							}
 						} else {
