@@ -6,6 +6,7 @@
 
 <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
 <link rel="stylesheet" href="css/modal.css">
+<link rel="stylesheet" href="css/toastr.min.css">
 
 <!--[if lte IE 8]>
     <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-old-ie-min.css">

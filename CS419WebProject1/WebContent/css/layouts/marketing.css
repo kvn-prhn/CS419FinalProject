@@ -31,7 +31,8 @@ label {
  * These are some useful classes which I will need
  */
 .l-box {
-  padding: 1em;
+  padding: 0.3em;
+  /* 1em; */
 }
 .l-box-lrg {
   padding: 2em;
@@ -39,6 +40,12 @@ label {
 }
 .is-center {
   text-align: center;
+}
+/**
+ *  Additional toastr styling work
+ */
+#toast-container {
+  margin-top: 80px;
 }
 /*
  * -- PURE FORM STYLES --
@@ -319,24 +326,6 @@ p {
 }
 .modal .modal-wrap {
   width: 80%;
-}
-/*
- * -- PRICING TABLE BUTTON --
- * Styles for the "Choose" button at the bottom of a pricing table.
- * This inherits from Pure Button.
- */
-.button-choose {
-  border: 1px solid #ccc;
-  background: #fff;
-  color: #333;
-  border-radius: 2em;
-  font-weight: bold;
-  position: relative;
-  bottom: -1.5em;
-}
-.information-head {
-  color: black;
-  font-weight: 500;
 }
 .footer {
   background: #111;

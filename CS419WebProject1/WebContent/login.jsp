@@ -109,8 +109,23 @@
 
 
 <script src="js/jquery.min.js"></script>
+<script src="js/toastr.min.js"></script>
+<script src="js/common.js"></script>
 <script>
 	$(function() {
+		<%-- Output any notifcations that are needed. --%>
+		<%  if (session.getAttribute("notification_message") != null) {  %>
+				toastr["success"]("<%= session.getAttribute("notification_message") %>");
+		<% 
+				session.setAttribute("notification_message", null);
+			} %>
+		<%-- Output any error messages --%>
+		<%  if (session.getAttribute("error_message") != null) {  %>
+				toastr["error"]("<%= session.getAttribute("error_message") %>");
+		<% 
+			session.setAttribute("error_message", null);
+		} %>
+		
 		var current_page_id = "login-link";
 		$("#" + current_page_id).addClass("pure-menu-selected");
 	});
