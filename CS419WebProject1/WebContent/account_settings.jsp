@@ -99,23 +99,27 @@
 				        </div>
 				        <div class="pure-control-group">
 			            	<legend>Update Subscription change</legend>
-			            	<div class="pure-u-1-5">
+			            	<div class="pure-u-1-5" style="background-color:#B87333">
 								<label for="subChoice1">Bronze</label>
 								<input type="radio" id="subChoice1" name="subscriptionTier" value="1">
+								<img src="img/Bronze.png">
 							</div>
-							<div class="pure-u-1-5">
+							<div class="pure-u-1-5" style="background-color:silver">
 								<label for="subChoice2">Silver</label>
 								<input type="radio" id="subChoice2" name="subscriptionTier" value="2">
+								<img src="img/Silver.png">
 								
 							</div>
-							<div class="pure-u-1-5">
+							<div class="pure-u-1-5" style="background-color:gold">
 								<label for="subChoice3">Gold</label>
 								<input type="radio" id="subChoice3" name="subscriptionTier" value="3">
+								<img src="img/Gold.png">
 								
 							</div>
-							<div class="pure-u-1-5">
+							<div class="pure-u-1-5" style="background-color:#e5e4e2">
 								<label for="subChoice4">Platinum</label>
 								<input type="radio" id="subChoice4" name="subscriptionTier" value="4">
+								<img src="img/Plat.png">
 							</div>
 							
 							<div style="padding-bottom:45px" class="pure-u-3-5">
