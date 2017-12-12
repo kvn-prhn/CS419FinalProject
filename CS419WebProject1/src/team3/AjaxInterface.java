@@ -42,6 +42,18 @@ public class AjaxInterface extends HttpServlet {
 						} else {
 							pw.write("{\"success\":false}");
 						}
+					} else if (actionToDo.equals("subtract_hours_left")) {		// get how much time is left for a user.
+						Account acc = AccountDao.getAccountById(user.getAccountId());
+						if (acc != null) {
+							String hoursChangingStr = req.getParameter("hours");
+							if (hoursChangingStr == null) {
+								
+							} else {
+								pw.write("{\"success\":true,\"hours_left\":\"" + acc.getHoursRemaining() + "\"}");
+							}
+						} else {
+							pw.write("{\"success\":false}");
+						}
 					} else {
 						HttpSession session = req.getSession(true);
 
