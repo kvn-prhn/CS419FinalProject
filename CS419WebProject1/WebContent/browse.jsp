@@ -86,7 +86,7 @@
             	<form class="pure-form" method="get" action="Search">
 	            	
 	            	<div class="pure-u-1-4">
-	            		<label for="sort_by">Sort by:</label>
+	            		<label for="sort_by">Order by:</label>
 	            		<select id="sort_by" name="sort_by">
 	            			<option value="keyword">Keyword</option>
 	            			<option value="genre">Genre</option>
@@ -98,7 +98,8 @@
 	            	<%-- Genre Filter Dropdown --%>
 	            	<div class="pure-u-1-4">
 	            		<label for="filter_by">Filter by:</label>
-	            		<select id="filter_by" name="sort_by">
+	            		<select id="filter_by" name="filter_by">
+	            			<option value="any">Any</option>
 	            			<option value="drama">Drama</option>
 	            			<option value="action">Action</option>
 	            			<option value="comedy">Comedy</option>
@@ -119,7 +120,7 @@
             </div>
          	<% int movieOn = 0; %>
          	<% List<Integer> userFavList = FavoritesListDao.getFavoritesListByUserId(userId).getMovieIdList(); %>
-			<% for (Movie movie : browseListBean.getMovies()) { %>
+			<% for (Movie movie : browseListBean.getMovieList()) { %>
 				<div class="pure-u-sm-1-2  pure-u-md-1-4  pure-u-lg-1-5  pure-u-xl-1-6  movie-display-block-<%= movieOn %> "> 						
 						<div class="pure-u-1  movie-display-upper">
 							<%-- Meta-data for the movie for the modal. 

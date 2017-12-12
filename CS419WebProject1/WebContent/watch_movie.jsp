@@ -16,7 +16,6 @@ Movie movie = null;
 if (movieId != null) {
 	movie =  MovieDao.getMovieById(Integer.parseInt(movieId));
 }
-boolean movieValid = (movieId != null && movie != null);
 %>
 
 
