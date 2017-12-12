@@ -32,6 +32,8 @@ public class AjaxInterface extends HttpServlet {
 			} else {
 				HttpSession session = req.getSession(true);
 				User user = (User)session.getAttribute("userBean");
+				System.out.print("User: ");
+				System.out.println(user);
 				if (user == null) {	// check that there is an account matching that
 					pw.write("{\"success\":false,\"msg\":\"Invalid user userID\"}");
 				} else {
@@ -51,7 +53,7 @@ public class AjaxInterface extends HttpServlet {
 								pw.write("{\"success\":false,\"msg\":\"No hours parameter\"}");
 							} else {
 								double hoursToChange = Double.parseDouble(hoursChangingStr);
-								
+								System.out.println("reducing the hours left by " + hoursToChange);
 								
 								pw.write("{\"success\":true,\"hours_left\":\"" + acc.getHoursRemaining() + "\"}");
 							}
@@ -97,6 +99,16 @@ public class AjaxInterface extends HttpServlet {
 								System.out.println(user.getQueue());
 								
 								session.setAttribute("notification_message", "Updated the queue:");
+							} else if (actionToDo.equals("leave_rating")) {		// TODO: Make it so you can leave a rating
+								String ratingStr = req.getParameter("rating");
+								if (ratingStr == null) {
+									pw.write("{\"success\":false,\"msg\":\"No rating parameter\"}");
+								} else {
+									int ratingToLeave = Integer.parseInt(ratingStr);
+									// TODO: Add the rating to the movie list
+									
+									pw.write("{\"success\":false,\"msg\":\"Not yet implemented\"}");
+								}
 							} else {
 								pw.write("{\"success\":false,\"msg\":\"Invalid action\"}");
 							}

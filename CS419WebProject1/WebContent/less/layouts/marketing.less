@@ -464,10 +464,14 @@ video.fullscreen {
     color: #888;
     text-align: center;
 	height: @footer_size;
+	opacity: 0;
 }
-.top-bar-movie-watching a {
-	color: #ddd;
+
+/* Only show content when the mouse hovers over the bar.*/
+.top-bar-movie-watching:hover { 
+	opacity: 1;	
 }
+
 
 
 video.fullscreen-watch-movie { 

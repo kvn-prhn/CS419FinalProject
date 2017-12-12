@@ -14,6 +14,7 @@
 
 <%@include file='WEB-INF/modules/header_common.jspf'%>
 
+
     
 <div class="splash-container">
 
@@ -26,7 +27,7 @@
             Sign up for a great selection at a great price.
         </p>
         <p>
-            <a href="#" class="pure-button pure-button-primary">Get Started</a>
+            <a href="browse.jsp" class="pure-button pure-button-primary">Get Started</a>
         </p>
     </div>
 </div>
