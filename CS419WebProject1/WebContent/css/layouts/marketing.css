@@ -451,3 +451,14 @@ h2 {
   height: 3em;
   max-height: 3em;
 }
+.queue-position-marker-block {
+  position: relative;
+  padding: 5px;
+  margin-bottom: -32px;
+  right: 0;
+  z-index: 999999;
+  display: block;
+  background-color: white;
+  height: 32px;
+  width: 32px;
+}

@@ -33,7 +33,8 @@
         <h2 class="content-head is-center">Log in</h2>
 
         <div class="pure-g">
-            <div class="l-box pure-u-1">
+        	<div class="pure-u-sm-0 pure-u-md-1-5 pure-u-lg-1-4"></div>	
+            <div class="l-box pure-u-sm-1 pure-u-md-3-5 pure-u-lg-1-2">
 
                 <form action="Login" method="POST" class="pure-form pure-form-stacked">
                     <fieldset>

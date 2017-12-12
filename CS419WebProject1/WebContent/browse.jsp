@@ -155,8 +155,8 @@
 								<%-- If the queue position is less than 0, it means its not in the queue --%>
 							<div style="display: none;" class="queue-position"><%
 								if (userQueue != null && userQueue.contains(movie.getId())) {
-									//out.println("1"); // TODO: add in code to get the position of the movie in the queue for this user.
-									out.println(userQueue.indexOf( new Integer(movie.getId()) ));
+									System.out.println(userQueue);
+									out.println(1 + userQueue.indexOf( movie.getId() ));
 								} else {
 									out.println("-1"); // not in queue
 								}
@@ -177,6 +177,13 @@
 								<%= (movie.getUserRating() == 0 ? MovieRatingDao.getAverageMovieRating(movie.getId()).getRating() : movie.getUserRating()) %>
 							</div>
 							<div class="pure-u-1">
+								<div <% if (userQueue == null || !userQueue.contains(movie.getId())) { 
+											out.print("style=\"display: none;\""); 
+										} %> class="queue-position-marker queue-position-marker-block"><%
+									if (userQueue != null && userQueue.contains(movie.getId())) {
+										out.print("[" + (1 + userQueue.indexOf( movie.getId() )) + "]");  // TODO: style as the position in the queue.
+									}
+								%></div>
 								<img class="pure-img" id="movie-display-img" alt="loading..." src="<%= movie.getImageURL() %>">
 							</div>
 						</div>
@@ -186,11 +193,7 @@
 								<span <%= fav_marker_initial_style %> class="fav-style-marker">*</span>
 								<span class="movie-title"><%= movie.getTitle() %></span>
 								<span <%= fav_marker_initial_style %> class="fav-style-marker">*</span>
-								<span class="queue-position-marker"><%
-									if (userQueue != null && userQueue.contains(movie.getId())) {
-										out.println("[1]");  // TODO: style as the position in the queue.
-									}
-								%></span>
+
 								</h2>
 							</label>
 							<div class="pure-u-1  movie-shorter-desc">
@@ -289,8 +292,11 @@
 					// change the favorites button based on if its in the favorites list or not.
 					if (currMovieInFavorites) {
 						$(".modal").find(".fav-style-marker").show();
+						$(".modal").find(".queue-position-marker").show();
+						$(".modal").find(".queue-position-marker").text("[" + currQueuePosition + "]");
 						$("#favoritesButton").text("Remove from Favorites");
 					} else {
+						$(".modal").find(".queue-position-marker").hide();
 						$(".modal").find(".fav-style-marker").hide();
 						$("#favoritesButton").text("Add to Favorites");
 					}
