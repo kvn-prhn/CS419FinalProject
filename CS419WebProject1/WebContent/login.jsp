@@ -47,7 +47,7 @@
 							<input id="password" type="password" name="password" placeholder="Your Password">
 						</div>
 						<div class="pure-controls">
-							<button type="submit" class="pure-button">Log in</button>
+							<button type="submit" class="pure-button" style="border: 2px solid black;">Log in</button>
 						</div>
                     </fieldset>
                 </form>
@@ -56,20 +56,6 @@
 				</p>
             </div>
             
-        </div>
-    </div>
-
-	<div class="ribbon l-box-lrg pure-g">
-        <div class="l-box-lrg is-center pure-u-1 pure-u-md-1-2 pure-u-lg-2-5">
-            <img width="300" alt="File Icons" class="pure-img-responsive" src="img/common/movie-theater-auditorium.jpg">
-        </div>
-        <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-3-5">
-
-            <h2 class="content-head content-head-ribbon">Blah Blah</h2>
-
-            <p>
-                Placeholder stuff 
-            </p>
         </div>
     </div>
 	
@@ -101,9 +87,20 @@
 
     </div>
 	-->
+	
+		<div class="ribbon l-box-lrg pure-g " style = "padding-bottom:185px" >
+        <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-3-5">
+			<div class = "pure-u-4-10">
+				<p>This website and its contents are all part of Team_Three_Entertainment(); 2017 - 2018 Ltd. <br /> 190 S Prospect Ave, Elmhurst, IL 60126, United States <br/> Use of this website is subject to our <a href="term_and_conditions.jsp">Terms & Conditions</a> and Privacy Policy. </p>
+			</div>
+			<div class = "pure-u-4-10">
+				<p class="content-head content-head-ribbon">Contact us at getflixmovie@gmail.com</p>
+			</div>
+        </div>
+    </div>
 
-    <div class="footer l-box is-center">
-        This is the footer.
+    <div class="footer l-box is-center" >
+            <img width="300" alt="File Icons" class="pure-img-responsive" src="img/common/CLogo.png">
     </div>
 
 </div>

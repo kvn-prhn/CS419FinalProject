@@ -79,33 +79,49 @@
 							</div>
 							<!--Radio buttons for choosing a plan-->
 							<div class="l-box pure-u-1-4" style="background-color:#B87333">
-								<label for="subChoice1">Bronze</label>
+								<div class="pure-u-2-5"></div>
+								<div class="pure-u-1-5">
+									<img src="img/Bronze.png" >
+								</div>
+								<div class="pure-u-2-5"></div>
 								<input type="radio" id="subChoice1" name="subscriptionTier" value="1">
 								<p style="color:#6d4d35"><b> 10 hours of watch time per month
 								<br><br>Ideal for those who watch a movie about every week</b></p>
 							</div>
 							<div class="l-box pure-u-1-4" style="background-color:silver">
-								<label for="subChoice2">Silver</label>
+								<div class="pure-u-2-5"></div>
+								<div class="pure-u-1-5">
+									<img src="img/Silver.png">
+								</div>
+								<div class="pure-u-2-5"></div>
 								<input type="radio" id="subChoice2" name="subscriptionTier" value="2">
 								<p style="color:#777676"><b> 30 hours of watch time per month
 								<br><br>Ideal for those who watch a couple movies every week</b></p>
 							</div>
 							<div class="l-box pure-u-1-4" style="background-color:gold">
-								<label for="subChoice3">Gold</label>
+								<div class="pure-u-2-5"></div>
+								<div class="pure-u-1-5">
+									<img src="img/Gold.png">
+								</div>
+								<div class="pure-u-2-5"></div>
 								<input type="radio" id="subChoice3" name="subscriptionTier" value="3">
 								<p style="color:#a38b15"> <b>50 hours of watch time per month!
 								<br><br>Ideal for an individual loves to watch movies</b></p>
 								
 							</div>
 							<div class="l-box pure-u-1-4" style="background-color:#e5e4e2">
-								<label for="subChoice4">Platinum</label>
+								<div class="pure-u-2-5"></div>
+								<div class="pure-u-1-5">
+									<img src="img/Plat.png">
+								</div>
+								<div class="pure-u-2-5"></div>
 								<input type="radio" id="subChoice4" name="subscriptionTier" value="4">
 								<p> <b>100 hours of watch time per month!!!
 								<br><br>Great for binge watching!</b></p>
 							</div>
 							
 							<div class="l-box pure-u-1">
-								<button type="submit" class="pure-button">Sign Up</button>
+								<button type="submit" class="pure-button" style="border: 2px solid black;">Sign Up</button>
 							</div>
 						</div>
                     </fieldset>
@@ -116,18 +132,20 @@
         </div>
     </div>
 
-	<div class="ribbon l-box-lrg pure-g">
-        <div class="l-box-lrg is-center pure-u-1 pure-u-md-1-2 pure-u-lg-2-5">
-            <img width="300" alt="File Icons" class="pure-img-responsive" src="img/common/movie-theater-auditorium.jpg">
-        </div>
+	<div class="ribbon l-box-lrg pure-g " style = "padding-bottom:60px" >
         <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-3-5">
-
-            <h2 class="content-head content-head-ribbon">Blah Blah</h2>
-
-            <p>
-                Placeholder stuff 
-            </p>
+			<div class = "pure-u-4-10">
+				<p>This website and its contents are all part of Team_Three_Entertainment(); 2017 - 2018 Ltd. <br /> 190 S Prospect Ave, Elmhurst, IL 60126, United States <br/> Use of this website is subject to our <a href="term_and_conditions.jsp">Terms & Conditions</a> and Privacy Policy. </p>
+			</div>
+			<div class = "pure-u-4-10">
+				<p class="content-head content-head-ribbon">Contact us at getflixmovie@gmail.com</p>
+				<!--  getflixmovie@gmail.com PW: team3entertainment -->
+			</div>
         </div>
+    </div>
+	
+    <div class="footer l-box is-center" >
+            <img width="300" alt="File Icons" class="pure-img-responsive" src="img/common/CLogo.png">
     </div>
 	
 	<!--
@@ -158,10 +176,6 @@
 
     </div>
 	-->
-
-    <div class="footer l-box is-center">
-        This is the footer.
-    </div>
 
 </div>
 
