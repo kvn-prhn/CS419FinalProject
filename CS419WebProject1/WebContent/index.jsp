@@ -81,22 +81,19 @@
     </div>
 
     <div class="ribbon l-box-lrg pure-g">
-        <div class="l-box-lrg is-center pure-u-1 pure-u-md-1-2 pure-u-lg-2-5">
-            <img width="300" alt="File Icons" class="pure-img-responsive" src="img/common/CLogo.png">
-        </div>
+        
         <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-3-5">
-
-            <h2 class="content-head content-head-ribbon">Blah Blah</h2>
-
-            <p>
-                Placeholder stuff 
-            </p>
+			<div class = "pure-u-3-5">
+				<p>This website and its contents are all part of Team_Three_Entertainment(); 2017 - 2018 Ltd. <br /> 190 S Prospect Ave, Elmhurst, IL 60126, United States <br/> Use of this website is subject to our <a href="term_and_conditions.jsp">Terms & Conditions</a> and Privacy Policy. </p>
+			</div>
+			<h2 class="content-head content-head-ribbon">Blah Blah</h2>
         </div>
     </div>
 
 
-    <div class="footer l-box is-center">
-        This is the footer.
+    <div class="footer l-box is-center" >
+            <img width="300" alt="File Icons" class="pure-img-responsive" src="img/common/CLogo.png">
+            <br>
     </div>
 
 </div>
