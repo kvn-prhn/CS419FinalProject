@@ -21,7 +21,8 @@
 					<% Account userAcc = AccountDao.getAccountById(userBean.getAccountId()); 
 					   if (userAcc != null) {  %>
 	   					<ul class="pure-menu-list">
-							<li class="pure-menu-item"><a href="account_settings.jsp" class="pure-menu-link">Plan: <%= userAcc.getSubscriptionTier() %></a></li>
+							<li class="pure-menu-item"><a href="account_settings.jsp" class="pure-menu-link"> 
+								<img src="img/<%= userAcc.getSubscriptionTierString() %>.png" height="32"></a></li>
 							<li class="pure-menu-item"><a href="account_settings.jsp" class="pure-menu-link">Hours left: <%= userAcc.getHoursRemaining() %></a></li>
 							<li class="pure-menu-item"><a href="browse.jsp" class="pure-menu-link">Items in Queue: <%= userBean.getQueue().size() %></a></li>
 						</ul>

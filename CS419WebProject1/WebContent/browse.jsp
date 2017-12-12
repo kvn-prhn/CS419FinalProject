@@ -62,13 +62,7 @@
 	       			<div class="l-box">Actors: <span id="modal-label-actors">Actors.</span></div>
 	       		</div>
 	       		<div class="pure-u-1">
-	       			<div class="l-box">Community Rating: <span id="modal-label-rating">Rating.</span>
-		       			<% 
-							for (int i = 0 ; i < 5; i++) {
-								out.print("<img src=\"img/star_gray.png\" height=\"16\">");
-							}
-						%>
-	       			</div>
+	       			<div class="l-box">Community Rating: <span id="modal-label-rating">Rating.</span></div>
 	       		</div>
 	       		<div class="pure-u-1">
 	       			<div class="l-box"><% if (userBean.isLoggedIn()) { %>
@@ -275,15 +269,23 @@
 					$("#modal-label-mpaa").html( $(classToReferenceMovieBlock).find(".mpaa").text() );
 					$("#modal-label-director").html( $(classToReferenceMovieBlock).find(".director").text() );
 					$("#modal-label-actors").html( $(classToReferenceMovieBlock).find(".actors").text() );
-					$("#modal-label-rating").html( $(classToReferenceMovieBlock).find(".movie_rating").text() );
+					//$("#modal-label-rating").html( $(classToReferenceMovieBlock).find(".movie_rating").text() );
+					var ratingNum = parseInt( $(classToReferenceMovieBlock).find(".movie_rating").text() );
+
+					var ratingHtmlImg = "";
+					for (var i = 0; i < ratingNum; i++) {
+						ratingHtmlImg += "<img src=\"img/star_gold.png\" height=\"16\">";
+					}
+					for (var i = 0; i < 5 - ratingNum; i++) {
+						ratingHtmlImg += "<img src=\"img/star_gray.png\" height=\"16\">";  
+					}
+					$("#modal-label-rating").html(ratingHtmlImg);
 					
 					// BOOLEAN to see if this movie is in favorites list
 					var currMovieInFavorites = $(classToReferenceMovieBlock).find(".fav-marker").text() === "1";
 					// Number to see what position the queue is in, if anything.
 					var currQueuePosition = parseInt( $(classToReferenceMovieBlock).find(".queue-position").text() );
-					
-					console.log("Queue position: " + currQueuePosition);
-					
+										
 					// change the favorites button based on if its in the favorites list or not.
 					if (currMovieInFavorites) {
 						$(".modal").find(".fav-style-marker").show();
@@ -318,9 +320,7 @@
 							var URL = "AjaxInterface?action=" + actionToDo + "&" + e.data.ajaxParams;
 							//console.log(URL);
 							$.getJSON(URL).done(function(data) {
-								console.log(data);
 								if (data.success) {
-									console.log("updated favorites");
 									if (actionToDo == "add_favorite") {  // add the favorite markers to it.
 										console.log("ADDED TO THE FAVORITES");
 										currMovieInFavorites = true;
