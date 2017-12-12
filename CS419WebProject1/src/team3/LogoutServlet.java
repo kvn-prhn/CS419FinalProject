@@ -29,6 +29,7 @@ public class LogoutServlet extends HttpServlet {
 			if (userBean != null) {
 				// remove the bean from the session
 				System.out.println("Logging out user with id: " + userBean.getAccountId());
+				session.setAttribute("notification_message", "Logged out Successfully");		// display a notification
 				userBean.setId(-1);
 				userBean.setLoggedIn(false);
 				//session.removeAttribute("userBean");

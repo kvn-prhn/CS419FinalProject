@@ -24,6 +24,8 @@ public class SignupServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		HttpSession session = request.getSession();
+		
 		// search for user that matches login info in database
 		try {
 			Connection con = DBLink.getConnection();
@@ -89,6 +91,8 @@ public class SignupServlet extends HttpServlet {
 					UserDao.create(u);
 				}
 				
+				session.setAttribute("notification_message", "Account created successfully");		// display a notification
+
 				//request.getRequestDispatcher("sign_up.jsp").forward(request, response);
 				response.sendRedirect("login.jsp");  // send to the login page after making an account.
 			}
@@ -97,6 +101,8 @@ public class SignupServlet extends HttpServlet {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			response.getWriter().println("THERE WAS AN ERROR");
+			session.setAttribute("error_message", "Updated Address");		// display a notification
+
 		}
 
 	}

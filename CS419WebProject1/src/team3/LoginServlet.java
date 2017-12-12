@@ -48,11 +48,13 @@ public class LoginServlet extends HttpServlet {
 				} else {
 					response.getWriter().println("No user found.");
 				}
+				session.setAttribute("notification_message", "Logged in Successfully");		// display a notification
 
 				con.close();
 			} catch (Exception ex) {
 				ex.printStackTrace();
 				response.getWriter().println("Error logging in: " + ex);
+				session.setAttribute("error_message", "Log in Failed. Please Try Again.");		// display a notification
 			}
 	        
 	    } else {

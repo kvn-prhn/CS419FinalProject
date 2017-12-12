@@ -30,7 +30,6 @@
        <label for="modal-trigger-center" class="close">&#10006;</label>
        <div class="pure-g">
        		<!-- Row 1 of modal -->
-			<div class="pure-u-1-4"></div><!-- padding -->
 			<div class="pure-u-1-2">
 				<h2>
 					<span class="fav-style-marker">*</span>
@@ -39,38 +38,37 @@
 					<span class="queue-position-marker"></span>
 				</h2>
 			</div>
-			<div class="pure-u-1-8"></div>
-			<div class="pure-u-1-8"></div>
+			<div class="pure-u-1-4"><a id="favoritesButton" class="pure-button pure-button-active">Add to Favorites</a></div>
+			<div class="pure-u-1-4"><a id="queueButton" class="pure-button pure-button-active">Add to Queue</a></div>
 			
 			<!-- Row 2, which is the rest. -->
 	       <div class="pure-u-1-4">
 	       	<img class="pure-img" id="modal-movie-image" alt="movie image" src=""></img>
 	       </div>
 	       <div class="pure-u-3-4"><!-- Content section to right of movie. -->
-	       		<div id="modal-label-movie-description" class="pure-u-1">
-		       		Description.
+	       		<div class="pure-u-1">
+		       		<div id="modal-label-movie-description"  class="l-box">Description.</div>
 	       		</div>
 	       		<div id="modal-label-genre" class="pure-u-1-2">
-	       			Genre.
+	       			<div class="l-box">Genre.</div>
 	       		</div>
 	       		<div id="modal-label-mpaa" class="pure-u-1-2">
-	       			MPAA Rating.
+	       			<div class="l-box">MPAA Rating.</div>
 	       		</div>
 	       		<div id="modal-label-director" class="pure-u-1">
-	       			Director.
+	       			<div class="l-box">Director.</div>
 	       		</div>
 	       		<div id="modal-label-actor" class="pure-u-1">
-	       			Actor.
+	       			<div class="l-box">Actor.</div>
 	       		</div>
 	       		<div id="modal-label-rating" class="pure-u-1">
-	       			Rating
+	       			<div class="l-box">Rating</div>
 	       		</div>
-	       </div>
-	       <div class="pure-u-1">
-	       	<div class="pure-u-2-5"><a id="favoritesButton" class="pure-button pure-button-active">Add to Favorites</a></div>
-	       	<div class="pure-u-2-5"><a id="queueButton" class="pure-button pure-button-active">Add to Queue</a></div>
-	        <div class="pure-u-2-5"><a id="watchButton" class="pure-button pure-button-active">Watch</a></div>
-	         
+	       		<div class="pure-u-1">
+	       			<div class="l-box"><% if (userBean.isLoggedIn()) { %>
+	       				<a id="watchButton" class="pure-button pure-button-active">Watch Now!</a>
+	       			<% } %></div>
+	       		</div>
 	       </div>
        </div>
      </div>
@@ -115,7 +113,7 @@
 	            	</div>
 	            	
 	            	<div class="pure-u-3-24">
-	            		<input type="submit" class="pure-button">Update</input>
+	            		<input type="submit" value="Update" class="pure-button"></input>
 	            	</div>
             	</form>
             </div>
@@ -222,8 +220,24 @@
 
 
 <script src="js/jquery.min.js"></script>
+<script src="js/toastr.min.js"></script>
+<script src="js/common.js"></script>
 <script>
 	$(function() {
+		
+		<%-- Output any notifcations that are needed. --%>
+		<%  if (session.getAttribute("notification_message") != null) {  %>
+				toastr["success"]("<%= session.getAttribute("notification_message") %>");
+		<% 
+				session.setAttribute("notification_message", null);
+			} %>
+		<%-- Output any error messages --%>
+		<%  if (session.getAttribute("error_message") != null) {  %>
+				toastr["error"]("<%= session.getAttribute("error_message") %>");
+		<% 
+			session.setAttribute("error_message", null);
+		} %>
+		
 		var current_page_id = "browse-link";
 		$("#" + current_page_id).addClass("pure-menu-selected");
 		
