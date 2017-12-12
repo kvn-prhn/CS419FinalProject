@@ -26,7 +26,9 @@ if (movieIdStr != null) {
 	System.out.println(movieId);
 	movie =  MovieDao.getMovieById(movieId);
 }
+
 boolean movieValid = (movieIdStr != null && movie != null);
+
 %>
 
 

@@ -45,6 +45,48 @@ public class MovieDao {
 		return m;
 	}
 	
+	public static List<Movie> getMoviesByIdList(List<Integer> movieIdList) {
+		List<Movie> movieList = new ArrayList<Movie>();
+		Movie m = null;
+		try{  
+            Connection con = DBLink.getConnection();
+            /*PreparedStatement ps=con.prepareStatement("select " +
+            		"movieID, movieGenre, movieTitle, movieDescription, movieYearReleased," +
+            		"movieImage, movieTrailer, movieMPAARating, movieLength  "
+            		+ "from movie where movieID = " + id);*/
+           
+            PreparedStatement ps = con.prepareStatement("select * from movie where movieID = ?");
+            for (int i = 0; i < movieIdList.size(); i++) {
+	            ps.setInt(1, movieIdList.get(i));
+	            
+	            ResultSet rs = ps.executeQuery(); 
+	            
+	            if (rs.next()) {
+	            	m = new Movie();
+	            	m.setId(rs.getInt(1));
+	                m.setGenre(rs.getString(2));
+	                m.setTitle(rs.getString(3));
+	                m.setDescription(rs.getString(4));
+	                m.setReleaseYear(rs.getInt(5));
+	                m.setImageURL(rs.getString(6));
+	                m.setTrailerURL(rs.getString(7));
+	                m.setReleaseDate(rs.getDate(8));
+	                m.setMPAARating(rs.getString(9));
+	                m.setDirector(rs.getString(10));
+	                m.setActor1(rs.getString(11));
+	                m.setActor2(rs.getString(12));
+	                
+	                movieList.add(m);
+	            }
+            }
+            con.close();  
+        }catch(Exception e){
+        	e.printStackTrace(); 
+    	} 
+		
+		return movieList;
+	}
+	
 	public static List<Movie> searchMovies(String searchString, MovieFilter filter){
 		List<Movie> list = new ArrayList<Movie>();  
 		
@@ -52,7 +94,7 @@ public class MovieDao {
 		
         try{  
             Connection con = DBLink.getConnection();
-            PreparedStatement ps=con.prepareStatement("select * from movie where movieTitle like ? or movieDescription like ? " + filter.filterClause());  
+            PreparedStatement ps=con.prepareStatement("select * from movie where (movieTitle like ? or movieDescription like ? )" + filter.filterClause() + " " + filter.orderByClause());  
             
             for (int i = 1; i <= ps.getParameterMetaData().getParameterCount(); i++) {
             	ps.setString(i, "%".concat(searchString.concat("%")));
