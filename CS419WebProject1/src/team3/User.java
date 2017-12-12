@@ -68,7 +68,7 @@ public class User {
 			Connection con = DBLink.getConnection();
 			try {
 				PreparedStatement ps = con.prepareStatement("delete from favoriteteam3 where movieId = " + movieId + " and userId = " + id);
-				int status = ps.executeUpdate();
+				int status = (ps.executeUpdate() > 0) ? 0 : 1;
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -88,7 +88,7 @@ public class User {
 			System.out.println("Added this movie: " + movieId);
 			queue.add(movieId);
 		} else {
-			System.err.println("Error adding tot he queue");
+			System.err.println("Error: the movie is already in the queue");
 			return 1;	// return 1 on failure.
 		}
 		Queue q = new Queue();

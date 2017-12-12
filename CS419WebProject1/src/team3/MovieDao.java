@@ -17,8 +17,8 @@ public class MovieDao {
             		"movieImage, movieTrailer, movieMPAARating, movieLength  "
             		+ "from movie where movieID = " + id);*/
             PreparedStatement ps = con.prepareStatement("select * from movie where movieID = ?");
-            
-            System.out.println(ps.toString());      
+            ps.setInt(1, id);
+            //System.out.println(ps.toString());      
             
             ResultSet rs = ps.executeQuery(); 
             

@@ -65,13 +65,13 @@ public class QueueDao {
 					update.setInt(1, i);
 					update.setInt(2, queue.get(i));
 					update.setInt(3, q.getUserId());
-					status = (update.executeUpdate() == 1 || status == 1) ? 1 : 0;
+					status = (update.executeUpdate() > 0) ? 0 : 1;
 				}
 				else {
 					insert.setInt(1, queue.get(i));
 					insert.setInt(2, q.getUserId());
 					insert.setInt(3, i);
-					insert.executeUpdate();
+					status = (insert.executeUpdate() > 0) ? 0 : 1;
 				}
 			}
 
@@ -79,6 +79,7 @@ public class QueueDao {
 			ex.printStackTrace();
 		}
 
+		System.out.println("QUEUE ADD: " + status);
 		return status;
 	}
 
@@ -90,7 +91,7 @@ public class QueueDao {
 			PreparedStatement ps = con.prepareStatement("delete from queueteam3 where userID=?");
 			ps.setInt(1, q.getUserId());
 
-			status = ps.executeUpdate();
+			status = (ps.executeUpdate() > 0) ? 0 : 1;
 
 			con.close();
 		} catch (Exception e) {
