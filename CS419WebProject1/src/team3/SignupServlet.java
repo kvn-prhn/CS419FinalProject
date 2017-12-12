@@ -68,10 +68,10 @@ public class SignupServlet extends HttpServlet {
 				
 				// TODO: Centralize all of this information somewhere.
 				switch(a.getSubscriptionTier()) {
-					case 1: a.setHoursRemaining(10); break; // bronze
-					case 2: a.setHoursRemaining(30); break; // silver
-					case 3: a.setHoursRemaining(50); break; // gold
-					case 4: a.setHoursRemaining(100); break; // plat
+					case 1: a.setMinutesRemaining(10); break; // bronze
+					case 2: a.setMinutesRemaining(30); break; // silver
+					case 3: a.setMinutesRemaining(50); break; // gold
+					case 4: a.setMinutesRemaining(100); break; // plat
 				}
 				
 				// TODO: Set the first date.

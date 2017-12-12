@@ -11,11 +11,9 @@ public class BrowseListBean {
 	
 	public List<Movie> getMovies() {
 
-        filter.setUserRating(false);
 		movieList.clear();  
 		
         try{ 
-        	
             movieList = MovieDao.searchMovies(searchString, filter);
             
         }catch(Exception e){

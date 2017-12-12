@@ -38,13 +38,13 @@
 				 			<hr style="border-top: dotted 2px;">
 				 			<div class="pure-u-1">
 				 				<div class="pure-u-1-8">Reset date:</div>
-				 				<% Date d1 = account.getHoursResetDate(); %>
+				 				<% Date d1 = account.getMinutesResetDate(); %>
 				 				<div class="pure-u-1-3"><% out.print( (d1.getMonth() + 1) + "/" + d1.getDay() + "/" + (d1.getYear() + 1900)); %></div>
 				 			</div> 
 				 			<hr>
 				 			<div class="pure-u-1">
 				 				<div class="pure-u-1-8">Hours Left:</div>
-				 				<div class="pure-u-1-3"><%= account.getHoursRemaining() %></div>
+				 				<div class="pure-u-1-3"><%= account.getMinutesRemaining() %></div>
 				 			</div>
 				 			<hr style="border-top: dotted 2px;">
 				 			<div class="pure-u-1">

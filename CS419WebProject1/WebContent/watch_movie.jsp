@@ -26,7 +26,9 @@ if (movieIdStr != null) {
 	System.out.println(movieId);
 	movie =  MovieDao.getMovieById(movieId);
 }
+
 boolean movieValid = (movieIdStr != null && movie != null);
+
 %>
 
 
@@ -37,8 +39,8 @@ boolean movieValid = (movieIdStr != null && movie != null);
 		    	out.println("Now watching: " + movie.getTitle());	// display the title
 		    } %>
     	</div>
-    	<div class="pure-u-1-5" id="show_hours_left">
-    		<%-- This value is updated in javascript --%>
+    	<div class="pure-u-1-5" id="show_minutes_left">
+
     	</div>
     	<div class="pure-u-1-5">
     		<a href="browse.jsp">Back to browse</a>
@@ -49,7 +51,7 @@ boolean movieValid = (movieIdStr != null && movie != null);
 			// verify that a user is logged in
 			if (userBean != null && userBean.isLoggedIn()) {
 				Account acc = AccountDao.getAccountById(userBean.getAccountId());
-				if (acc != null && acc.getHoursRemaining() > 0) {
+				if (acc != null && acc.getMinutesRemaining() > 0) {
 					%>
 						<!-- <iframe class="fullscreen-watch-movie" src="<%= movie.getTrailerURL() %>" 
 							frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>  -->
@@ -91,37 +93,28 @@ $(function() {
 		session.setAttribute("error_message", null);
 	} %>
 	
-	var localHoursLeft = -1; // we have no idea what this value is yet.
-	
-	function debugShowHoursLeft() {
-		console.log("localHoursLeft: " + localHoursLeft);
-	}
-	
-	function checkHoursLeft() {
-		var URL_GET_HOURS = "AjaxInterface?action=get_hours_left&userID=" + <%= userBean.getId() %>;
+	function checkMinutesLeft() {
+		var URL_GET_HOURS = "AjaxInterface?action=get_minutes_left&userID=" + <%= userBean.getId() %>;
 		console.log(URL_GET_HOURS);
 		$.getJSON(URL_GET_HOURS).done(function(data) {
 			if (data.success) {
 				console.log(data);
-				localHoursLeft =  data.hours_left;
-				debugShowHoursLeft();  // temp
-				$("#show_hours_left").text("Hours remaining: " + data.hours_left);
+				$("#show_minutes_left").text("Minutes remaining: " + (parseInt(data.hours_left) / 60));
 			} else {
-				console.error("Failed getting hours left");
+				console.error("Failed getting minutes left");
 			}
 		});
 	}
 	
-	function reduceNumHoursLeft(_amount) {
-		var URL_REDUCE_HOURS = "AjaxInterface?action=get_hours_left&userID=" + <%= userBean.getId() %>;
-		console.log(URL_GET_HOURS);
-		$.getJSON(URL_GET_HOURS).done(function(data) {
+	function reduceNumMinutesLeft(_amount) {
+		var URL_REDUCE_HOURS = "AjaxInterface?action=reduce_minutes_left&userID=" + <%= userBean.getId() %> + "&minutes=" + _amount;
+		console.log(URL_REDUCE_HOURS);
+		$.getJSON(URL_REDUCE_HOURS).done(function(data) {
 			if (data.success) {
 				console.log(data);
-				localHoursLeft =  data.hours_left;
-				debugShowHoursLeft();  // temp
+				$("#show_minutes_left").text("Minutes remaining: " + (parseInt(data.hours_left) / 60));
 			} else {
-				console.error("Failed getting hours left");
+				console.error("Failed getting minutes left");
 			}
 		});
 	}
@@ -129,8 +122,16 @@ $(function() {
 	// this function will check how many hours of viewing you have left
 	checkHoursLeft();
 	
+	var durationForUpdate = 1000; // how often to update the time in milliseconds
 	
-	
+    function updateTimeWhileWatching() {
+    	console.log("start 10 second timer...");
+       setTimeout(updateTimeWhileWatching,durationForUpdate);  // call every 10 seconds
+       console.log("updating the hours left...");
+       reduceNumMinutesLeft(1 / 60);  // One update per minute
+    }
+    
+	updateTimeWhileWatching();	// start the timer.	
 });
 
 </script>

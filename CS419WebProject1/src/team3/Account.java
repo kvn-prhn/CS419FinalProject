@@ -11,8 +11,10 @@ public class Account {
 	private String address;
 	
 	private int subscriptionTier;
-	private Date hoursResetDate;
-	private float hoursRemaining;
+	//private Date hoursResetDate;
+	private Date minutesResetDate;
+	//private float hoursRemaining;
+	private float minutesRemaining;
 	
 	public int getId() {
 		return id;
@@ -68,6 +70,7 @@ public class Account {
 		}
 		return "INVALID_SUB_TIER";
 	}
+	/*
 	public Date getHoursResetDate() {
 		return hoursResetDate;
 	}
@@ -79,6 +82,22 @@ public class Account {
 	}
 	public void setHoursRemaining(float hoursRemaining) {
 		this.hoursRemaining = hoursRemaining;
+	} */
+	
+	public float getMinutesRemaining() {
+		return minutesRemaining;
+	}
+	
+	public void setMinutesRemaining(float minutesRemaining) {
+		this.minutesRemaining = minutesRemaining;
+	}
+	
+	public Date getMinutesResetDate() {
+		return minutesResetDate;
+	}
+	
+	public void setMinutesResetDate(Date minutesResetDate) {
+		this.minutesResetDate = minutesResetDate;
 	}
 	
 	

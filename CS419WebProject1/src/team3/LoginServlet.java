@@ -40,13 +40,10 @@ public class LoginServlet extends HttpServlet {
 				// if a user is found, set the user bean to that user
 				if (rs.next()) {
 					userBean = (User) UserDao.getUsersForAccount(rs.getInt(1)).get(0);	// get default user for account
-					// TEMP: fake log in
-					//int indexOfId = rs.findColumn("id");
-					//userBean.setAccountId(rs.getInt(indexOfId));
+
 					userBean.setLoggedIn(true);   // let them know the user is logged in
 					response.sendRedirect("browse.jsp");  // browse after successful login.
 				} else {
-					//response.getWriter().println("No user found.");
 					session.setAttribute("error_message", "Error logging in: Email or Password Incorrect.");
 					response.sendRedirect("login.jsp");
 					return;
@@ -56,7 +53,6 @@ public class LoginServlet extends HttpServlet {
 				con.close();
 			} catch (Exception ex) {
 				ex.printStackTrace();
-				//response.getWriter().println("Error logging in: " + ex);
 				session.setAttribute("error_message", "Log in Failed. Please Try Again.");		// display an error
 				response.sendRedirect("login.jsp");
 				return;

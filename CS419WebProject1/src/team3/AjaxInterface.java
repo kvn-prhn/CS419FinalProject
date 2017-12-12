@@ -38,31 +38,31 @@ public class AjaxInterface extends HttpServlet {
 					pw.write("{\"success\":false,\"msg\":\"Invalid user userID\"}");
 				} else {
 
-					if (actionToDo.equals("get_hours_left")) {		// get how much time is left for a user.
+					if (actionToDo.equals("get_minutes_left")) {		// get how much time is left for a user.
 						Account acc = AccountDao.getAccountById(user.getAccountId());
 						if (acc != null) {
-							pw.write("{\"success\":true,\"hours_left\":\"" + acc.getHoursRemaining() + "\"}");
+							pw.write("{\"success\":true,\"minutes_left\":\"" + acc.getMinutesRemaining() + "\"}");
 						} else {
 							pw.write("{\"success\":false}");
 						}
-					} else if (actionToDo.equals("subtract_hours_left")) {		// get how much time is left for a user.
+					} else if (actionToDo.equals("reduce_minutes_left")) {		// get how much time is left for a user.
 						Account acc = AccountDao.getAccountById(user.getAccountId());
 						if (acc != null) {
-							String hoursChangingStr = req.getParameter("hours");
-							if (hoursChangingStr == null) {
-								pw.write("{\"success\":false,\"msg\":\"No hours parameter\"}");
+							String minutesChangingStr = req.getParameter("minutes");
+							if (minutesChangingStr == null) {
+								pw.write("{\"success\":false,\"msg\":\"No minutes parameter\"}");
 							} else {
-								double hoursToChange = Double.parseDouble(hoursChangingStr);
-								System.out.println("reducing the hours left by " + hoursToChange);
-								
-								pw.write("{\"success\":true,\"hours_left\":\"" + acc.getHoursRemaining() + "\"}");
+								float minutesToChange = Float.parseFloat(minutesChangingStr);
+								System.out.println("reducing the minutes left by " + minutesToChange);
+								float currentMinutesLeft = acc.getMinutesRemaining();  // acc.getHoursRemaining();
+								acc.setMinutesRemaining(currentMinutesLeft - minutesToChange);
+								AccountDao.update(acc);
+								pw.write("{\"success\":true,\"minutes_left\":\"" + acc.getMinutesRemaining() + "\"}");
 							}
 						} else {
 							pw.write("{\"success\":false}");
 						}
 					} else {
-						
-
 						// begin actions that use a movieId
 						// make sure that movie ID that was given is valid
 						String movieIdStr = req.getParameter("movieID");
