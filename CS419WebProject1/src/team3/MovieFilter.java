@@ -174,11 +174,4 @@ public class MovieFilter {
 		this.genre = genre;
 	}
 	
-	public String getFilterByString() {
-		switch(filterg)
-	}
-	
-	public String getSortByString() {
-		
-	}
 }

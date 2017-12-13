@@ -94,9 +94,14 @@ public class MovieDao {
 		
 		String[] searchTerms = searchString.split(" ");
 		
+		// return an empty list if there was no filter given.
+		if (filter == null)
+			return list;
+		
         try{  
             Connection con = DBLink.getConnection();
-            PreparedStatement ps=con.prepareStatement("select * from movie where (movieTitle like ? or movieDescription like ? or actor1 like ? or actor2 like ? or director like ?)" + filter.filterClause() + " " + filter.orderByClause());  
+            PreparedStatement ps=con.prepareStatement("select * from movie where (movieTitle like ? or movieDescription like ? or actor1 like ? or actor2 like ? or director like ?)" 
+            			+ filter.filterClause() + " " + filter.orderByClause());  
             
             for (int i = 1; i <= ps.getParameterMetaData().getParameterCount(); i++) {
             	ps.setString(i, "%".concat(searchString.concat("%")));
