@@ -1,13 +1,14 @@
-@background_color: #7f8c8d;
-@background_splash: #1f8dd6;
+@background_color: #000000; /* #7f8c8d; */
+@background_splash: #000000; /* #1f8dd6; */ 
 
-@menu_background_1: #2d3e50;
-@menu_text_normal: #6FBEF3;
-@menu_text_hover: #AECFE5;
-@menu_text_active: white; 		/* The color of the link for the page you're on */
+@menu_background_1: #000000;  /*#2d3e50;*/ 
+@menu_text_normal: #05FEFA;  /* #6FBEF3; */
+@menu_text_hover: #cfcfcf; /* #AECFE5; */
+@menu_text_active: #E413EA; /* white; The color of the link for the page you're on */
 
 @text_color_1: #34495e;
 
+@border_color_1: white;   /* Color of borders on menus*/
 
 @footer_size: 65px;
 
@@ -114,6 +115,7 @@ a.pure-button-primary {
     padding: 0.5em;
     text-align: center;
     box-shadow: 0 1px 1px rgba(0,0,0, 0.10);
+    border-bottom: 2px solid @border_color_1;
 }
 .home-menu {
     background: @menu_background_1;
@@ -131,7 +133,9 @@ a.pure-button-primary {
     font-size: 120%;
 }
 
-.home-menu .pure-menu-selected a {
+.home-menu .pure-menu-selected a,
+.home-menu .pure-menu-selected .pure-menu-link
+{
     color: @menu_text_active;
 }
 
@@ -145,6 +149,18 @@ a.pure-button-primary {
     color: @menu_text_hover;
 }
 
+.header_logo_link
+{
+	margin: 0;
+	padding: 0;
+}
+
+.header_logo_link img
+{
+	margin: 0;
+	padding-top: 3px;
+	margin-left: 5px;
+}
 
 /*
  * -- SPLASH STYLES --
@@ -247,8 +263,8 @@ a.pure-button-primary {
 
 /* This is the class used for the dark-background areas. */
 .ribbon {
-    background: #2d3e50;
-    color: #aaa;
+    background: @menu_background_1; 		/* #2d3e50;  */ 
+    color: @menu_text_normal;  				/* #aaa; */
 }
 
 /* This is the class used for the footer */
@@ -539,7 +555,7 @@ h2
 	bottom: 0;
 }
 
-.modal-trigger-center-lbl  h2:hover
+.modal-trigger-center-lbl  span:hover
 {
 	background-color: #cfcfcf;
 	cursor: pointer;

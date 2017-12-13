@@ -1,4 +1,10 @@
-/* The color of the link for the page you're on */
+/* #7f8c8d; */
+/* #1f8dd6; */
+/*#2d3e50;*/
+/* #6FBEF3; */
+/* #AECFE5; */
+/* white; The color of the link for the page you're on */
+/* Color of borders on menus*/
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -10,7 +16,7 @@
  */
 body {
   line-height: 1.7em;
-  color: #7f8c8d;
+  color: #000000;
   font-size: 13px;
 }
 h1,
@@ -87,9 +93,10 @@ a.pure-button-primary {
   padding: 0.5em;
   text-align: center;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  border-bottom: 2px solid white;
 }
 .home-menu {
-  background: #2d3e50;
+  background: #000000;
 }
 .pure-menu.pure-menu-fixed {
   /* Fixed menus normally have a border at the bottom. */
@@ -102,24 +109,34 @@ a.pure-button-primary {
   font-weight: 400;
   font-size: 120%;
 }
-.home-menu .pure-menu-selected a {
-  color: white;
+.home-menu .pure-menu-selected a,
+.home-menu .pure-menu-selected .pure-menu-link {
+  color: #E413EA;
 }
 .home-menu a {
-  color: #6FBEF3;
+  color: #05FEFA;
 }
 .home-menu li a:hover,
 .home-menu li a:focus {
   background: none;
   border: none;
-  color: #AECFE5;
+  color: #cfcfcf;
+}
+.header_logo_link {
+  margin: 0;
+  padding: 0;
+}
+.header_logo_link img {
+  margin: 0;
+  padding-top: 3px;
+  margin-left: 5px;
 }
 /*
  * -- SPLASH STYLES --
  * This is the blue top section that appears on the page.
  */
 .splash-container {
-  background: #1f8dd6;
+  background: #000000;
   z-index: 1;
   overflow: hidden;
   /* The following styles are required for the "scroll-over" effect */
@@ -205,8 +222,10 @@ a.pure-button-primary {
 }
 /* This is the class used for the dark-background areas. */
 .ribbon {
-  background: #2d3e50;
-  color: #aaa;
+  background: #000000;
+  /* #2d3e50;  */
+  color: #05FEFA;
+  /* #aaa; */
 }
 /* This is the class used for the footer */
 .footer {
@@ -438,7 +457,7 @@ h2 {
   position: relative;
   bottom: 0;
 }
-.modal-trigger-center-lbl h2:hover {
+.modal-trigger-center-lbl span:hover {
   background-color: #cfcfcf;
   cursor: pointer;
 }

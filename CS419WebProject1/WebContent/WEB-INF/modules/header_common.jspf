@@ -9,12 +9,13 @@
     <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
 		<div class="pure-g">
 			<div class="pure-u-1-5">
-				<a class="pure-menu-heading" href="">
-					<img src="img/common/MLogo.png"  style="width:93px;height:50px;border:0">
+				<a class="pure-menu-heading  header_logo_link" href="index.jsp">
+					<img src="img/common/MLogo_cropped.png" height="40">
 				</a>
 			</div>
 			<div class="pure-u-2-5">
 				<% if (userBean != null && userBean.isLoggedIn()) { %>
+					<% System.out.println(userBean.getAccountId()); %>
 					<% Account userAcc = AccountDao.getAccountById(userBean.getAccountId()); 
 					   if (userAcc != null) {  %>
 	   					<!-- <ul class="pure-menu-list"> -->

@@ -14,7 +14,7 @@ public class Account {
 	//private Date hoursResetDate;
 	private Date minutesResetDate;
 	//private float hoursRemaining;
-	private float minutesRemaining;
+	private int minutesRemaining;
 	
 	public int getId() {
 		return id;
@@ -84,11 +84,11 @@ public class Account {
 		this.hoursRemaining = hoursRemaining;
 	} */
 	
-	public float getMinutesRemaining() {
+	public int getMinutesRemaining() {
 		return minutesRemaining;
 	}
 	
-	public void setMinutesRemaining(float minutesRemaining) {
+	public void setMinutesRemaining(int minutesRemaining) {
 		this.minutesRemaining = minutesRemaining;
 	}
 	

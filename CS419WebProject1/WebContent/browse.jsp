@@ -67,9 +67,12 @@
 	       		<div class="pure-u-1">
 	       			<div class="l-box">Actors: <span id="modal-label-actors">Actors.</span></div>
 	       		</div>
+	       		
+	       		<% if (userBean.isLoggedIn()) {   %>
 	       		<div class="pure-u-1">
-	       			<div class="l-box">Your Rating: <span id="modal-label-rating">Rating.</span></div>
+	       			<div class="l-box" >Your Rating: <span id="modal-label-rating">Rating.</span></div>
 	       		</div>
+	       		<% }  %>
 	       		<div class="pure-u-1">
 	       			<div class="l-box">Average Rating: <span id="modal-label-rating-average">Rating.</span></div>
 	       		</div>
@@ -97,10 +100,11 @@
 	            	<div class="pure-u-1-4">
 	            		<label for="sort_by">Order by:</label>
 	            		<select id="sort_by" name="sort_by">
-	            			<option value="keyword">Keyword</option>
-	            			<option value="genre">Genre</option>
-	            			<option value="rating">Rating</option>
-	            			<option value="releaseYear">Release Year</option>
+	            			<% String curr_sby = request.getParameter("filter_by"); %>
+	            			<option value="keyword" <%= curr_sby != null && curr_sby.equals("keyword") ? "selected" : "" %>>Keyword</option>
+	            			<option value="genre" <%= curr_sby != null && curr_sby.equals("genre") ? "selected" : "" %>>Genre</option>
+	            			<option value="rating" <%= curr_sby != null && curr_sby.equals("rating") ? "selected" : "" %>>Rating</option>
+	            			<option value="releaseYear" <%= curr_sby != null && curr_sby.equals("releaseYear") ? "selected" : "" %>>Release Year</option>
 	            		</select>
 	            	</div>
 	            	
@@ -108,12 +112,13 @@
 	            	<div class="pure-u-1-4">
 	            		<label for="filter_by">Filter by:</label>
 	            		<select id="filter_by" name="filter_by">
-	            			<option value="any">Any</option>
-	            			<option value="drama">Drama</option>
-	            			<option value="action">Action</option>
-	            			<option value="comedy">Comedy</option>
-	            			<option value="horror">Horror</option>
-	            			<option value="sciFi">Sci-Fi</option>
+	            			<% String curr_f_opt = request.getParameter("filter_by"); %>
+	            			<option value="any" <%= curr_f_opt != null && curr_f_opt.equals("any") ? "selected" : "" %>>Any</option>
+	            			<option value="drama" <%= curr_f_opt != null && curr_f_opt.equals("drama") ? "selected" : "" %>>Drama</option>
+	            			<option value="action" <%= curr_f_opt != null && curr_f_opt.equals("action") ? "selected" : "" %>>Action</option>
+	            			<option value="comedy" <%= curr_f_opt != null && curr_f_opt.equals("comedy") ? "selected" : "" %>>Comedy</option>
+	            			<option value="horror" <%= curr_f_opt != null && curr_f_opt.equals("horror") ? "selected" : "" %>>Horror</option>
+	            			<option value="sciFi" <%= curr_f_opt != null && curr_f_opt.equals("sciFi") ? "selected" : "" %>>Sci-Fi</option>
 	            		</select>
 	            	</div>
 	            	
@@ -302,11 +307,16 @@
 					function setModalRating(_ratingNum) {
 						$("#modal-label-rating").text("");
 						var ratingHtmlImg = "";
+						var totalNumOn = 1;
 						for (var i = 0; i < _ratingNum; i++) {
-							ratingHtmlImg += "<img id=\"rating-star-" + (i + 1) + "\" src=\"img/star_gold.png\" height=\"16\">";
+							
+							var titleToHave = "<%= userBean.isLoggedIn() ? "Rate \" + (totalNumOn) + \" Stars" : "Log in to rate" %>";
+							ratingHtmlImg += "<img title=\"" + titleToHave + "\" id=\"rating-star-" + (totalNumOn) + "\" src=\"img/star_gold.png\" height=\"16\">";
+							totalNumOn++;
 						}
 						for (var i = 0; i < 5 - _ratingNum; i++) {
-							ratingHtmlImg += "<img id=\"rating-star-" + (i + 1) + "\" src=\"img/star_gray.png\" height=\"16\">";  
+							ratingHtmlImg += "<img title=\"Rate " + (totalNumOn) + " Stars\" id=\"rating-star-" + (totalNumOn) + "\" src=\"img/star_gray.png\" height=\"16\">";  
+							totalNumOn++;
 						}
 						$("#modal-label-rating").html(ratingHtmlImg);
 						

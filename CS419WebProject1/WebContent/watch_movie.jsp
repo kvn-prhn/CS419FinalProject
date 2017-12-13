@@ -102,7 +102,8 @@ $(function() {
 		$.getJSON(URL_GET_HOURS).done(function(data) {
 			if (data.success) {
 				console.log(data);
-				$("#show_minutes_left").text("Minutes remaining: " + (parseInt(data.hours_left) / 60));
+				// TODO: format better
+				$("#show_minutes_left").text("Hours remaining: " + (parseInt(data.minutes_left) / 60));
 			} else {
 				console.error("Failed getting minutes left");
 			}
@@ -115,23 +116,25 @@ $(function() {
 		$.getJSON(URL_REDUCE_HOURS).done(function(data) {
 			if (data.success) {
 				console.log(data);
-				$("#show_minutes_left").text("Minutes remaining: " + (parseInt(data.hours_left) / 60));
+				// TODO: Format better
+				$("#show_minutes_left").text("Hours remaining: " + (parseInt(data.minutes_left) / 60));
 			} else {
-				console.error("Failed getting minutes left");
+				console.error(data);
+				console.error("Failed reducing the minutes left");
 			}
 		});
 	}
 	
 	// this function will check how many hours of viewing you have left
-	checkHoursLeft();
+	checkMinutesLeft();
 	
-	var durationForUpdate = 1000; // how often to update the time in milliseconds
+	var durationForUpdate = 60 * 1000; // how often to update the time in milliseconds
 	
     function updateTimeWhileWatching() {
     	console.log("start 10 second timer...");
-       setTimeout(updateTimeWhileWatching,durationForUpdate);  // call every 10 seconds
+       setTimeout(updateTimeWhileWatching,durationForUpdate);  // call every minute
        console.log("updating the hours left...");
-       reduceNumMinutesLeft(1 / 60);  // One update per minute
+       reduceNumMinutesLeft(1);  // One update per minute
     }
     
 	updateTimeWhileWatching();	// start the timer.	

@@ -50,11 +50,12 @@ public class AjaxInterface extends HttpServlet {
 							if (minutesChangingStr == null) {
 								pw.write("{\"success\":false,\"msg\":\"No minutes parameter\"}");
 							} else {
-								float minutesToChange = Float.parseFloat(minutesChangingStr);
+								int minutesToChange = Integer.parseInt(minutesChangingStr);
 								System.out.println("reducing the minutes left by " + minutesToChange);
-								float currentMinutesLeft = acc.getMinutesRemaining();  // acc.getHoursRemaining();
+								int currentMinutesLeft = acc.getMinutesRemaining();  // acc.getHoursRemaining();
 								acc.setMinutesRemaining(currentMinutesLeft - minutesToChange);
-								AccountDao.update(acc);
+								System.out.println("New minutes left: " + acc.getMinutesRemaining());
+								int status = AccountDao.update(acc);
 								pw.write("{\"success\":true,\"minutes_left\":\"" + acc.getMinutesRemaining() + "\"}");
 							}
 						} else {

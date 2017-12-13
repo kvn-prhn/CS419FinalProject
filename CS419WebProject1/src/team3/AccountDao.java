@@ -19,7 +19,7 @@ public class AccountDao {
             ps.setString(5, a.getAddress());
             ps.setInt(6, a.getSubscriptionTier());
             //ps.setDate(7, a.getHoursResetDate());
-            ps.setFloat(7, a.getMinutesRemaining());
+            ps.setInt(7, a.getMinutesRemaining());
               
             status = ps.executeUpdate();  
             System.out.println("********Execution complete!!!");
@@ -35,7 +35,8 @@ public class AccountDao {
             Connection con = DBLink.getConnection();  
             PreparedStatement ps = con.prepareStatement(  
                          "update accountteam3 set "
-                         + "firstName=?, lastName=?, password=?, email=?, address=?, subscription=? "
+                         + "firstName=?, lastName=?, password=?, email=?, address=?, subscription=?,  "
+                         + "resetDate=?, minutesRemaining=?  "  
                          + "where id=?");  
             ps.setString(1, a.getFirstName()); 
             ps.setString(2, a.getLastName());  
@@ -43,9 +44,11 @@ public class AccountDao {
             ps.setString(4, a.getEmail());
             ps.setString(5, a.getAddress());
             ps.setInt(6, a.getSubscriptionTier());
+            ps.setDate(7, a.getMinutesResetDate());
+            ps.setInt(8, a.getMinutesRemaining());
             
-            ps.setInt(7, a.getId());
-              
+            ps.setInt(9, a.getId());
+            System.out.println(ps);
             status = ps.executeUpdate();  
               
             con.close();  
@@ -88,7 +91,7 @@ public class AccountDao {
                 a.setEmail(rs.getString(5));  
                 a.setAddress(rs.getString(6));  
                 a.setMinutesResetDate(rs.getDate(7));
-                a.setMinutesRemaining(rs.getFloat(8));
+                a.setMinutesRemaining(rs.getInt(8));
                 a.setSubscriptionTier(rs.getInt(9));
                 
             }  
