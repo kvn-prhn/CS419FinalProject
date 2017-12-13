@@ -56,7 +56,7 @@ public class MovieFilter {
 			if (origLanguage)
 				filter.append(" originalLanguage,");
 			if (length)
-				filter.append(" length,");
+				filter.append(" movieLength,");
 			if (rating)
 				filter.append(" movieMPAARating,");
 			if (title)

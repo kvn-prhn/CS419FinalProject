@@ -36,6 +36,7 @@ public class MovieDao {
                 m.setDirector(rs.getString(10));
                 m.setActor1(rs.getString(11));
                 m.setActor2(rs.getString(12));
+                m.setLength(rs.getInt(13));
             }
             con.close();  
         }catch(Exception e){
@@ -75,6 +76,7 @@ public class MovieDao {
 	                m.setDirector(rs.getString(10));
 	                m.setActor1(rs.getString(11));
 	                m.setActor2(rs.getString(12));
+	                m.setLength(rs.getInt(13));
 	                
 	                movieList.add(m);
 	            }
@@ -118,6 +120,7 @@ public class MovieDao {
                 m.setDirector(rs.getString(10));
                 m.setActor1(rs.getString(11));
                 m.setActor2(rs.getString(12));
+                m.setLength(rs.getInt(13));
                 
                 //m.setLanguage(rs.getString(5));
                 //m.setLength(rs.getInt(6));
@@ -150,6 +153,7 @@ public class MovieDao {
 	                m.setDirector(rs.getString(10));
 	                m.setActor1(rs.getString(11));
 	                m.setActor2(rs.getString(12));
+	                m.setLength(rs.getInt(13));
 	                
 	                if (!list.stream().filter(o -> o.getTitle().equals(m.getTitle())).findFirst().isPresent())
 	                	list.add(m);
@@ -185,6 +189,7 @@ public class MovieDao {
                 m.setDirector(rs.getString(10));
                 m.setActor1(rs.getString(11));
                 m.setActor2(rs.getString(12));
+                m.setLength(rs.getInt(13));
                 
                 list.add(m);  
             }  
