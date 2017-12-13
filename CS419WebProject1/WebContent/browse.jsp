@@ -7,6 +7,12 @@
 <%@ page import = "team3.QueueDao" %>
 <%@ page import = "java.util.List" %>
 
+<% 
+	// ensure that the browse bean is populated if there is no search term
+	if (browseListBean.getSearchString().length() == 0 && browseListBean.getMovies().isEmpty()) {
+		browseListBean.getMovies();  // set the internal movies list.
+	}
+%>
 
 <!doctype html>
 <html lang="en">
@@ -62,7 +68,10 @@
 	       			<div class="l-box">Actors: <span id="modal-label-actors">Actors.</span></div>
 	       		</div>
 	       		<div class="pure-u-1">
-	       			<div class="l-box">Community Rating: <span id="modal-label-rating">Rating.</span></div>
+	       			<div class="l-box">Your Rating: <span id="modal-label-rating">Rating.</span></div>
+	       		</div>
+	       		<div class="pure-u-1">
+	       			<div class="l-box">Average Rating: <span id="modal-label-rating-average">Rating.</span></div>
 	       		</div>
 	       		<div class="pure-u-1">
 	       			<div class="l-box"><% if (userBean.isLoggedIn()) { %>
@@ -173,8 +182,11 @@
 							<div style="display: none;" class="director">
 								<%= movie.getDirector() %>
 							</div>
-							<div style="display: none;" class="movie_rating">
-								<%= (movie.getUserRating() == 0 ? MovieRatingDao.getAverageMovieRating(movie.getId()).getRating() : movie.getUserRating()) %>
+							<div style="display: none;" class="movie_rating"><!-- USERS rating -->
+								<%= movie.getUserRating() %>
+							</div>
+							<div style="display: none;" class="movie_rating_average">
+								<%= MovieRatingDao.getAverageMovieRating(movie.getId()).getRating() %>
 							</div>
 							<div class="pure-u-1">
 								<div 
@@ -271,17 +283,69 @@
 					$("#modal-label-mpaa").html( $(classToReferenceMovieBlock).find(".mpaa").text() );
 					$("#modal-label-director").html( $(classToReferenceMovieBlock).find(".director").text() );
 					$("#modal-label-actors").html( $(classToReferenceMovieBlock).find(".actors").text() );
-					//$("#modal-label-rating").html( $(classToReferenceMovieBlock).find(".movie_rating").text() );
-					var ratingNum = parseInt( $(classToReferenceMovieBlock).find(".movie_rating").text() );
 
-					var ratingHtmlImg = "";
-					for (var i = 0; i < ratingNum; i++) {
-						ratingHtmlImg += "<img src=\"img/star_gold.png\" height=\"16\">";
+					var avgRatingNum = parseInt( $(classToReferenceMovieBlock).find(".movie_rating_average").text() );
+
+					// set stars for the average rating.
+					$("#modal-label-rating-average").text("");
+					var avgRatingHtmlImg = "";
+					for (var i = 0; i < avgRatingNum; i++) {
+						avgRatingHtmlImg += "<img src=\"img/star_gold.png\" height=\"16\">";
 					}
-					for (var i = 0; i < 5 - ratingNum; i++) {
-						ratingHtmlImg += "<img src=\"img/star_gray.png\" height=\"16\">";  
+					for (var i = 0; i < 5 - avgRatingNum; i++) {
+						avgRatingHtmlImg += "<img src=\"img/star_gray.png\" height=\"16\">";  
 					}
-					$("#modal-label-rating").html(ratingHtmlImg);
+					$("#modal-label-rating-average").html(avgRatingHtmlImg);
+					
+					// user rating
+					var ratingNum = parseInt( $(classToReferenceMovieBlock).find(".movie_rating").text() );
+					function setModalRating(_ratingNum) {
+						$("#modal-label-rating").text("");
+						var ratingHtmlImg = "";
+						for (var i = 0; i < _ratingNum; i++) {
+							ratingHtmlImg += "<img id=\"rating-star-" + (i + 1) + "\" src=\"img/star_gold.png\" height=\"16\">";
+						}
+						for (var i = 0; i < 5 - _ratingNum; i++) {
+							ratingHtmlImg += "<img id=\"rating-star-" + (i + 1) + "\" src=\"img/star_gray.png\" height=\"16\">";  
+						}
+						$("#modal-label-rating").html(ratingHtmlImg);
+						
+						// conditional ratings events being put on rating stars based on the user being logged in.
+						if (<%= userBean.isLoggedIn() ? "true" : "false" %>) {
+							// function to leave a rating for this movie. Between 1 and 5.
+							function leaveMovieRating(_rating) {
+								var URL_RATING = "AjaxInterface?action=leave_rating&userID=" + (<%= userBean.getId() %>) +
+										"&movieID=" + (e.data.movieId) + "&rating=" + _rating;
+								console.log(URL_RATING);
+								$.getJSON(URL_RATING).done(function(data) {
+									if (data.success) {
+										console.log(data);
+									} else {
+										console.error("Error with leaving the rating");
+										console.error(data);
+									}
+								});
+							}
+							
+							for (var i = 1; i <= 5; i++) {
+								(function(thisI) { 
+									console.log("thisI: " + thisI);
+									$("#rating-star-" + thisI).addClass("rating-star-active");   // make it style to act activated
+									$("#rating-star-" + thisI).click(function(e) {
+										(function(_r) { 
+											console.log("_r: " + _r);
+											var ratingToHave = _r;
+											setModalRating(ratingToHave);		// set the styling for the rating
+											$(classToReferenceMovieBlock).find(".movie_rating").text(ratingToHave);	// set the meta data rating
+											// update the server's rating
+											leaveMovieRating(ratingToHave);
+										})(thisI);  // set the rating for this button to be i + 1
+									});
+								})( i );  // pass in this i
+							}
+						} // end conditional event listeners
+					}
+					setModalRating(ratingNum);
 					
 					// BOOLEAN to see if this movie is in favorites list
 					var currMovieInFavorites = $(classToReferenceMovieBlock).find(".fav-marker").text() === "1";
@@ -308,10 +372,8 @@
 
 					// If you are logged into the user, show the buttons
 					if (<%= userBean.isLoggedIn() ? "true" : "false" %>) {
-						//$("#favoritesButton").show();
-						//$("#queueButton").show();
 						var paramsToAjax = {ajaxParams : "userID=" + (<%= userBean.getId() %>) + "&movieID=" + (e.data.movieId) };
-						// TODO: Event listeners for the modal.
+						
 						$("#favoritesButton").off("click");  // remove the old event handler.
 						$("#favoritesButton").click(paramsToAjax, function(e) {
 							var actionToDo = "";

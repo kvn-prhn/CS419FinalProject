@@ -58,16 +58,19 @@ boolean movieValid = (movieIdStr != null && movie != null);
 					<video class="fullscreen-watch-movie" src="img/fishvideo.webm" autoplay loop muted></video> 
 					<%
 				} else {
-					session.setAttribute("error_message", "You don't have enough hours left on your account to watch.");
-					request.getRequestDispatcher("browse.jsp").forward(request, response);
+					//session.setAttribute("error_message", "You don't have enough hours left on your account to watch.");
+					//request.getRequestDispatcher("browse.jsp").forward(request, response);
+					response.sendRedirect("browse.jsp");
 				}
 			} else {
-				session.setAttribute("error_message", "You must be logged in to watch.");
-				request.getRequestDispatcher("browse.jsp").forward(request, response);
+				//session.setAttribute("error_message", "You must be logged in to watch.");
+				//request.getRequestDispatcher("browse.jsp").forward(request, response);
+				response.sendRedirect("browse.jsp");
 			}
 		} else {
-			session.setAttribute("error_message", "You don't have enough hours left on your account to watch.");
-			request.getRequestDispatcher("browse.jsp").forward(request, response);
+			//session.setAttribute("error_message", "You don't have enough hours left on your account to watch.");
+			//request.getRequestDispatcher("browse.jsp").forward(request, response);
+			response.sendRedirect("browse.jsp");
 		}		
 	%>
 	
