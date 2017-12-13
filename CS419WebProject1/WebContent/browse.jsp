@@ -62,6 +62,9 @@
 	       			<div class="l-box">Rated: <span id="modal-label-mpaa">MPAA Rating.</span></div>
 	       		</div>
 	       		<div class="pure-u-1">
+	       			<div class="l-box">Length: <span id="modal-label-length">Length.</span></div>
+	       		</div>
+	       		<div class="pure-u-1">
 	       			<div class="l-box">Directed by: <span id="modal-label-director">Director.</span></div>
 	       		</div>
 	       		<div class="pure-u-1">
@@ -98,6 +101,7 @@
 	            		<label for="sort_by">Order by:</label>
 	            		<select id="sort_by" name="sort_by">
 	            			<option value="keyword">Keyword</option>
+	            			<option value="length">Length</option>
 	            			<option value="genre">Genre</option>
 	            			<option value="rating">Rating</option>
 	            			<option value="releaseYear">Release Year</option>
@@ -178,6 +182,9 @@
 							</div>
 							<div style="display: none;" class="mpaa">
 								<%= movie.getMPAARating() %>
+							</div>
+							<div style="display: none;" class="length">
+								<%= movie.getLength() %> minutes
 							</div>
 							<div style="display: none;" class="director">
 								<%= movie.getDirector() %>
@@ -281,6 +288,7 @@
 					// add more information about the movie to the modal
 					$("#modal-label-genre").html( $(classToReferenceMovieBlock).find(".genre").text() );
 					$("#modal-label-mpaa").html( $(classToReferenceMovieBlock).find(".mpaa").text() );
+					$("#modal-label-length").html( $(classToReferenceMovieBlock).find(".length").text() );
 					$("#modal-label-director").html( $(classToReferenceMovieBlock).find(".director").text() );
 					$("#modal-label-actors").html( $(classToReferenceMovieBlock).find(".actors").text() );
 
