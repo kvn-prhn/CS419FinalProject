@@ -79,8 +79,7 @@ public class MovieSearchServlet extends HttpServlet {
             }
             
             session.setAttribute("browseListBean", browseList);
-            //response.sendRedirect("browse.jsp");
-            response.
+            response.sendRedirect("browse.jsp");
             
         }catch(Exception e){
         	e.printStackTrace();
