@@ -86,8 +86,9 @@
 			<div class = "pure-u-4-10">
 				<p>This website and its contents are all part of Team_Three_Entertainment(); 2017 - 2018 Ltd. <br /> 190 S Prospect Ave, Elmhurst, IL 60126, United States <br/> Use of this website is subject to our <a href="term_and_conditions.jsp">Terms & Conditions</a> and <a href="privacy_policy.jsp">Privacy Policy</a>. </p>
 			</div>
-			<div class = "pure-u-4-10">
+			<div class = "pure-u-3-10">
 				<p class="content-head content-head-ribbon">Contact us at getflixmovie@gmail.com</p>
+				<a class="pure-menu-heading" href="https://www.facebook.com/Unofficial-Getflix-1878537172174603/"><img src="img/common/facebook.png"  style="width:30px;height:30px;border:0"></a>
 				<!--  getflixmovie@gmail.com PW: team3entertainment -->
 			</div>
         </div>

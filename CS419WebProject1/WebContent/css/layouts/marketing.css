@@ -410,6 +410,7 @@ video.fullscreen-watch-movie {
 div[class*="movie-display-block"] {
   border: 1px solid #999999;
   background-color: #ffffff;
+  position: relative;
 }
 div[class*="movie-display-block"]:hover {
   z-index: 1000;
@@ -423,9 +424,8 @@ div[class*="movie-display-block"] > label {
   display: block;
   /* padding: 0.5em; */
 }
-.movie-display-lower {
+.movie-display-upper {
   position: relative;
-  bottom: 0;
 }
 /*Add more styling so that it can behave how we want.*/
 h2 {
@@ -452,6 +452,10 @@ h2 {
   min-height: 3em;
   height: 3em;
   max-height: 3em;
+}
+/* Styling for the rating images/stars when active*/
+.rating-star-active {
+  cursor: pointer;
 }
 .queue-position-marker-block {
   position: relative;

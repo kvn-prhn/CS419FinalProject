@@ -143,6 +143,7 @@
 			</div>
 			<div class = "pure-u-4-10">
 				<p class="content-head content-head-ribbon">Contact us at getflixmovie@gmail.com</p>
+				<a class="pure-menu-heading" href="https://www.facebook.com/Unofficial-Getflix-1878537172174603/"><img src="img/common/facebook.png"  style="width:30px;height:30px;border:0"></a>
 				<!--  getflixmovie@gmail.com PW: team3entertainment -->
 			</div>
         </div>

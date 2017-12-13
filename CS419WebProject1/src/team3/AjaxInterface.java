@@ -32,10 +32,8 @@ public class AjaxInterface extends HttpServlet {
 			} else {
 				HttpSession session = req.getSession(true);
 				User user = (User)session.getAttribute("userBean");
-				System.out.print("User: ");
-				System.out.println(user);
-				if (user == null) {	// check that there is an account matching that
-					pw.write("{\"success\":false,\"msg\":\"Invalid user userID\"}");
+				if (user == null || user.getId() != Integer.parseInt(userIdStr)) {	// check that there is an account matching that
+					pw.write("{\"success\":false,\"msg\":\"Invalid user userID. User must be logged in.\"}");
 				} else {
 
 					if (actionToDo.equals("get_minutes_left")) {		// get how much time is left for a user.
@@ -105,9 +103,21 @@ public class AjaxInterface extends HttpServlet {
 									pw.write("{\"success\":false,\"msg\":\"No rating parameter\"}");
 								} else {
 									int ratingToLeave = Integer.parseInt(ratingStr);
-									// TODO: Add the rating to the movie list
-									
-									pw.write("{\"success\":false,\"msg\":\"Not yet implemented\"}");
+									MovieRating mrFind = MovieRatingDao.getMovieRatingByUserId(movieId, user.getId());
+									int status = 1;
+									if (mrFind.getMovieId() == movieId) {
+										// update the current rating
+										mrFind.setRating(ratingToLeave);
+										status = MovieRatingDao.update(mrFind);
+									} else {
+										// create a new rating
+										MovieRating mrating = new MovieRating();
+										mrating.setMovieId(movieId);
+										mrating.setUserId(user.getId());
+										mrating.setRating(ratingToLeave);
+										status = MovieRatingDao.create(mrating);
+									}
+									pw.write("{\"success\":" + (status == 0) + ",\"new_rating\":" + ratingToLeave + "}");
 								}
 							} else {
 								pw.write("{\"success\":false,\"msg\":\"Invalid action\"}");

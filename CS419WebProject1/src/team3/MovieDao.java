@@ -130,6 +130,7 @@ public class MovieDao {
                 if (!list.stream().filter(o -> o.getTitle().equals(m.getTitle())).findFirst().isPresent())
                 	list.add(m);
             }
+            System.out.println(list);
             
             for (int i = 0; i < searchTerms.length; i++) {
 	            ps.setString(1, "%".concat(searchTerms[i].concat("%")));

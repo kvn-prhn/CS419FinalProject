@@ -25,15 +25,18 @@ public class MovieRatingDao {
         try{  
             Connection con = DBLink.getConnection();  
             PreparedStatement ps = con.prepareStatement(  
-                         "insert into movieRating(movieId, userId, rating) values (?,?,?)");  
+                         "insert into movieratingteam3(movieId, userId, rating) values (?,?,?)");  
             ps.setInt(1, mr.getMovieId());
             ps.setInt(2, mr.getUserId());
             ps.setInt(3, mr.getRating());
               
-            status = ps.executeUpdate();  
-            
+            ps.executeUpdate();  
+            status = 0;
             con.close();  
-        }catch(Exception ex){ex.printStackTrace();}  
+        }catch(Exception ex){
+        	ex.printStackTrace();
+        	status = 1;
+        }  
           
         return status;  
 	}
@@ -43,15 +46,18 @@ public class MovieRatingDao {
         try{  
             Connection con = DBLink.getConnection();  
             PreparedStatement ps = con.prepareStatement(  
-                         "update movieRating set rating=? where movieID=? and userID=?");  
+                         "update movieratingteam3 set rating=? where movieID=? and userID=?");  
             ps.setInt(1, mr.getRating());
             ps.setInt(2, mr.getMovieId());
             ps.setInt(3, mr.getUserId());
               
-            status = ps.executeUpdate();  
-            
+            ps.executeUpdate();  
+            status = 0;
             con.close();  
-        }catch(Exception ex){ex.printStackTrace();}  
+        }catch(Exception ex){
+        	ex.printStackTrace();
+        	status = 1;
+        }  
           
         return status;  
 	}
@@ -61,14 +67,17 @@ public class MovieRatingDao {
         try{  
             Connection con = DBLink.getConnection();  
             PreparedStatement ps = con.prepareStatement(  
-                         "delete from movieRating where movieID=? and userID=?");  
+                         "delete from movieratingteam3 where movieID=? and userID=?");  
             ps.setInt(1, mr.getMovieId());
             ps.setInt(2, mr.getUserId());
               
-            status = ps.executeUpdate();  
-            
+            ps.executeUpdate();  
+            status = 0;
             con.close();  
-        }catch(Exception ex){ex.printStackTrace();}  
+        }catch(Exception ex){
+        	ex.printStackTrace();
+        	status = 1;
+    	}  
          
         return status;  
 	}
@@ -103,9 +112,7 @@ public class MovieRatingDao {
             										  + "WHERE movieId = ? AND userId = ? ");  
             ps.setInt(1, movieId);  
             ps.setInt(2, userId);
-            
-            //System.out.println(ps.toString());
-            
+                        
             ResultSet rs = ps.executeQuery();  
             
             if(rs.next()){  
