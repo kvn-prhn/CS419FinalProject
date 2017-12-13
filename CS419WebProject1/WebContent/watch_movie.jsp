@@ -103,7 +103,7 @@ $(function() {
 			if (data.success) {
 				console.log(data);
 				// TODO: format better
-				$("#show_minutes_left").text("Hours remaining: " + (parseInt(data.minutes_left) / 60));
+				$("#show_minutes_left").text("Hours remaining: " + (parseInt(data.minutes_left) / 60).toFixed(2) );
 			} else {
 				console.error("Failed getting minutes left");
 			}
@@ -117,7 +117,7 @@ $(function() {
 			if (data.success) {
 				console.log(data);
 				// TODO: Format better
-				$("#show_minutes_left").text("Hours remaining: " + (parseInt(data.minutes_left) / 60));
+				$("#show_minutes_left").text("Hours remaining: " + (parseInt(data.minutes_left) / 60).toFixed(2) );
 			} else {
 				console.error(data);
 				console.error("Failed reducing the minutes left");

@@ -48,7 +48,7 @@ public class MovieSearchServlet extends HttpServlet {
             		filterString = "any";
            		filter.setGenreFilter(filterString);
             
-           		System.out.println("ORDERBY: " + (String)request.getParameter("sort_by").toLowerCase());
+           		//System.out.println("ORDERBY: " + (String)request.getParameter("sort_by").toLowerCase());
             	switch ((String)request.getParameter("sort_by").toLowerCase()) {
             	case "keyword":
             		filter.setTitle(true);
@@ -79,7 +79,8 @@ public class MovieSearchServlet extends HttpServlet {
             }
             
             session.setAttribute("browseListBean", browseList);
-            response.sendRedirect("browse.jsp");
+            //response.sendRedirect("browse.jsp");
+            response.
             
         }catch(Exception e){
         	e.printStackTrace();

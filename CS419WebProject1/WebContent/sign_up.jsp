@@ -85,7 +85,8 @@
 								</div>
 								<div class="pure-u-2-5"></div>
 								<input type="radio" id="subChoice1" name="subscriptionTier" value="1">
-								<p style="color:#6d4d35"><b> 10 hours of watch time per month
+								<p style="color:#6d4d35"><b>$3/month
+								<br><br>10 hours of watch time per month
 								<br><br>Ideal for those who watch a movie about every week</b></p>
 							</div>
 							<div class="l-box pure-u-1-4" style="background-color:silver">
@@ -95,7 +96,8 @@
 								</div>
 								<div class="pure-u-2-5"></div>
 								<input type="radio" id="subChoice2" name="subscriptionTier" value="2">
-								<p style="color:#777676"><b> 30 hours of watch time per month
+								<p style="color:#777676"><b>$8/month
+								<br><br>30 hours of watch time per month
 								<br><br>Ideal for those who watch a couple movies every week</b></p>
 							</div>
 							<div class="l-box pure-u-1-4" style="background-color:gold">
@@ -105,7 +107,8 @@
 								</div>
 								<div class="pure-u-2-5"></div>
 								<input type="radio" id="subChoice3" name="subscriptionTier" value="3">
-								<p style="color:#a38b15"> <b>50 hours of watch time per month!
+								<p style="color:#a38b15"> <b>$12/month
+								<br><br>50 hours of watch time per month!
 								<br><br>Ideal for an individual loves to watch movies</b></p>
 								
 							</div>
@@ -116,7 +119,8 @@
 								</div>
 								<div class="pure-u-2-5"></div>
 								<input type="radio" id="subChoice4" name="subscriptionTier" value="4">
-								<p> <b>100 hours of watch time per month!!!
+								<p> <b>$20/month
+								<br><br>100 hours of watch time per month!!!
 								<br><br>Great for binge watching!</b></p>
 							</div>
 							

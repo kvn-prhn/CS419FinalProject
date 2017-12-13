@@ -36,6 +36,7 @@ public class MovieDao {
                 m.setDirector(rs.getString(10));
                 m.setActor1(rs.getString(11));
                 m.setActor2(rs.getString(12));
+                m.setLength(rs.getInt(13));
             }
             con.close();  
         }catch(Exception e){
@@ -75,6 +76,7 @@ public class MovieDao {
 	                m.setDirector(rs.getString(10));
 	                m.setActor1(rs.getString(11));
 	                m.setActor2(rs.getString(12));
+	                m.setLength(rs.getInt(13));
 	                
 	                movieList.add(m);
 	            }
@@ -94,7 +96,7 @@ public class MovieDao {
 		
         try{  
             Connection con = DBLink.getConnection();
-            PreparedStatement ps=con.prepareStatement("select * from movie where (movieTitle like ? or movieDescription like ? )" + filter.filterClause() + " " + filter.orderByClause());  
+            PreparedStatement ps=con.prepareStatement("select * from movie where (movieTitle like ? or movieDescription like ? or actor1 like ? or actor2 like ? or director like ?)" + filter.filterClause() + " " + filter.orderByClause());  
             
             for (int i = 1; i <= ps.getParameterMetaData().getParameterCount(); i++) {
             	ps.setString(i, "%".concat(searchString.concat("%")));
@@ -118,6 +120,7 @@ public class MovieDao {
                 m.setDirector(rs.getString(10));
                 m.setActor1(rs.getString(11));
                 m.setActor2(rs.getString(12));
+                m.setLength(rs.getInt(13));
                 
                 //m.setLanguage(rs.getString(5));
                 //m.setLength(rs.getInt(6));
@@ -151,6 +154,7 @@ public class MovieDao {
 	                m.setDirector(rs.getString(10));
 	                m.setActor1(rs.getString(11));
 	                m.setActor2(rs.getString(12));
+	                m.setLength(rs.getInt(13));
 	                
 	                if (!list.stream().filter(o -> o.getTitle().equals(m.getTitle())).findFirst().isPresent())
 	                	list.add(m);
@@ -186,6 +190,7 @@ public class MovieDao {
                 m.setDirector(rs.getString(10));
                 m.setActor1(rs.getString(11));
                 m.setActor2(rs.getString(12));
+                m.setLength(rs.getInt(13));
                 
                 list.add(m);  
             }  

@@ -62,6 +62,9 @@
 	       			<div class="l-box">Rated: <span id="modal-label-mpaa">MPAA Rating.</span></div>
 	       		</div>
 	       		<div class="pure-u-1">
+	       			<div class="l-box">Length: <span id="modal-label-length">Length.</span></div>
+	       		</div>
+	       		<div class="pure-u-1">
 	       			<div class="l-box">Directed by: <span id="modal-label-director">Director.</span></div>
 	       		</div>
 	       		<div class="pure-u-1">
@@ -100,7 +103,8 @@
 	            	<div class="pure-u-1-4">
 	            		<label for="sort_by">Order by:</label>
 	            		<select id="sort_by" name="sort_by">
-	            			<% String curr_sby = request.getParameter("filter_by"); %>
+	            			<% String curr_sby = request.getParameter("sort_by"); %>
+	            			[<%= curr_sby %>]
 	            			<option value="keyword" <%= curr_sby != null && curr_sby.equals("keyword") ? "selected" : "" %>>Keyword</option>
 	            			<option value="genre" <%= curr_sby != null && curr_sby.equals("genre") ? "selected" : "" %>>Genre</option>
 	            			<option value="rating" <%= curr_sby != null && curr_sby.equals("rating") ? "selected" : "" %>>Rating</option>
@@ -113,6 +117,7 @@
 	            		<label for="filter_by">Filter by:</label>
 	            		<select id="filter_by" name="filter_by">
 	            			<% String curr_f_opt = request.getParameter("filter_by"); %>
+	            			[<%= curr_f_opt %>]
 	            			<option value="any" <%= curr_f_opt != null && curr_f_opt.equals("any") ? "selected" : "" %>>Any</option>
 	            			<option value="drama" <%= curr_f_opt != null && curr_f_opt.equals("drama") ? "selected" : "" %>>Drama</option>
 	            			<option value="action" <%= curr_f_opt != null && curr_f_opt.equals("action") ? "selected" : "" %>>Action</option>
@@ -183,6 +188,9 @@
 							</div>
 							<div style="display: none;" class="mpaa">
 								<%= movie.getMPAARating() %>
+							</div>
+							<div style="display: none;" class="length">
+								<%= movie.getLength() %> minutes
 							</div>
 							<div style="display: none;" class="director">
 								<%= movie.getDirector() %>
@@ -286,6 +294,7 @@
 					// add more information about the movie to the modal
 					$("#modal-label-genre").html( $(classToReferenceMovieBlock).find(".genre").text() );
 					$("#modal-label-mpaa").html( $(classToReferenceMovieBlock).find(".mpaa").text() );
+					$("#modal-label-length").html( $(classToReferenceMovieBlock).find(".length").text() );
 					$("#modal-label-director").html( $(classToReferenceMovieBlock).find(".director").text() );
 					$("#modal-label-actors").html( $(classToReferenceMovieBlock).find(".actors").text() );
 
