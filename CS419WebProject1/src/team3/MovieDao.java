@@ -96,7 +96,7 @@ public class MovieDao {
 		
         try{  
             Connection con = DBLink.getConnection();
-            PreparedStatement ps=con.prepareStatement("select * from movie where (movieTitle like ? or movieDescription like ? )" + filter.filterClause() + " " + filter.orderByClause());  
+            PreparedStatement ps=con.prepareStatement("select * from movie where (movieTitle like ? or movieDescription like ? or actor1 like ? or actor2 like ? or director like ?)" + filter.filterClause() + " " + filter.orderByClause());  
             
             for (int i = 1; i <= ps.getParameterMetaData().getParameterCount(); i++) {
             	ps.setString(i, "%".concat(searchString.concat("%")));
