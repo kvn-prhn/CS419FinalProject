@@ -491,3 +491,9 @@ h2 {
 .watch-movie-title {
   color: #05FEFA;
 }
+a.home-links-page {
+  color: #E413EA;
+}
+a.home-links-page:visited {
+  color: #E413EA;
+}
