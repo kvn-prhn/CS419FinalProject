@@ -59,7 +59,7 @@
 								<input id="zipCode" type="text" name="zipcode"
 									value="<%= request.getParameter("zipcode") != null ? request.getParameter("zipcode") : "" %>" placeholder="ZIP Code">
 							</div>
-							<div class="l-box pure-u-4-5">		
+							<div class="l-box pure-u-2-5">		
 								<label for="creditCardNum">Credit Card Number</label>
 								<input id="creditCardNum" type="text" name="creditCardNum"
 									value="<%= request.getParameter("creditCardNum") != null ? request.getParameter("creditCardNum") : "" %>" placeholder="Credit Card Number">
@@ -69,6 +69,12 @@
 								<input id="cvv" type="text" name="cvv"
 									value="<%= request.getParameter("cvv") != null ? request.getParameter("cvv") : "" %>" placeholder="CVV">
 							</div>
+							<div class="l-box pure-u-1-5">		
+								<label for="CCEDate">CC Expiry Date</label>
+								<input id="CCEDate" type="text" name="CCEDate"
+									value="<%= request.getParameter("CCEDate") != null ? request.getParameter("CCEDate") : "" %>" placeholder="MMYY">
+							</div>
+							
 							<!--Radio buttons for choosing a plan-->
 							<div class="l-box pure-u-1-4" style="background-color:#B87333">
 								<div class="pure-u-2-5"></div>

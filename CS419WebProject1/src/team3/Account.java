@@ -11,6 +11,7 @@ public class Account {
 	private String address;
 	private String creditCardNum;
 	private String cvv;
+	private String CCEDate;
 	
 	private int subscriptionTier;
 	//private Date hoursResetDate;
@@ -20,6 +21,12 @@ public class Account {
 	
 	public int getId() {
 		return id;
+	}
+	public String getCCEDate() {
+		return CCEDate;
+	}
+	public void setCCEDate(String cCEDate) {
+		CCEDate = cCEDate;
 	}
 	public void setId(int id) {
 		this.id = id;

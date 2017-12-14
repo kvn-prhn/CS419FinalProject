@@ -52,7 +52,8 @@ public class SignupServlet extends HttpServlet {
 						request.getParameter("zipcode") == null ||
 						request.getParameter("subscriptionTier") == null ||
 						request.getParameter("creditCardNum") == null ||
-						request.getParameter("cvv") == null) {
+						request.getParameter("cvv") == null ||
+						request.getParameter("CCEDate") == null){
 					// return to the sign up page if  everything is not in there yet.
 					session.setAttribute("error_message", "All fields must be filled out.");		// display an error
 
@@ -72,7 +73,8 @@ public class SignupServlet extends HttpServlet {
 						request.getParameter("zipcode").trim().length() == 0 ||
 						request.getParameter("subscriptionTier").trim().length() == 0 ||
 						request.getParameter("creditCardNum").trim().length() == 0 ||
-						request.getParameter("cvv").trim().length() == 0) {
+						request.getParameter("cvv").trim().length() == 0 ||
+					request.getParameter("CCEDate").trim().length() == 0){
 					// return to the sign up page if  everything is not in there yet.
 					session.setAttribute("error_message", "All fields must be filled out.");		// display an error
 
@@ -92,7 +94,7 @@ public class SignupServlet extends HttpServlet {
 				a.setSubscriptionTier(Integer.parseInt(request.getParameter("subscriptionTier")));
 				a.setCreditCardNum((String)request.getParameter("creditCardNum"));
 				a.setCVV((String)request.getParameter("cvv"));
-				
+				a.setCCEDate((String)request.getParameter("CCEDate"));
 				// TODO: Centralize all of this information somewhere.
 				switch(a.getSubscriptionTier()) {
 					case 1: a.setMinutesRemaining(10 * 60); break; // bronze

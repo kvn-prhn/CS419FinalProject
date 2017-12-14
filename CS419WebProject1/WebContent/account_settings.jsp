@@ -67,6 +67,11 @@
 				 				<div class="pure-u-1-3"><%= account.getCVV() %></div>
 				 			</div> 
 				 			<hr style="border-top: dotted 2px;">
+				 			<div class="pure-u-1">
+				 				<div class="pure-u-1-4">Credit Card Exp Date:</div>
+				 				<div class="pure-u-1-3"><%= account.getCCEDate() %></div>
+				 			</div> 
+				 			<hr style="border-top: dotted 2px;">
 				 		</div>
 				 		<div class="pure-control-group pure-u-1">
 				            <div class="pure-u-1">
@@ -122,6 +127,10 @@
 							<div class="pure-u-3-5">
 								<label for="cvv">CVV:</label>
 								<input id="cvv" type="text" name="cvv" value="" placeholder="CVV" >
+							</div>
+							<div class="pure-u-3-5">
+								<label for="CCEDate">CC Expiry Date:</label>
+								<input id="CCEDate" type="text" name="CCEDate" value="" placeholder="MMYY" >
 							</div>
 							<div style="padding-bottom:45px" class="pure-u-3-5">
 								<input id="update_creditcard" class="pure-button pure-button-active" type="submit" 

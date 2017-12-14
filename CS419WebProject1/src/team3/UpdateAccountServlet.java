@@ -46,6 +46,7 @@ public class UpdateAccountServlet extends HttpServlet {
 				} else if (updateSubmitStr.equalsIgnoreCase("Update Credit Card Info")) {	// Update subscription
 					acc.setCreditCardNum(req.getParameter("creditCardNum"));
 					acc.setCVV(req.getParameter("cvv"));
+					acc.setCCEDate(req.getParameter("CCEDate"));
 					session.setAttribute("notification_message", "Updated Credit Card Information");		// display a notification
 				} else {
 					session.setAttribute("error_message", "Failed Updating the Account");		// display a notification
