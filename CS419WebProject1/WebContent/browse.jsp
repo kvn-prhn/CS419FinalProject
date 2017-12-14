@@ -335,24 +335,19 @@
 							function leaveMovieRating(_rating) {
 								var URL_RATING = "AjaxInterface?action=leave_rating&userID=" + (<%= userBean.getId() %>) +
 										"&movieID=" + (e.data.movieId) + "&rating=" + _rating;
-								console.log(URL_RATING);
 								$.getJSON(URL_RATING).done(function(data) {
 									if (data.success) {
-										console.log(data);
 									} else {
 										console.error("Error with leaving the rating");
-										console.error(data);
 									}
 								});
 							}
 							
 							for (var i = 1; i <= 5; i++) {
 								(function(thisI) { 
-									console.log("thisI: " + thisI);
 									$("#rating-star-" + thisI).addClass("rating-star-active");   // make it style to act activated
 									$("#rating-star-" + thisI).click(function(e) {
 										(function(_r) { 
-											console.log("_r: " + _r);
 											var ratingToHave = _r;
 											setModalRating(ratingToHave);		// set the styling for the rating
 											$(classToReferenceMovieBlock).find(".movie_rating").text(ratingToHave);	// set the meta data rating
@@ -404,11 +399,9 @@
 								actionToDo = "add_favorite";
 							}
 							var URL = "AjaxInterface?action=" + actionToDo + "&" + e.data.ajaxParams;
-							//console.log(URL);
 							$.getJSON(URL).done(function(data) {
 								if (data.success) {
 									if (actionToDo == "add_favorite") {  // add the favorite markers to it.
-										console.log("ADDED TO THE FAVORITES");
 										currMovieInFavorites = true;
 										$(".modal").find(".fav-style-marker").show();
 										$(classToReferenceMovieBlock).find(".fav-marker").text("1");   // mark as favorite
@@ -421,7 +414,6 @@
 										$(classToReferenceMovieBlock).find(".fav-style-marker").hide();
 										$("#favoritesButton").text("Add to Favorites");
 									}
-									// TODO: change styling for queue
 								} else {
 									console.error("Error with updating favorites");
 								}
@@ -429,7 +421,6 @@
 						});
 						$("#queueButton").off("click");  // remove the old event handler.
 						$("#queueButton").click(paramsToAjax, function(e) {
-							console.log("queue button");
 							// if the movie is NOT in the queue...
 							var actionToDo = "";
 							if (currQueuePosition >= 0) {  // item is already in queue, and can be removed.
@@ -439,13 +430,8 @@
 								actionToDo = "add_queue";
 							}
 							var URL = "AjaxInterface?action=" + actionToDo + "&" + e.data.ajaxParams;
-							console.log(URL);
 							$.getJSON(URL).done(function(data) {
-								console.log(data);
 								if (data.success) {
-									console.log("updated the queue");
-									console.log(data);
-									// TODO: change styling for queue
 									if (actionToDo == "add_queue") {
 										// if we have just added to the queue, then set
 										// it as removing from the queue.

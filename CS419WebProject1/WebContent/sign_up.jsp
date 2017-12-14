@@ -10,24 +10,6 @@
 
 <%@include file='WEB-INF/modules/header_common.jspf'%>
 
-
-<!--
-<div class="splash-container">
-
-    <div class="splash">
-		<video class="fullscreen" src="img/trafficbg.webm" autoplay loop muted></video>
-
-        <h1 class="splash-head">Movies for you</h1>
-        <p class="splash-subhead">
-            Sign up for a great selection at a great price.
-        </p>
-        <p>
-            <a href="#" class="pure-button pure-button-primary">Get Started</a>
-        </p>
-    </div>
-</div>
--->
-
 <div class="content-wrapper">
     <div class="content">
         <h2 class="content-head is-center">Sign Up</h2>
@@ -76,6 +58,16 @@
 								<label for="zipCode">ZIP Code</label>
 								<input id="zipCode" type="text" name="zipcode"
 									value="<%= request.getParameter("zipcode") != null ? request.getParameter("zipcode") : "" %>" placeholder="ZIP Code">
+							</div>
+							<div class="l-box pure-u-4-5">		
+								<label for="creditCardNum">Credit Card Number</label>
+								<input id="creditCardNum" type="text" name="creditCardNum"
+									value="<%= request.getParameter("creditCardNum") != null ? request.getParameter("creditCardNum") : "" %>" placeholder="Credit Card Number">
+							</div>
+							<div class="l-box pure-u-1-5">		
+								<label for="cvv">CVV</label>
+								<input id="cvv" type="text" name="cvv"
+									value="<%= request.getParameter("cvv") != null ? request.getParameter("cvv") : "" %>" placeholder="CVV">
 							</div>
 							<!--Radio buttons for choosing a plan-->
 							<div class="l-box pure-u-1-4" style="background-color:#B87333">
@@ -153,35 +145,6 @@
             <img width="300" alt="File Icons" class="pure-img-responsive" src="img/common/CLogo.png">
     </div>
 	
-	<!--
-    <div class="content">
-        <h2 class="content-head is-center">Dolore magna aliqua. Uis aute irure.</h2>
-
-        <div class="pure-g">
-            <div class="l-box-lrg pure-u-1 pure-u-md-2-5">
-                
-            </div>
-
-            <div class="l-box-lrg pure-u-1 pure-u-md-3-5">
-                <h4>Contact Us</h4>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat.
-                </p>
-
-                <h4>More Information</h4>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua.
-                </p>
-            </div>
-        </div>
-
-    </div>
-	-->
-
 </div>
 
 

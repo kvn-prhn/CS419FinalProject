@@ -10,7 +10,7 @@ public class AccountDao {
         try{  
             Connection con = DBLink.getConnection();  
             PreparedStatement ps = con.prepareStatement(  
-                         "insert into accountteam3 (firstName,lastName,password,email,address,subscription,resetDate,minutesRemaining) " + 
+                         "insert into accountteam3 (firstName,lastName,password,email,address,subscription,resetDate,minutesRemaining,creditCardNum,cvv) " + 
                         		 "values (?,?,?,?,?,?,NOW(),?)");    // NOW() is temporary - set the date to today
             ps.setString(1, a.getFirstName()); 
             ps.setString(2, a.getLastName()); 
@@ -20,7 +20,9 @@ public class AccountDao {
             ps.setInt(6, a.getSubscriptionTier());
             //ps.setDate(7, a.getHoursResetDate());
             ps.setInt(7, a.getMinutesRemaining());
-              
+            ps.setString(8, a.getCreditCardNum());
+            ps.setString(9, a.getCVV());
+            
             status = ps.executeUpdate();  
             System.out.println("********Execution complete!!!");
             con.close();  
@@ -36,7 +38,7 @@ public class AccountDao {
             PreparedStatement ps = con.prepareStatement(  
                          "update accountteam3 set "
                          + "firstName=?, lastName=?, password=?, email=?, address=?, subscription=?,  "
-                         + "resetDate=?, minutesRemaining=?  "  
+                         + "resetDate=?, minutesRemaining=?, creditCardNum=?, cvv=?  "  
                          + "where id=?");  
             ps.setString(1, a.getFirstName()); 
             ps.setString(2, a.getLastName());  
@@ -46,8 +48,10 @@ public class AccountDao {
             ps.setInt(6, a.getSubscriptionTier());
             ps.setDate(7, a.getMinutesResetDate());
             ps.setInt(8, a.getMinutesRemaining());
-            
-            ps.setInt(9, a.getId());
+            ps.setString(9, a.getCreditCardNum());
+            ps.setString(10, a.getCVV());
+        
+            ps.setInt(11, a.getId());
             System.out.println(ps);
             status = ps.executeUpdate();  
               
@@ -93,7 +97,8 @@ public class AccountDao {
                 a.setMinutesResetDate(rs.getDate(7));
                 a.setMinutesRemaining(rs.getInt(8));
                 a.setSubscriptionTier(rs.getInt(9));
-                
+                a.setCreditCardNum(rs.getString(10));
+                a.setCVV(rs.getString(11));
             }  
             con.close();  
         }

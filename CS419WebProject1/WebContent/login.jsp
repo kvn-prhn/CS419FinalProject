@@ -11,23 +11,6 @@
 <%@include file='WEB-INF/modules/header_common.jspf'%>
 
 
-<!--
-<div class="splash-container">
-
-    <div class="splash">
-		<video class="fullscreen" src="img/trafficbg.webm" autoplay loop muted></video>
-
-        <h1 class="splash-head">Movies for you</h1>
-        <p class="splash-subhead">
-            Sign up for a great selection at a great price.
-        </p>
-        <p>
-            <a href="#" class="pure-button pure-button-primary">Get Started</a>
-        </p>
-    </div>
-</div>
--->
-
 <div class="content-wrapper">
     <div class="content">
         <h2 class="content-head is-center">Log in</h2>
@@ -58,37 +41,9 @@
             
         </div>
     </div>
-	
-	<!--
-    <div class="content">
-        <h2 class="content-head is-center">Dolore magna aliqua. Uis aute irure.</h2>
-
-        <div class="pure-g">
-            <div class="l-box-lrg pure-u-1 pure-u-md-2-5">
-                
-            </div>
-
-            <div class="l-box-lrg pure-u-1 pure-u-md-3-5">
-                <h4>Contact Us</h4>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                    consequat.
-                </p>
-
-                <h4>More Information</h4>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua.
-                </p>
-            </div>
-        </div>
-
-    </div>
-	-->
-	
-		<div class="ribbon l-box-lrg pure-g " style = "padding-bottom:185px" >
+    
+    
+	<div class="ribbon l-box-lrg pure-g " style = "padding-bottom:185px" >
         <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-3-5">
 			<div class = "pure-u-4-10">
 				<p>This website and its contents are all part of Team_Three_Entertainment(); 2017 - 2018 Ltd. <br /> 190 S Prospect Ave, Elmhurst, IL 60126, United States <br/> Use of this website is subject to our <a href="term_and_conditions.jsp">Terms & Conditions</a> and <a href="privacy_policy.jsp">Privacy Policy</a>. </p>

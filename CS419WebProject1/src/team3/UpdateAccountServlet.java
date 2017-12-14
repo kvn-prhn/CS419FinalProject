@@ -43,10 +43,16 @@ public class UpdateAccountServlet extends HttpServlet {
 				} else if (updateSubmitStr.equalsIgnoreCase("Update Subscription")) {	// Update subscription
 					acc.setSubscriptionTier(Integer.parseInt(req.getParameter("subscriptionTier")));
 					session.setAttribute("notification_message", "Updated Subscription Tier");		// display a notification
+				} else if (updateSubmitStr.equalsIgnoreCase("Update Credit Card Info")) {	// Update subscription
+					acc.setCreditCardNum(req.getParameter("creditCardNum"));
+					acc.setCVV(req.getParameter("cvv"));
+					session.setAttribute("notification_message", "Updated Credit Card Information");		// display a notification
 				} else {
 					session.setAttribute("error_message", "Failed Updating the Account");		// display a notification
 					System.err.println("Invalid name for a submit button for updating the account");
 				}
+				
+				// 
 				
 				// make the changes
 				AccountDao.update(acc); 

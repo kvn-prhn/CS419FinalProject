@@ -9,6 +9,8 @@ public class Account {
 	private String password;
 	private String email;
 	private String address;
+	private String creditCardNum;
+	private String cvv;
 	
 	private int subscriptionTier;
 	//private Date hoursResetDate;
@@ -70,36 +72,36 @@ public class Account {
 		}
 		return "INVALID_SUB_TIER";
 	}
-	/*
-	public Date getHoursResetDate() {
-		return hoursResetDate;
-	}
-	public void setHoursResetDate(Date hoursResetDate) {
-		this.hoursResetDate = hoursResetDate;
-	}
-	public float getHoursRemaining() {
-		return hoursRemaining;
-	}
-	public void setHoursRemaining(float hoursRemaining) {
-		this.hoursRemaining = hoursRemaining;
-	} */
-	
 	public int getMinutesRemaining() {
 		return minutesRemaining;
 	}
-	
+	public String getTruncatedStringHours() {
+		double minsD = (double)minutesRemaining;
+		double hoursLeft = minsD / 60;
+		String doubleStr = hoursLeft + "";
+		String[] parts = doubleStr.split("\\.");
+		return parts[0] + "." + parts[1].substring(0, 2);
+	}
 	public void setMinutesRemaining(int minutesRemaining) {
 		this.minutesRemaining = minutesRemaining;
 	}
-	
 	public Date getMinutesResetDate() {
 		return minutesResetDate;
 	}
-	
 	public void setMinutesResetDate(Date minutesResetDate) {
 		this.minutesResetDate = minutesResetDate;
 	}
-	
-	
+	public String getCreditCardNum() {
+		return creditCardNum;
+	}
+	public void setCreditCardNum(String creditCardNum) {
+		this.creditCardNum = creditCardNum;
+	}
+	public String getCVV() {
+		return cvv;
+	}
+	public void setCVV(String cvv) {
+		this.cvv = cvv;
+	}
 	
 }

@@ -50,7 +50,9 @@ public class SignupServlet extends HttpServlet {
 						request.getParameter("state") == null ||
 						request.getParameter("city") == null ||
 						request.getParameter("zipcode") == null ||
-						request.getParameter("subscriptionTier") == null) {
+						request.getParameter("subscriptionTier") == null ||
+						request.getParameter("creditCardNum") == null ||
+						request.getParameter("cvv") == null) {
 					// return to the sign up page if  everything is not in there yet.
 					request.getRequestDispatcher("sign_up.jsp").forward(request, response);
 					con.close();
@@ -65,6 +67,8 @@ public class SignupServlet extends HttpServlet {
 				a.setAddress((String)request.getParameter("streetAddress"), (String)request.getParameter("city"),
 							(String)request.getParameter("state"), (String)request.getParameter("zipcode"));
 				a.setSubscriptionTier(Integer.parseInt(request.getParameter("subscriptionTier")));
+				a.setCreditCardNum((String)request.getParameter("creditCardNum"));
+				a.setCVV((String)request.getParameter("cvv"));
 				
 				// TODO: Centralize all of this information somewhere.
 				switch(a.getSubscriptionTier()) {
@@ -89,11 +93,9 @@ public class SignupServlet extends HttpServlet {
 					u.setLoggedIn(false);
 					
 					UserDao.create(u);
-				}
-				
+				} 
 				session.setAttribute("notification_message", "Account created successfully");		// display a notification
 
-				//request.getRequestDispatcher("sign_up.jsp").forward(request, response);
 				response.sendRedirect("login.jsp");  // send to the login page after making an account.
 			}
 

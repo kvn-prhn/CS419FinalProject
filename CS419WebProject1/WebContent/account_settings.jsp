@@ -27,35 +27,44 @@
 				 		<div class="pure-u-1">
 				 			<legend>Account Information</legend>
 				 			<div class="pure-u-1">
-				 				<div class="pure-u-1-8"> Name:</div>
+				 				<div class="pure-u-1-4"> Name:</div>
 				 				<div class="pure-u-1-3"><%= account.getLastName()  %>, <%= account.getFirstName()  %></div>
 				 			</div>
 				 			<hr style="border-top: dotted 2px;">
 				 			<div class="pure-u-1">
-				 				<div class="pure-u-1-8">Email:</div>
+				 				<div class="pure-u-1-4">Email:</div>
 				 				<div class="pure-u-1-3"><%= account.getEmail() %></div>
 				 			</div> 
 				 			<hr style="border-top: dotted 2px;">
 				 			<div class="pure-u-1">
-				 				<div class="pure-u-1-8">Reset date:</div>
+				 				<div class="pure-u-1-4">Reset date:</div>
 				 				<% Date d1 = account.getMinutesResetDate(); %>
 				 				<div class="pure-u-1-3"><% out.print( (d1.getMonth() + 1) + "/" + d1.getDay() + "/" + (d1.getYear() + 1900)); %></div>
 				 			</div> 
 				 			<hr>
 				 			<div class="pure-u-1">
-				 				<div class="pure-u-1-8">Hours Left:</div>
-				 				<div class="pure-u-1-3"><%= account.getMinutesRemaining() %></div>
+				 				<div class="pure-u-1-4">Hours Left:</div>
+				 				<div class="pure-u-1-3"><%= account.getTruncatedStringHours() %></div>
 				 			</div>
 				 			<hr style="border-top: dotted 2px;">
 				 			<div class="pure-u-1">
-				 				<div class="pure-u-1-8">Current Address:</div>
+				 				<div class="pure-u-1-4">Current Address:</div>
 				 				<div class="pure-u-1-3"><%= account.getAddress() %></div>
 				 			</div>
 				 			<hr style="border-top: dotted 2px;">
 				 			<div class="pure-u-1">
-				 				<div class="pure-u-1-8">Subscription Tier:</div>
+				 				<div class="pure-u-1-4">Subscription Tier:</div>
 				 				<div class="pure-u-1-3"><img src="img/<%= account.getSubscriptionTierString() %>.png"></div>
-				 				
+				 			</div> 
+				 			<hr style="border-top: dotted 2px;">
+				 			<div class="pure-u-1">
+				 				<div class="pure-u-1-4">Credit Card:</div>
+				 				<div class="pure-u-1-3"><%= account.getCreditCardNum() %></div>
+				 			</div> 
+				 			<hr style="border-top: dotted 2px;">
+				 			<div class="pure-u-1">
+				 				<div class="pure-u-1-4">CVV:</div>
+				 				<div class="pure-u-1-3"><%= account.getCVV() %></div>
 				 			</div> 
 				 			<hr style="border-top: dotted 2px;">
 				 		</div>
@@ -105,7 +114,21 @@
 								</div>
 				        </div>
 				        <div class="pure-control-group">
-			            	<legend>Update Subscription change</legend>
+			            	<legend>Update Credit Card Info</legend>
+			            	<div class="pure-u-3-5">
+								<label for="creditCardNum">Credit Card:</label>
+								<input id="creditCardNum" type="text" name="creditCardNum" value="" placeholder="Credit Card" >
+							</div>
+							<div class="pure-u-3-5">
+								<label for="cvv">CVV:</label>
+								<input id="cvv" type="text" name="cvv" value="" placeholder="CVV" >
+							</div>
+							<div style="padding-bottom:45px" class="pure-u-3-5">
+								<input id="update_creditcard" class="pure-button pure-button-active" type="submit" 
+				            			name="update_submit" value="Update Credit Card Info" style="border: 1px solid black;"></div>
+				        </div>
+				        <div class="pure-control-group">
+			            	<legend>Update Subscription Plan</legend>
 			            	<div class="pure-u-1-5" style="background-color:#B87333">
 								<div class="pure-u-2-5"></div>
 								<div class="pure-u-1-5">
@@ -141,7 +164,7 @@
 								<input type="radio" id="subChoice4" name="subscriptionTier" value="4">
 							</div>
 							
-							<div style="padding-bottom:45px" class="pure-u-3-5">
+							<div style="padding-bottom:45px; margin-top:10px;" class="pure-u-3-5">
 								<input id="update_address" class="pure-button pure-button-active" type="submit" 
 				            			name="update_submit" value="Update Subscription" style="border: 1px solid black;"></div>
 				        </div>
