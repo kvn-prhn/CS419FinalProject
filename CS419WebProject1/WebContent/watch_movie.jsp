@@ -43,7 +43,7 @@ boolean movieValid = (movieIdStr != null && movie != null);
 
     	</div>
     	<div class="pure-u-1-5">
-    		<a href="browse.jsp">Back to browse</a>
+    		<a class="browse-page-back-link" href="browse.jsp">Back to browse</a>
     	</div>
 	</div>
 	<%

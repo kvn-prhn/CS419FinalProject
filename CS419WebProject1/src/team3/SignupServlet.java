@@ -54,10 +54,33 @@ public class SignupServlet extends HttpServlet {
 						request.getParameter("creditCardNum") == null ||
 						request.getParameter("cvv") == null) {
 					// return to the sign up page if  everything is not in there yet.
+					session.setAttribute("error_message", "All fields must be filled out.");		// display an error
+
 					request.getRequestDispatcher("sign_up.jsp").forward(request, response);
 					con.close();
 					return;
 				}
+				
+				// make sure that there is no just whitespace
+				if (request.getParameter("firstName").trim().length() == 0 ||
+						request.getParameter("lastName").trim().length() == 0 ||
+						request.getParameter("password").trim().length() == 0 ||
+						request.getParameter("email").trim().length() == 0 ||
+						request.getParameter("streetAddress").trim().length() == 0 ||
+						request.getParameter("state").trim().length() == 0 ||
+						request.getParameter("city").trim().length() == 0 ||
+						request.getParameter("zipcode").trim().length() == 0 ||
+						request.getParameter("subscriptionTier").trim().length() == 0 ||
+						request.getParameter("creditCardNum").trim().length() == 0 ||
+						request.getParameter("cvv").trim().length() == 0) {
+					// return to the sign up page if  everything is not in there yet.
+					session.setAttribute("error_message", "All fields must be filled out.");		// display an error
+
+					request.getRequestDispatcher("sign_up.jsp").forward(request, response);
+					con.close();
+					return;
+				}
+				
 				
 				Account a = new Account();
 				a.setFirstName((String)request.getParameter("firstName"));
