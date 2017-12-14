@@ -337,6 +337,7 @@
 										"&movieID=" + (e.data.movieId) + "&rating=" + _rating;
 								$.getJSON(URL_RATING).done(function(data) {
 									if (data.success) {
+										toastr["success"]("Movie rated!");
 									} else {
 										console.error("Error with leaving the rating");
 									}

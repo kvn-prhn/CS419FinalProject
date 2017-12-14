@@ -27,7 +27,7 @@
             Sign up for a great selection at a great price.
         </p>
         <p>
-            <a href="browse.jsp" class="pure-button pure-button-primary">Get Started</a>
+            <a href="sign_up.jsp" class="pure-button pure-button-primary">Get Started</a>
         </p>
     </div>
 </div>
