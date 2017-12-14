@@ -48,7 +48,7 @@
 				 			</div>
 				 			<hr style="border-top: dotted 2px;">
 				 			<div class="pure-u-1">
-				 				<div class="pure-u-1-4">Current Address:</div>
+				 				<div class="pure-u-1-4">Current Billing Address:</div>
 				 				<div class="pure-u-1-3"><%= account.getAddress() %></div>
 				 			</div>
 				 			<hr style="border-top: dotted 2px;">
@@ -90,7 +90,7 @@
 				        </div>
 				        <div class="pure-control-group pure-u-1">
 				            <div class="pure-u-1">
-				            	<legend>Update Address</legend>
+				            	<legend>Update Billing Address</legend>
 				            	<% Account acc = AccountDao.getAccountById(userBean.getAccountId()); %>
 				            	<div class="pure-u-3-5">
 				            		<label for="streetAddress">Street Address</label>

@@ -40,9 +40,9 @@
 									value="<%= request.getParameter("email") != null ? request.getParameter("email") : "" %>" placeholder="Your Email">
 							</div>
 							<div class="l-box pure-u-2-5">
-								<label for="streetAddress">Street Address</label>
+								<label for="streetAddress">Billing Street Address</label>
 								<input id="streetAddress" type="text" name="streetAddress"
-									value="<%= request.getParameter("streetAddress") != null ? request.getParameter("streetAddress") : "" %>" placeholder="Street Address">
+									value="<%= request.getParameter("streetAddress") != null ? request.getParameter("streetAddress") : "" %>" placeholder="Billing Street Address">
 							</div>
 							<div class="l-box pure-u-1-5">
 								<label for="city">City</label>
