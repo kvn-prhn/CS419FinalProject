@@ -36,7 +36,7 @@ boolean movieValid = (movieIdStr != null && movie != null);
     <div class="top-bar-movie-watching l-box is-center">
     	<div class="pure-u-1-5">
 	    	<% if (movieValid) {
-		    	out.println("Now watching: " + movie.getTitle());	// display the title
+		    	out.println("Now watching: <span class=\"watch-movie-title\">" + movie.getTitle() + "</span>");	// display the title
 		    } %>
     	</div>
     	<div class="pure-u-1-5" id="show_minutes_left">

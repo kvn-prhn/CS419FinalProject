@@ -1,9 +1,4 @@
-/* #7f8c8d; */
-/* #1f8dd6; */
-/*#2d3e50;*/
-/* #6FBEF3; */
-/* #AECFE5; */
-/* white; The color of the link for the page you're on */
+/*The color of the link for the page you're on */
 /* Color of borders on menus*/
 * {
   -webkit-box-sizing: border-box;
@@ -486,4 +481,13 @@ h2 {
   background-color: white;
   height: 32px;
   width: 32px;
+}
+.browse-page-back-link {
+  color: #E413EA;
+}
+.browse-page-back-link:visited {
+  color: #E413EA;
+}
+.watch-movie-title {
+  color: #05FEFA;
 }
