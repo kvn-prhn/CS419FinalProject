@@ -11,7 +11,7 @@ public class AccountDao {
             Connection con = DBLink.getConnection();  
             PreparedStatement ps = con.prepareStatement(  
                          "insert into accountteam3 (firstName,lastName,password,email,address,subscription,resetDate,minutesRemaining,creditCardNum,cvv) " + 
-                        		 "values (?,?,?,?,?,?,NOW(),?)");    // NOW() is temporary - set the date to today
+                        		 "values (?,?,?,?,?,?,NOW(),?,?,?)");    // NOW() is temporary - set the date to today
             ps.setString(1, a.getFirstName()); 
             ps.setString(2, a.getLastName()); 
             ps.setString(3, a.getPassword());   

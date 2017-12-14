@@ -80,7 +80,15 @@ public class Account {
 		double hoursLeft = minsD / 60;
 		String doubleStr = hoursLeft + "";
 		String[] parts = doubleStr.split("\\.");
-		return parts[0] + "." + parts[1].substring(0, 2);
+		if (parts.length >= 2) {
+			int endOfSubStr = 2;	
+			if (parts[1].length() < 2) {			// shorten the substring if its too large.
+				endOfSubStr = parts[1].length();
+			}
+			return parts[0] + "." + parts[1].substring(0, endOfSubStr);	
+		} else {
+			return parts[0];
+		}
 	}
 	public void setMinutesRemaining(int minutesRemaining) {
 		this.minutesRemaining = minutesRemaining;
