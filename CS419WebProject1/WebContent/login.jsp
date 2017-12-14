@@ -46,7 +46,8 @@
 	<div class="ribbon l-box-lrg pure-g " style = "padding-bottom:185px" >
         <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-3-5">
 			<div class = "pure-u-4-10">
-				<p>This website and its contents are all part of Team_Three_Entertainment(); 2017 - 2018 Ltd. <br /> 190 S Prospect Ave, Elmhurst, IL 60126, United States <br/> Use of this website is subject to our <a href="term_and_conditions.jsp">Terms & Conditions</a> and <a href="privacy_policy.jsp">Privacy Policy</a>. </p>
+				<p>This website and its contents are all part of Team_Three_Entertainment(); 2017 - 2018 Ltd. <br /> 190 S Prospect Ave, Elmhurst, IL 60126, United States <br/> 
+				Use of this website is subject to our <a class="home-links-page" href="term_and_conditions.jsp">Terms & Conditions</a> and <a class="home-links-page" href="privacy_policy.jsp">Privacy Policy</a>. </p>
 			</div>
 			<div class = "pure-u-4-10">
 				<p class="content-head content-head-ribbon">Contact us at getflixmovie@gmail.com</p>
